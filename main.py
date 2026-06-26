@@ -26,31 +26,34 @@ nodeB.right_node = nodeF
  C(7)   D(15)  E(21)   F(32)
 
 """
-
-def search(node, target):
-    if node is None: # if node no found
-        return
-    elif node.value == target: # if node is found 
-        return node
-    elif target < node.value: # if target is less than node value, search left subtree
-        return search(node.left_node, target)
-    else:
-        return search(node.right_node, target) # search right subtree
-
-result = search(root, 31)
-if result:
-    print(result.value)
-else:
-    print(result)
-
-def insert(node, value):
+def inOrderTraversal(node):
     if node is None:
-        return TreeNode(value)
-    elif value < node.value: # if value less than node value, insert left subtree
-        node.left = insert(node.left_node, value)
-    elif value > node.value:
-        node.right = insert(node.right_node, value) # if value more than node value, insert right subtree
-    else:
-        return node # if node already exist
-    return node
+        return
+    inOrderTraversal(node.left_node)
+    print(node.value)
+    inOrderTraversal(node.right_node)
 
+def delete(node, value):
+    # remove the node from parent node
+    # link the child nodes to parent node
+
+    if node is None:
+        return
+    
+    if value < node.value: # node in left subtree
+        node.left_node = delete(node.left_node, value)
+    elif value > node.value: # node in right subtree
+        node.right_node = delete(node.right_node, value)
+    else: # found node
+        # if node has no child, or one child
+        if node.left_node is None: # return right node if no left node
+            return node.right_node
+        elif node.right_node is None:
+            return node.left_node # return left node if no right node
+        else:
+            node.data = node.right_node.data
+            node.right_node = None
+    return node 
+
+delete(root, 15)
+inOrderTraversal(root)
