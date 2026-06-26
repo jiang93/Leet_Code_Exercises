@@ -1,0 +1,3210 @@
+Python => Python is an interpreted, high-level programming language where code can executed immediately without prior complication. Python is popular for: 
+
+1. Web Application 
+2. Data Analysis 
+3. Task Automation
+4. Cross-Platform
+5. Support Procedural(follow instructions steps by step), Object-Oriented(classes and objects), and Functional(tranform data using functions without modifying original values) programming styles
+
+
+Feature         | Interpreted            | Compiled
+------------------------------------------------------------------
+How it runs     | Line-by-line           | Entire program first
+Speed           | Slower                 | Faster
+Error detection | At runtime             | Before execution
+Output          | No separate executable | Produces executable file
+Examples        | Python, JavaScript     | C, C++
+
+Python installation => https://www.python.org/downloads/
+
+Python Syntax =>
+	- indentation (Best practice is 4 spaces. Accepts other indentations as long as it is consistent throughout the program)
+	- assign variable (variable_names = value) 
+	- comments (# for single-line comments, """ for string literals or docstrings when it is the first statement a function, class or module. String literals are first created and then discarded, but docstrings are stored and can be accessed using __doc__)
+
+Python Variables
+
+- Python variables do not need to be declared with any particular types, and they can change type after they have been set
+- Data type of a variable can be obtained using type() function
+- Data type of a variable can be converted using casting 
+- String variables can be declared either with single quotes or double quotes, multiline string variables can be declared using triple single or triple double quotes.
+- Variable name rules:
+	- Variable names are case-sensitive
+	- Variable names must start with a letter or underscore 
+	- Variable name can only containers alphanumeric and underscore	
+	- Python keywords are reserved and cannot be used as variable names
+	- Best practices are Camel Case (each word except the first word starts with capital letters. e.g., myFirstVariable), Pascal Case(each word starts with capital letters. e.g., MyFirstVariable), and Snake Case (each word is separated with underscore. e.g., my_first_variable)
+
+Assign multiple variables:
+x, y, z = "apple", "banana", "cherry"
+
+Assign single value into multiple variables:
+x = y = z = "apple"
+
+Unpack variables from a collection
+fruits = ["apple", "banana", "cherry"]
+x, y, z = fruits 
+
+Printing output variables:
+x = "I am"
+y = 33
+
+print(x + " " + str(y)) #concatenation/ mathematic operations if variables are numeric 
+print(x, y) #commas in print
+print (f"{x} {y}") #f-strings
+print("{} {}".format(x, y)) #str.format()
+
+Text in Python must be inside quotes, either single quote or double quotes. By default, the print() function ends with a new line like this, print("Hello World!", end="\n")
+
+
+Global variable => Global variables are created outside functions and can be used anywhere, both inside and outside functions. Variables created inside a function are local variables and can only be used within that function. However, a global variable can be modified inside a function using the global keyword.
+
+Python Built-in Data Types
+
+Text Type       | str            
+---------------------------------------------
+Numeric Types   | int, float, complex
+---------------------------------------------
+Sequence Types  | list, tuple, range
+---------------------------------------------
+Mapping Type    | dict
+---------------------------------------------
+Set Types       | set, frozenset
+---------------------------------------------
+Boolean Type    | bool
+---------------------------------------------
+Binary Types    | bytes, bytearray, memoryview
+---------------------------------------------
+None Type       | NoneType
+
+
+bytes => fixed (read-only) binary data for sending or receiving
+bytearray => mutable binary data for sending and receiving
+memoryview => efficient access to existing binary data without creating a new copy 
+
+
+Feature           | List                | Tuple               | Set                 | Frozenset
+------------------|---------------------|---------------------|----------------------|---------------------
+Preferred Syntax  | [1, 2, 3]           | (1, 2, 3)           | {1, 2, 3}            | frozenset([1, 2, 3])
+------------------|---------------------|---------------------|----------------------|---------------------
+Mutable?          | Yes                 | No                  | Yes                  | No
+------------------|---------------------|---------------------|----------------------|---------------------
+Ordered?          | Yes                 | Yes                 | No                   | No
+------------------|---------------------|---------------------|----------------------|---------------------
+Indexable?        | Yes                 | Yes                 | No                   | No
+------------------|---------------------|---------------------|----------------------|---------------------
+Slicing?          | Yes                 | Yes                 | No                   | No
+------------------|---------------------|---------------------|----------------------|---------------------
+Duplicates?       | Allowed             | Allowed             | Not Allowed          | Not Allowed
+------------------|---------------------|---------------------|----------------------|---------------------
+Hashable?         | No                  | Yes*                | No                   | Yes
+------------------|---------------------|---------------------|----------------------|---------------------
+Nested type?      | Yes                 | Yes                 | tuple, frozenset     | tuple, frozenset
+------------------|---------------------|---------------------|----------------------|---------------------
+Null Values?      | Yes                 | Yes                 | Yes (only one None)  | Yes (only one None)
+------------------|---------------------|---------------------|----------------------|---------------------
+Mix Data Type?    | Yes                 | Yes                 | Yes 		     | Yes
+------------------|---------------------|---------------------|----------------------|---------------------
+Speed (membership)| O(n)                | O(n)                | O(1)                 | O(1)
+------------------|---------------------|---------------------|----------------------|---------------------
+Memory Usage      | High                | Low                 | Medium               | Medium
+------------------|---------------------|---------------------|----------------------|---------------------
+When to Use       | Dynamic data        | Fixed/Read-only data| Unique items         | Immutable unique items
+------------------|---------------------|---------------------|----------------------|---------------------
+
+
+* Tuple is only hashable if all elements inside it are hashable
+* Set/ Frozenset are considered unordered (even if insertion order may appear preserved in Python 3.7+)
+* Set/ Frozenset allow only one None because duplicates are not allowed
+
+** Array are used to store multiple values of the same data type in one variable. Python supports array through standard array module and external NumPy library** 
+
+String Methods: https://www.w3schools.com/python/python_strings_methods.asp
+
+Python Operations 
+- Arithmetic [addition => +, subtraction => -, multiplication => *, division => /, floor division => //, modulus => % , exponential => **]
+- Assignment [assign => =, add => += , subtract => -=, multiply => *=, divide => /=, floor divide => //=, modulus => %=, exponential => **=, AND => &=, OR => |=, XOR => ^=, left shift => >>=, right shift => <<=, walrus operator => := ]
+- Comparison [equal => ==, not equal => !=, greater than => >, smaller than => <, greater than or equal to => >=, smaller than or equal to => <=]
+- Logical => for combining conditional statements [and, or, not]
+- Identity => check whether two objects have the same identity/ memory address [is, is not]
+- Membership => check if an element is in an object [in, not in]
+- Bitwise => compare binary numbers [ AND => &, OR => |, XOR => ^, NOT => ~, left shift => >>, right shift => <<]
+- Operator Precedence => define the order of operations [() highest precedence => exponential => unary operation (+x, -x, ~x) => arithmetic => bitwise => comparison => identity => membership => logical]
+ 
+Python Assignment Example - list vs integer:
+ 
+x = y = [1, 2, 3]
+# x and y is pointing to the same object
+# x:  [1, 2, 3] 1728100045440 y:  [1, 2, 3] 1728100045440
+print("x: ", x, id(x), "y: ", y, id(y))
+
+x += [3]
+y = y + [3]
+# x += modifies the same list in place, y = y + [3] creates a new list 
+# x:  [1, 2, 3, 3] 1728100045440 y:  [1, 2, 3, 3, 3] 1728100329728
+print("x: ", x, id(x), "y: ", y, id(y))
+
+x = x + [4]
+y += [4]
+# x =  x + [4] create a new list, y += [4] modifies the same list in place
+# [1, 2, 3, 3, 4] 1728100333888 y:  [1, 2, 3, 3, 3, 4] 1728100329728
+print("x: ", x, id(x), "y: ", y, id(y))
+
+x = y = 1200
+# x and y is point to the same object
+# x:  1200 2564371689200 y:  1200 2564371689200
+print("x: ", x, id(x), "y: ", y, id(y))
+
+x += 200
+y = y + 200
+c = y
+# because int is immutable, x += 200 cannot be change in place, it create a new object. y = y + 105 create a new object 
+# x:  1400 2553322865136 y:  1400 2553322865264
+# True, False
+
+print("x: ", x, id(x), "y: ", y, id(y))
+print(x is y, c is y)
+
+y += 150
+x = x + 150
+# because int is immutable, y += 100 create a new object,and  x = x + 100 also creates a new object
+# x:  1550 2553322865040 y:  1550 2553322865200
+# False
+print(x is y)
+print("x: ", x, id(x), "y: ", y, id(y))
+
+List Comprehension => shorter syntax to create a new list based on the values of an existing list. Syntax: newlist = [expression for item in iterable if condition == True]
+
+even = [x for x in [1, 2, 3, 4, 5, 6] if x%2 == 0]
+print(even)
+
+List/ Tuple unpacking
+
+animals = ["alligator", "bear", "camel", "dragon", "elephant"]
+a, b, *c = animals
+print(animals, type(animals)) # ['alligator', 'bear', 'camel', 'dragon', 'elephant'] <class 'list'>
+print(a, type(a)) # alligator <class 'str'>
+print(b, type(b)) # bear <class 'str'>
+print(c, type(c)) # ['camel', 'dragon', 'elephant'] <class 'list'>
+
+
+fruits = ("apple", "banana", "cherry", "strawberry", "raspberry") 
+(a, *b, c) = fruits
+print(fruits, type(fruits)) # ('apple', 'banana', 'cherry', 'strawberry', 'raspberry') <class 'tuple'>
+print(a, type(a)) # apple <class 'str'>
+print(b, type(b)) # ['banana', 'cherry', 'strawberry'] <class 'list'>
+print(c, type(c)) # raspberry <class 'str'>
+
+Python Assignment Example - tuple
+
+mytuple = fruits = ("apple", "banana", "cherry", "cherry", "strawberry", "raspberry")
+print(mytuple, type(mytuple), id(mytuple)) # ('apple', 'banana', 'cherry', 'cherry', 'strawberry', 'raspberry') <class 'tuple'> 2038497400608
+print(fruits, type(fruits), id(fruits)) # ('apple', 'banana', 'cherry', 'cherry', 'strawberry', 'raspberry') <class 'tuple'> 2038497400608
+
+newtuple = ("orange",)
+mytuple += newtuple
+
+print(mytuple, type(mytuple), id(mytuple)) # ('apple', 'banana', 'cherry', 'cherry', 'strawberry', 'raspberry', 'orange') <class 'tuple'> 2038497403488
+print(fruits, type(fruits), id(fruits)) # ('apple', 'banana', 'cherry', 'cherry', 'strawberry', 'raspberry') <class 'tuple'> 2038497400608
+
+thislist = list(mytuple)
+thislist += ["durian"]
+print(thislist, id(thislist)) # ['apple', 'banana', 'cherry', 'cherry', 'strawberry', 'raspberry', 'orange', 'durian'] 2038541712384
+
+mytuple = tuple(thislist)
+print(mytuple, type(mytuple), id(mytuple)) # ('apple', 'banana', 'cherry', 'cherry', 'strawberry', 'raspberry', 'orange', 'durian') <class 'tuple'> 2038497513472
+print(fruits, type(fruits), id(fruits)) # ('apple', 'banana', 'cherry', 'cherry', 'strawberry', 'raspberry') <class 'tuple'> 2038497400608
+
+Python Assignment Example - set
+
+myset = thisset = {"apple", "banana", "cherry", "cherry", "strawberry", "raspberry"}
+print(myset, type(myset), id(myset)) # {'apple', 'raspberry', 'banana', 'strawberry', 'cherry'} <class 'set'> 2661839426656
+print(thisset, type(thisset), id(thisset)) # {'apple', 'raspberry', 'banana', 'strawberry', 'cherry'} <class 'set'> 2661839426656
+
+myset.update({True, False, 1})
+print(myset, type(myset), id(myset)) # {False, True, 'apple', 'raspberry', 'banana', 'strawberry', 'cherry'} <class 'set'> 2661839426656
+print(thisset, type(thisset), id(thisset)) # {False, True, 'apple', 'raspberry', 'banana', 'strawberry', 'cherry'} <class 'set'> 2661839426656
+
+thisset.add("durian")
+print(myset, type(myset), id(myset)) # {False, True, 'apple', 'raspberry', 'durian', 'banana', 'strawberry', 'cherry'} <class 'set'> 2661839426656
+print(thisset, type(thisset), id(thisset)) # {False, True, 'apple', 'raspberry', 'durian', 'banana', 'strawberry', 'cherry'} <class 'set'> 2661839426656
+
+Python Assignment Example - frozenset
+
+myset = thisset = frozenset({"apple", "banana", "cherry", "cherry"})
+print(myset, type(myset), id(myset)) # frozenset({'banana', 'apple', 'cherry'}) <class 'frozenset'> 2650596857824
+print(thisset, type(thisset), id(thisset)) # frozenset({'banana', 'apple', 'cherry'}) <class 'frozenset'> 2650596857824
+
+newset = myset.union(frozenset({1, 0, False}))
+print(myset, type(myset), id(myset)) # frozenset({'banana', 'apple', 'cherry'}) <class 'frozenset'> 2650596857824
+print(thisset, type(thisset), id(thisset)) # frozenset({'banana', 'apple', 'cherry'}) <class 'frozenset'> 2650596857824
+print(newset, type(newset), id(newset)) # frozenset({0, 1, 'cherry', 'banana', 'apple'}) <class 'frozenset'> 2650596856928
+
+Python Assignment Example - dictionary
+
+x = y = {"model": "A1860", "year": 1987}
+print(x.items(), id(x)) # dict_items([('model', 'A1860'), ('year', 1987)]) 1928320838080
+print(y.items(), id(y)) # dict_items([('model', 'A1860'), ('year', 1987)]) 1928320838080
+
+x["color"] = "green"
+print(x.items(), id(x)) # dict_items([('model', 'A1860'), ('year', 1987), ('color', 'green')]) 1928320838080
+print(y.items(), id(y)) # dict_items([('model', 'A1860'), ('year', 1987), ('color', 'green')]) 1928320838080
+
+Python Logical Conditions
+
+Python can evaluate many types of values as True or False in an if statement. 0, empty strings (""), empty collections like list[], tuple(), set{}, etc are treated as False. Everything else is treated as True
+
+If => to evaluate a condition 
+if, elif => to evalute a condition in order from multiple mutually exclusive conditions
+if, else/ if, elif, else => a fallback that executes when none of the preceding conditions are true
+
+Short Hand if Syntaxs:
+One-line if => if condition: value_if_true
+One-line if, else => value_if_true if condition else: value_if_false
+One-line multiple if, else => value_if_condition1 if condition1 else value_if_condition2 if condition2 else value_if_false
+
+** A if statement cannot be empty. If it has no content, put in a pass statement to avoid error. The pass statement is a null operation, nothing happens when it executes. It serves as a placeholder. **
+
+Python Match Statement => selects one of many code blocks to be executed. It is used for matching specific values/ patterns/ structure, or when there is too many elif
+
+Python primitive loops:
+1. while/ while, else => execute a set of statements as long as a condition is met.
+2. for/ for, else => iteracting over a collection like list, tuple, set, frozenset, dictionary or sequence like range, string variable 
+
+break => stop a loop even if the condition is met
+continue => stop the current iteration, and continue with the next
+return => exist a function completely 
+
+Python Functions (def) => a block of code executes only when it is called. Functions needs to written only once, but can be used many times. It can take inputs(arguments), and return data as a result, which can be use directly in subsequent operations.
+
+- Return statement => when a function reaches a return statement, it stops exection and send the result back
+- Pass statement => function definitions cannot be empty, use pass statement when creating function placeholder without any code
+
+Parameters vs Arguments 
+- Parameter is the variable listed inside the parentheses in function definitions
+- Arguments is the actual value that is passed to the function when it is called 
+
+When passing in arguments:
+
+1. Number of arguments must match parameters
+2. Default parameter values => if the function is called without an argument, the default value assigned to the parameter will be used
+3. Keywords arguments (key=value syntax) => arguments are passed using parameter names, so argument order does not matter
+4. Positional arguments => arguments are assigned based on their position, so they must be in the correct order
+5. For mixing Positional and Keywords arguments => positional argument must come before keyword arguments
+
+** to specify a function can have only positional arguments, add / after the argument in function definition
+** to specify a function can have only keyword arguments, add * before the argument in function definition 
+** to specify a function can have only mixed of positional and keyword arguments, add / after the positional argument and * before the keyword argument (positional argument must come before keyword arguments)
+
+*args and **kwargs => allow functions to accept unknow number of arguments 
+
+*args (Arbitrary Arguments) => allow a function to accept unknow number of positional arguments. These arguments are stored as tuple. 
+
+**kwargs (Arbitrary Keyword Arguments) => allow a function to accept unknow number of keyword arguments. These arguments are stored as dictionary. 
+
+Combining parameters, *args,**kwangs => the order must be:
+1. regular parameters
+2. *args
+3. *kwargs
+
+Unpacking arguments using * and ** operators
+1. * operator => unpack a list, tuple, set into individual positional arguments(number of elements must match the function parameters)
+2. ** operator => unpack a dictionary into individual keyword arguments(dictionary key must match to paramater names)
+
+Python Scope => defines the visibility and lifetime of variables within different parts of a program
+if, for and while statements do not create new scope. so variables created inside these statements belong to the global scope for outside functions, or local scope inside functions 
+
+Functions, classes and module creates new scope, so variables defined inside them belong to their respective local scope. 
+
+1. Local Scope => a variable created inside a function belongs to the local scope of that function and can only be used inside that function. 
+
+2. Enclosing Scope => for nested functions, a variable defined in an outer function is accessible to inner functions, but a variable defined inside an inner function is not accessible to the outer functions 
+
+3. Global Scope => a variable created outside any function (in the main body of the program) belongs to the global scope and can be used anywhere in the program. To make a change to or create a global variable inside a function, the global keyword must be used.
+
+4. Built-in Scope => a variable belong to python, and are automatically available when the program runs.
+
+nonlocal keyword => used in nested functions to modify a variable defined in the outer function.
+
+Python uses LEGB rule to look up names (variables, functions and objects):
+1. Local
+2. Enclosing
+3. Global Build-in 
+
+Python Decorators => a function that takes another function as input and returns a new function as output. It allows modification and extension of the behaviour of a function without changing the function code.
+
+# function inside a function/ nested function 
+def get_multiple_func(n):
+    print("executing get_multiple_func...")
+    def multiple(x):
+        print("executing multiple...")
+        return n*x
+    print("Type:", type(multiple)) # Type: <class 'function'>
+    print("multiple function id:", id(multiple)) # multiple function id: 3024075856192
+    print("closure:", multiple.__closure__) # closure: (<cell at 0x000002C018F5A500: int object at 0x00007FF8BAD549D8>,)
+    print("free vars:", multiple.__code__.co_freevars) # free vars: ('n',)
+    return multiple
+
+# get_multiple_func is a function object in the global scope
+# It is created when Python reads the def statement, but it is not executed yet
+print("Type:", type(get_multiple_func)) # Type: <class 'function'>
+print("get_multiple_func id:", id(get_multiple_func)) # get_multiple_func id: 3024075856352
+print("closure:", get_multiple_func.__closure__) # closure: None
+print("free vars:", get_multiple_func.__code__.co_freevars) # free vars: ()
+
+print("Assign get_multiple_func to double...")
+double = get_multiple_func(2) # get_multiple_func(n) => return multiple. get_multiple_func(2) executes and returns the multiple function object. double = multiple function object, with n = 2 stored in its closure.
+print("Type:", type(double)) # Type: <class 'function'>
+print("Address:", id(double)) # Address: 3024075856192
+print("Closure:", double.__closure__) # Closure: (<cell at 0x000002C018F5A500: int object at 0x00007FF8BAD549D8>,)
+print("Stored value:", double.__closure__[0].cell_contents) # Stored value: 2
+print("Free vars:", double.__code__.co_freevars) # Free vars: ('n',)
+print(double(3)) #6
+
+Instruction                    | Heap (objects)                               | Stack (temporary frames)
+---------------------------------------------------------------------------------------------------------------------------------
+def get_multiple_func(n):      | get_multiple_func function object created    | -
+    def multiple(x):           | code for multiple function stored            |
+        return n*x             |                                              |
+    return multiple            |                                              |
+---------------------------------------------------------------------------------------------------------------------------------
+double = get_multiple_func(2)  | create multiple function object              | create get_multiple_func frame 
+                               | closure cell stores n = 2                    | n = 2
+call get_multiple_func(2)      | return reference to multiple function object | multiple = reference to the function object
+        ↓                      |                                              | remove get_multiple_func stack frame 
+execute function body          | double points to multiple function object    | 
+        ↓                      |                                              |
+def multiple(x) executes       |                                              |
+        ↓                      |                                              |
+multiple function is created   |                                              |
+        ↓                      |                                              |
+return multiple                |                                              |
+---------------------------------------------------------------------------------------------------------------------------------
+print(double(3))               | double = multiple, double(3) = multiple(3),  | create multiple stack frame  
+                               |                                              | x = 3
+                               | int object: 6                                | return n*x = 2*3 = 6
+                               |                                              | remove multiple stack frame
+---------------------------------------------------------------------------------------------------------------------------------
+** The outer function creates and returns the inner function, while the actual computation is performed when the inner function is called ** 
+
+# decorators must sit directly above the function definition
+# passing a function as argument to changecase
+# func is not a special keyword, it is a normal parameter name usually used to represents a function object
+def changecase(func):
+  print("original myfunction:", id(func))
+  # myinner function, convert function output to upper cases 
+  def myinner():
+    return func().upper() # myinner return string object
+  print("myinner: ", id(myinner))
+  return myinner # return myinner function object
+
+# changecase function object created, and myinner() code stored
+print("changecase: ", id(changecase))
+
+# myfunction = changecase(myfunction)
+# changecase(func) => return myinner, myfunction = changecase(myfunction) => myfunction = myinner, where func = myfunction
+@changecase
+def myfunction():
+  return "Hello Sally"
+
+# myfunction function object created
+print("changecase: ", id(changecase))
+print("myfunction: ", id(myfunction))
+
+print(myfunction()) # myfunction() = myinner(), where where func = myfunction
+
+Instruction                         | Heap (objects)                                              | Stack (temporary frames)
+------------------------------------------------------------------------------------------------------------------------------------------------
+def changecase(func):               | changecase function object created                          | -
+    def myinner():                  | code for myinner stored                                     |
+        return func().upper()       |                                                             |
+    return myinner                  |                                                             |
+------------------------------------------------------------------------------------------------------------------------------------------------
+@changecase                         | python remembers the function decorator                     | -
+def myfunction():                   | original myfunction function object created                 |
+    return "Hello Sally"            | code return: "Hello Sally"                                  |
+                                    |                                                             |
+myfunction = changecase(myfunction) | python applies function decorator                           |
+call changecase(myfunction)         | myfunction = changecase(myfunction)                         | create changecase frame
+        ↓                           |                                                             | func = original myfunction
+execute function body               | myinner function object created                             | myinner = reference to the function object
+        ↓                           | closure cell stores func = original myfunction              | 
+execute def myinner()               | return reference to myinner function object                 | destroy changecase frame
+        ↓                           | myfunction points to myinner                                | 
+myinner function object is created  |                                                             |
+        ↓                           |                                                             |
+return myinner                      |                                                             |
+------------------------------------------------------------------------------------------------------------------------------------------------
+print(myfunction())                 | myfunction = myinner, myfunction() = myinner() where func   | create print() frame
+                                    | is the original myfunction                                  | create myinner frame
+                                    | string object: "Hello Sally"                                | create original myfunction frame
+                                    | string object: "HELLO SALLY"                                | return "Hello Sally"
+                                    |                                                             | destroy original myfunction frame
+                                    |                                                             | execute "Hello Sally".upper()
+                                    |                                                             | return "HELLO SALLY"
+                                    |                                                             | destroy myinner frame
+                                    |                                                             | pass "HELLO SALLY" to print caller
+                                    |                                                             | execute print ("HELLO SALLY")
+                                    |                                                             | destroy print() frame
+-------------------------------------------------------------------------------------------------------------------------------------------------
+
+- A decorated function that requires arguments can pass those arguments to the wrapper function.
+1. wrapper function can define the same parameters
+2. wrapper function can use *args and **kwargs to accept any positional and keyword arguments.
+
+- Decorator can accept their arguments by adding another wrapper level. 
+
+# passing a function as argument to changecase
+def changecase(func): 
+  # myinner function takes in flexible arguments/ keyword arguments, covert function output to upper cases 
+  def myinner(*args, **kwargs): # 
+    return func(*args, **kwargs).upper() #return string object 
+  return myinner
+# changecase funciton object create, my inner code stored
+
+# myfunction = changecase(myfunction)
+# changecase(func) => return myinner,  myfunction = changecase(myfunction) => myfunction = myinner where func = original myfunction(name, message)
+@changecase
+def myfunction(name, message):
+  return "Hello " + name + message
+
+# myfunction function object created
+# myfunction(message="Happy Labour Day!", name = "John, ") = myinner(message="Happy Labour Day!", name = "Hui, ")
+print(myfunction(message="Happy Labour Day!", name = "John, "))
+
+Instruction                                     | Heap (objects)                                              | Stack (temporary frames)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+def changecase(func):                           | changecase function object created                          | -
+    def myinner(*args, **kwargs):               | code for myinner stored                                     |
+        return func(*args, **kwargs).upper()    |                                                             |
+    return myinner                              |                                                             | 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+@changecase                                     | python remembers the function decorator                     |
+def myfunction(name, message):                  | original myfunction function object created                 |
+     return "Hello " + name + message           | code return: "Hello " + name + message                      |
+                                                |                                                             |
+call changecase(myfunction)                     | myfunction = changecase(myfunction)                         | create changecase frame
+        ↓                                       |                                                             | func = original myfunction
+execute function body                           | myinner function object created                             | myinner = reference to the function object
+        ↓                                       | closure cell stores func = original myfunction              | 
+execute def myinner()                           | return reference to myinner function object                 | destroy changecase frame
+        ↓                                       | myfunction points to myinner                                | 
+myinner function object is created              |                                                             |
+        ↓                                       |                                                             |
+return myinner                                  |                                                             |
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+print(myfunction(message=val1, name =val2))     | myfunction(message, name) = myinner(*args, **kwargs) where  | create print frame
+                                                | func is the original myfunction                             | create myinner frame
+                                                |                                                             | args = ()
+                                                |                                                             | kwargs = {"message": "Happy Labour Day!", "name": "Hui, "}
+                                                |                                                             | create original myfunction frame
+                                                | string object: "Hello Hui, Happy Labour Day!"               | return "Hello Hui, Happy Labour Day!"
+                                                |                                                             | destroy original myfunction frame
+                                                |                                                             | execute ""Hello Hui, Happy Labour Day!".upper()
+                                                | string object: "HELLO HUI, HAPPY LABOUR DAY!"               | return "HELLO HUI, HAPPY LABOUR DAY!"
+                                                |                                                             | destroy myinner frame
+                                                |                                                             | pass "HELLO HUI, HAPPY LABOUR DAY!" to print caller
+                                                |                                                             | execute print ("HELLO HUI, HAPPY LABOUR DAY!")
+                                                |                                                             | destroy print() frame
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# decorator that takes in argument
+def changecase(n):
+  # decorator that takes in function 
+  def changecase(func):
+    # wrapper that coverts function output to lower/ upper cases 
+    def myinner():
+      if n == 1:
+        a = func().lower()
+      else:
+        a = func().upper()
+      return a 
+    return myinner # return myinner function object
+  return changecase # return inner changecase function object
+# outer changecase function object created, inner changecase and myinner code stored
+
+# decorator = changecase(2)
+# myfunction = decorator(myfunction)
+
+# decorator = changecase(2), changecase(2) => return inner changecase, decorator = inner changecase, n = 2
+@changecase(2)
+def myfunction():
+  return "Hello Hui!"
+
+# myfunction = decorator(myfunction) => myfunction = changecase(func), where func = original myfunction, changecase(func) => return myinner, myfunction = myinner
+# myfunction function object created
+# myfunction() = myinner()
+print(myfunction())
+
+Instruction                          | Heap (objects)                                       | Stack (temporary frames)
+------------------------------------------------------------------------------------------------------------------------------------------
+def changecase(n):                   | outer changecase function object created             | -
+  def changecase(func):              | code for inner changecase stored                     |
+    def myinner():                   | code for myinner stored                              |
+      if n == 1:                     |                                                      |
+        a = func().lower()           |                                                      |
+      else:                          |                                                      |
+        a = func().upper()           |                                                      |
+      return a                       |                                                      |
+    return myinner                   |                                                      |
+  return changecase                  |                                                      |           
+------------------------------------------------------------------------------------------------------------------------------------------
+@changecase(2)                       | python remembers the function decorator              |
+def myfunction():                    | apply decorator = changecase(2)                      | create outer changecase stack frame  
+     return "Hello Hui!"             | inner changecase function object created             | n = 2
+                                     | closure cell stores n = 2                            | inner changecase local reference 
+decorator = changecase(2)            | return reference to inner changecase function object | destroy outer changecase stack frame
+        ↓                            | original myfunction function object created          |
+myfunction = decorator(function)     | code return: "Hello Hui!"                            |
+        ↓                            | myfunction = decorator(myfunction)                   |
+call changecase(myfunction)          | myfunction = changecase(myfunction)                  | create inner changecase stack frame
+        ↓                            |                                                      | func = original myfunction
+execute function body                | myinner function object created                      | myinner = reference to the function object
+        ↓                            | closure cell stores func = original myfunction and n | destroy inner changercase stack frame 
+execute def myinner()                | return reference to myinner function object          | destroy changecase frame
+        ↓                            | myfunction points to myinner                         | 
+myinner function object is created   |                                                      |
+        ↓                            |                                                      |
+return myinner                       |                                                      |
+------------------------------------------------------------------------------------------------------------------------------------------
+print(myfunction())                   | myfunction = myinner, where n = 2, and              | create print stack frame
+                                      | func = original myfunction                          | create myinner stack frame 
+                                      |                                                     | create original myfunction stack frame
+                                      | string object: "Hello Hui!"                         | return "Hello Hui!"
+                                      | string object: "HELLO HUI!"                         | destroy original myfunction stack frame
+                                      |                                                     | execute "Hello Hui!".upper()
+                                      |                                                     | return "HELLO HUI!"
+                                      |                                                     | destroy myinner stack frame
+                                      |                                                     | pass "HELLO HUI!" to print caller
+                                      |                                                     | execute print ("HELLO HUI!")
+                                      |                                                     | destroy print stack frame 
+------------------------------------------------------------------------------------------------------------------------------------------
+
+def style(case):
+    def add_prefix(prefix):
+        def changecase(func):
+            def wrapper():
+                text = func()
+                if case.lower() == "upper":
+                    text = text.upper()
+                else:
+                    text = text.lower()
+                return prefix + text
+            return wrapper
+        return changecase
+    return add_prefix
+
+# style function object created, add_prefix, changecase, wrapper code are stored
+
+@style("upper")("<<<<3 ")
+# decorator = style("upper")("<<<<3 ")
+# style("upper") executed, created add_prefix function object, and returned add_prefix function object
+# then add_prefix("<<<<3 ") executed, created changecase function object, and returned changecase function object
+# decorator points to changecase function object
+
+def greet():
+    return "Hello Hui!"
+# original greet function object created, code return "Hello Hui!"
+# greet = decorator(greet) => changecase(func) where func is the original greet function
+# changecase(func) => created wrapper function object, and return wrapper function object, greet points wrapper function object
+# greet = wrapper, greet() = wrapper() where func references the original greet function object
+print(greet())
+
+def changecase(func):
+    def myinner():
+        return func().upper()
+    return myinner
+# created changecase function object
+
+def addgreeting(func):
+    def myinner():
+        return "Hello " + func() + " Have a good day!"
+    return myinner
+# created addgreeting function object
+
+@changecase
+@addgreeting
+#myfunction = changecase(addgreeting(myfunction))
+
+def myfunction():
+    return "Tobias"
+# created original myfunction function object
+# original myfunction function returns string object "Tobias"
+# myfunction = changecase(addgreeting(myfunction))
+# applied addgreeting(myfunction) decorator, created addgreeting myinner function object and returned reference to addgreeting myinner object, where func = original myfunction 
+# applied changecase(addgreeting myinner) decorator, created changecase myinner functoin object and returned reference to changecase myinner object, func = addgreeting myinner
+
+print(myfunction())
+# executed myfunction() = executed changecase myinner()
+# changecase myinner function return func().upper() where func = addgreeting(myfunction) which points to addgreeting myinner
+# executed func() = executed addgreeting myinner() where func points to the original myfunction
+# addgreeting myinner() return "Hello " + func() + " Have a good day!" where func points to original myfunction 
+# original myfunction executed and returns "Tobias"
+# addgreeting myinner() returns "Hello Tobias Have a good day!"
+# changecase myinner() executed and returns "HELLO TOBIAS HAVE A GOOD DAY!"
+# String object "HELLO TOBIAS HAVE A GOOD DAY!" is passed to print caller
+
+Python and memory
+
+x = 10
+
+- Step 1: create a int object 10 in memory
+- Step 2: create name x
+- Step 3: x point to the object. id(x) => identity of the object
+
+
+Heap (Objects) 	 		       Stack (Temp frames)
+|------------------------------------  |---------------------------------
+|  int object, value: 10       	       | x point to int object
+|  id(x) = 14062384712968	       |
+|------------------------------------  |---------------------------------
+
+def hello():
+    return "Good Morning!"
+
+print(hello())
+
+- Step 1: create a function object "hello" in memory
+- Step 2: create name "hello"
+- Step 3: hello point to the function object
+- Step 4: python evaluate print(hello()) => it calls hello() which returns string object "Good Morning!" to print caller
+- Step 5: print ("Good Morning!")
+
+Heap (objects)                          Stack (temporary frames)
+|------------------------------------   |---------------------------------
+| function object: hello                | hello point to function object
+| code: return "Good Morning!"		|
+| id(hello) = 16051234713201          	|
+|------------------------------------   |---------------------------------
+|                                       | create hello() frame
+| string object: "Good Morning!"        | execute hello()
+| id(hello()) = 16051234713204          | return "Good Morning!" to print()
+|                                       | destroy hello()
+|------------------------------------   |---------------------------------
+|                                       | create print() frame
+|                                       | execute print("Good Morning!")
+|                                       | destroy print()
+|------------------------------------   |---------------------------------
+
+def outer():
+    print("running outer")
+
+    def inner():
+        print("running inner")
+
+    return inner
+
+my_inner = outer()
+my_inner()
+
+- Step 1: create a function object "outer" and save inner code
+- Step 2: create name "outer"
+- Step 3: outer points to the function object
+- Step 4: python evaluate my_inner = outer() => calls outer(), print(""running outer""), create function object inner, return the function object and assign it to my_inner.
+- Step 5: python evaluate my_inner() => calls inner(), and print("running inner")
+
+Heap (objects)                                  Stack (temporary frames)
+|--------------------------------------------   ---------------------------------------
+| function object: outer                        | outer point to function object
+| code: print("running outer")		        |
+| id(outer) = 16051234713201          	        |
+|--------------------------------------------   |---------------------------------------
+|                                               | create outer() frame
+| function object: inner                        | execute outer()
+| code: print("running inner")                  | print("running outer")
+| return reference to inner function object     | inner = reference to function object 
+|                                               | destroy outer()
+|--------------------------------------------   |---------------------------------------
+| my_inner = inner                              | create inner() frame
+|                                               | print("running inner")
+|                                               | destroy inner()
+|--------------------------------------------   |---------------------------------------
+
+
+id(x) is the unique identity of the object, It may or may not be the actual memory address depending on the Python implementation.
+
+When passing function as a argument to another function, 
+
+1. pass (func) => pass the function itself as the argument (no execution)
+2. pass (func()) => pass the result of the function as the argument (execution happens first)
+
+Function Metadata Attributes 
+1. __name__ stores the function name
+2. __doc__ stores the docstring which is written as the first statement inside the function to describe what the function does
+3. inspect.signature(callable) stores the information about the function parameter and return annotation.
+
+import inspect
+
+# Function definition without annotations 
+def add(parameter1, parameter2 = 6):
+    return parameter1 + parameter2
+
+print(inspect.signature(add)) # print => add(parameter1, parameter2=6)
+print(add(1, 4)) # print => 5
+
+# Function definition annotations 
+def diff(parameter1: int, parameter2: int = 6) -> int:
+    return abs(parameter1 - parameter2)
+
+print(inspect.signature(diff)) # print => diff(parameter1: int, parameter2: int = 6) -> int
+print(diff(1, 4)) # print => 3
+
+def greet(name: str | None) -> str: # input can be str or None data type
+    if name is None:
+        return "Hello, Guest!"
+    return f"Hello, {name}!"
+
+message = greet(None)
+print(message) 
+
+def greet(name: str | None = None) -> str: # input can be str, None or ommited. If name is omitted, use None by default.
+    if name is None:
+        return "Hello, Guest!"
+    return f"Hello, {name}!"
+
+message = greet()
+print(message)
+
+** Funtion annotations are used to describe the expected types of function parameters and return values ** 
+** They do not enforce data types at runtime. They provides readability, support documentation and help with type checking ** 
+
+
+** When a function is decorated, the metadata of the original function is overwritten by the wrapper function, import functools and use functools.wraps to preserve the original function name and docstring ** 
+
+Python Lambda Function 
+Lambda function can take any number of arguments and automatically returns the result of a single expression.
+
+lambda arguments : expression
+-------------------------------------------------------------------
+x = lambda a : a + 10
+-------------------------------------------------------------------
+def myfunc(n):
+  return lambda a : a * n
+# created myfunc function object
+
+mydoubler = myfunc(2)
+# executed myfunc(2) 
+# created lambda function object: lambda a: a * n where n = 2
+# returned lambda object reference to mydoubler 
+# mydoubler points to lambda object 
+  
+print(mydoubler(11))
+# executed lambda function and return a * n where a = 11 and n = 2
+-------------------------------------------------------------------
+
+Lambda with built-in functions 
+1. map (iterator) => applies a function to every item in an iterable 
+2. filter (iterator) => create a list of filtered items for which a function returns True
+3. sort => custom sorting using function as the key 
+
+** An iterator is an object that produces values one at a time. It keeps track current item position, and is consumed as it is used. Once all item returned, iterator become exhausted and has no more value to return. An iterator can be consumed using next(), a for/ while loop, or by converting it to a collection such as list or tuple. **
+
+Iterator object follows the iterator protocol consisting of __iter__() and __next__() methods
+
+__iter__() method to return the iterator object itself
+__next__() method to return the next value
+
+Common examples of iterators include:
+- map
+- filter
+- zip
+- enumerate
+- reversed
+- generator
+- iter
+
+** An iterable is an object that stores a collection of values and can be looped over many times. e.g., list, tuple, set, strings, dictionaries. These iterable objects have a iter() method which takes in an iterable and returns an iterator. ** 
+
+mylist = ["apple", "banana", "cherry"]
+print(type(mylist)) # <class 'list'>
+list_iter = iter(mylist) # return an iterator
+print(type(list_iter)) # <class 'list_iterator'>
+print(next(list_iter)) # apple
+print(next(list_iter)) # banana
+print(next(list_iter)) # cherry
+print(next(list_iter)) # raise StopIteration error
+
+# create a list object
+mylist = ["apple", "banana", "cherry"]
+
+# for loop in python => iterator = iter(mylist)
+# create a list iterator
+for x in mylist:
+    # x = next(iterator)
+    # 1st loop: x = next(iterator), x = "apple"
+    # 2nd loop: x = next(iterator), x = "banana"
+    # 3rd loop: x = next(iterator) , "cherry"
+    # 4th loop: next(iterator) → StopIteration, for loop stops, and print(x) never executed
+    print(x)
+
+To create an object/ class as an iterator, implements both __iter__() and __next__() methods:
+
+1. __iter__() => return self to return the iterator object itself
+2. __next__() => return the next value in the sequence, and raise StopIteration when no more values
+
+class MyNumbers:
+  def __init__(self):
+    self.a = 1
+    # set starting value when object is created
+  
+  def __iter__(self):
+    return self
+    # return this same object as the iterator
+
+  def __next__(self):
+    if self.a <= 20:
+      x = self.a
+      self.a += 1
+      return x 
+      # return current object value, and increment self.a by 1
+    else:
+      raise StopIteration
+      # stop the iteratorion
+      # if StopIteration error is not raised, python return None in next line by default
+# created class definition for MyNumbers
+
+myclass = MyNumbers()
+print(type(myclass)) # <class '__main__.MyNumbers'>
+print(id(myclass)) # 1546987153040
+# created myclass object from MyNumbers() class
+# this object is an iterator, it has __iter__() and __next__()
+# myclass.a = 1
+myiter = iter(myclass) 
+print(type(myiter)) # <class '__main__.MyNumbers'>
+print(id(myiter)) # 1546987153040
+# created myiter iterator object from myclass, since myclass is a iterator, myclass and myiter point to the same object
+
+print("print first 5 values using myclass: ")
+print(next(myclass))
+print(next(myclass))
+print(next(myclass))
+print(next(myclass))
+print(next(myclass))
+
+print("print first 5 values using myiter: ")
+print(next(myiter))
+print(next(myiter))
+print(next(myiter))
+print(next(myiter))
+print(next(myiter))
+
+print("print remaining values using for loop: ")
+for x in myiter:
+  print(x)
+
+Python map function
+
+Nested function calls vs Nested function definitions
+
+1. Nested function calls => calling one function inside another function call. e.g., doubled = list(map(lambda x: x * 2, numbers))
+The inside call runs first:
+   - create the lambda function object
+   - call map(lambda, numbers)
+   - map() returns a map object
+   - list() consumes the map object, and create a list object
+
+2. Nested function definitions => defining a function inside another functions
+The outer function object is created first, and inner function objects are not created immediately. They are created only when outer function is called 
+
+----------------------------------------------------|---------------------------------------------------------------------------------------------
+numbers = [1, 2, 3]                                 | numbers = [1, 2, 3]
+double = map(lambda x: x * 2, numbers)              | double = map(lambda x: x * 2, numbers)
+                                                    | double_list = list(double) # Convert map object to list object and assign it to double_list
+print("printing map object double 1st time")        | print("printing list object 1st time")
+print(double)  # <map object at 0x00000271E7FA9AE0> | print(double_list)  # [2, 4, 6]
+print(type(double))  # <class 'map'>                | print(type(double_list))  # <class 'list'>
+                                                    |
+for n in double:                                    | for n in double_list:
+    print(n)  # 2, 4, 6                             |     print(n)  # 2, 4, 6
+print(type(n))  # <class 'int'>                     | print(type(n))  # <class 'int'>
+                                                    |
+print("printing map object double 2nd time")        | print("printing map object double 1st time")
+print(double)  # <map object at 0x00000271E7FA9AE0> | print(double)  # <map object at 0x00000271E7FA9AE0>
+print(type(double))  # <class 'map'>                | print(type(double))  # <class 'map'>
+                                                    |
+for n in double:                                    | for n in double:
+    # Nothing printed, iterator exhausted.          |     # Nothing printed, iterator exhausted because it was already used to create double_list
+    # The for loop does not run at all.             |     # The for loop does not run at all.  
+    # Variable n holds previous value.              |     # Variable n holds previous value.
+    print(n)                                        |     print(n)   
+print(n)  # 6                                       | print(n)  # 6 
+print(type(n))  # <class 'int'>                     | print(type(n))  # <class 'int'>
+                                                    |
+                                                    | print("printing list object 2nd time")
+                                                    | print(double_list)  # [2, 4, 6]
+                                                    | print(type(double_list))  # <class 'list'>
+                                                    |
+                                                    | for n in double_list:
+                                                    |     print(n)  # 2, 4, 6
+                                                    | print(n)  # 6
+                                                    | print(type(n))  # <class 'int'>
+
+Python recursive function
+
+Recursion is when a function calls itself. Every recursive function must have 2 parts:
+1. a base case - condition that stops the recursion 
+2. a recursive case - function that calling itself with a modified argument
+
+def countdown(n):
+  # base case
+  if n <= 0:
+    print("Done!")
+  else:
+    print(n)
+    # recursive case
+    countdown(n - 1)
+# countdown function object is created 
+
+countdown(5)
+
+Heap (objects)                    | Stack (temporary frames)
+----------------------------------|------------------------------------------------
+function object: countdown        | countdown points to function object
+code: if … else …                 |
+----------------------------------|------------------------------------------------
+                                  | create countdown(5) frame
+                                  | n = 5
+                                  | check if n <= 0: False
+                                  | print(5)
+                                  | call countdown(4)
+----------------------------------|------------------------------------------------
+                                  | create countdown(4) frame
+                                  | n = 4
+                                  | check if n <= 0: False
+                                  | print(4)
+                                  | call countdown(3)
+----------------------------------|------------------------------------------------
+                                  | create countdown(3) frame
+                                  | n = 3
+                                  | check if n <= 0: False
+                                  | print(3)
+                                  | call countdown(2)
+----------------------------------|------------------------------------------------
+                                  | create countdown(2) frame
+                                  | n = 2
+                                  | check if n <= 0: False
+                                  | print(2)
+                                  | call countdown(1)
+----------------------------------|------------------------------------------------
+                                  | create countdown(1) frame
+                                  | n = 1
+                                  | check if n <= 0: False
+                                  | print(1)
+                                  | call countdown(0)
+----------------------------------|------------------------------------------------
+                                  | create countdown(0) frame
+                                  | n = 0
+                                  | check if n <= 0: True
+                                  | print("Done!")
+----------------------------------|------------------------------------------------
+                                  | destroy countdown(0) frame
+                                  | destroy countdown(1) frame
+                                  | destroy countdown(2) frame
+                                  | destroy countdown(3) frame
+                                  | destroy countdown(4) frame
+                                  | destroy countdown(5) frame
+----------------------------------|------------------------------------------------
+
+def factorial(n):
+  # Base case
+  if n == 0 or n == 1:
+    return 1
+  # Recursive case
+  else:
+    return n * factorial(n - 1)
+# factorial function object created 
+
+print(factorial(5))
+
+Heap (objects)                    | Stack (temporary frames)
+----------------------------------|------------------------------------------------
+function object: factorial        | factorial points to function object
+code: if …  else …                |
+----------------------------------|------------------------------------------------
+                                  | create factorial(5) frame
+                                  | n = 5
+                                  | check if n == 0 or n == 1: False
+                                  | return 5 * factorial(4)
+----------------------------------|------------------------------------------------
+                                  | create factorial(4) frame
+                                  | n = 4
+                                  | check if n == 0 or n == 1: False
+                                  | return 4 * factorial(3)
+----------------------------------|------------------------------------------------
+                                  | create factorial(3) frame
+                                  | n = 3
+                                  | check if n == 0 or n == 1: False
+                                  | return 3 * factorial(2)
+----------------------------------|------------------------------------------------
+                                  | create factorial(2) frame
+                                  | n = 2
+                                  | check if n == 0 or n == 1: False
+                                  | return 2 * factorial(1)
+----------------------------------|------------------------------------------------
+                                  | create factorial(1) frame
+                                  | n = 1
+                                  | check if n == 0 or n == 1: True
+                                  | return 1
+----------------------------------|------------------------------------------------
+                                  | factorial(1) returns 1
+                                  | destroy factorial(1) frame
+                                  | return to factorial(2)
+----------------------------------|------------------------------------------------
+                                  | factorial(2) calculates 2 * 1
+                                  | factorial(2) returns 2
+                                  | destroy factorial(2) frame
+                                  | return to factorial(3)
+----------------------------------|------------------------------------------------
+                                  | factorial(3) calculates 3 * 2
+                                  | factorial(3) returns 6
+                                  | destroy factorial(3) frame
+                                  | return to factorial(4)
+----------------------------------|------------------------------------------------
+                                  | factorial(4) calculates 4 * 6
+                                  | factorial(4) returns 24
+                                  | destroy factorial(4) frame
+                                  | return to factorial(5)
+----------------------------------|------------------------------------------------
+                                  | factorial(5) calculates 5 * 24
+                                  | factorial(5) returns 120
+                                  | destroy factorial(5) frame
+----------------------------------|------------------------------------------------
+                                  | create print(120) frame
+                                  | print 120
+                                  | destroy print() frame
+----------------------------------|------------------------------------------------
+
+def fibonacci(n):
+  # base case
+  if n <= 1:
+    return n
+  else:
+    # recursive case
+    return fibonacci(n - 1) + fibonacci(n - 2)
+# fibonacci function object created
+
+print(fibonacci(7))
+
+Heap (objects)                    | Stack (temporary frames)
+----------------------------------|-------------------------------------------------------------------
+function object: fibonacci        | fibonacci points to function object
+code: if …  else …                |
+----------------------------------|-------------------------------------------------------------------
+                                  | create fibonacci(7) frame
+                                  | n = 7
+                                  | check if n <= 1: False
+                                  | return fibonacci(6) + fibonacci(5) =>  fibonacci(6) evaluate first
+----------------------------------|-------------------------------------------------------------------
+                                  | create fibonacci(6) frame
+                                  | n = 6
+                                  | check if n <= 1: False
+                                  | return fibonacci(5) + fibonacci(4) =>  fibonacci(5) evaluate first
+----------------------------------|-------------------------------------------------------------------
+                                  | create fibonacci(5) frame
+                                  | n = 5
+                                  | check if n <= 1: False
+                                  | return fibonacci(4) + fibonacci(3) =>  fibonacci(4) evaluate first
+----------------------------------|-------------------------------------------------------------------
+                                  | create fibonacci(4) frame
+                                  | n = 4
+                                  | check if n <= 1: False
+                                  | return fibonacci(3) + fibonacci(2) =>  fibonacci(3) evaluate first
+----------------------------------|-------------------------------------------------------------------
+                                  | create fibonacci(3) frame
+                                  | n = 3
+                                  | check if n <= 1: False
+                                  | return fibonacci(2) + fibonacci(1) => fibonacci(2) evaluate first
+----------------------------------|-------------------------------------------------------------------
+                                  | create fibonacci(2) frame
+                                  | n = 2
+                                  | check if n <= 1: False
+                                  | return fibonacci(1) + fibonacci(0) => fibonacci(1) evaluate first, then fibonacci(0)
+----------------------------------|-------------------------------------------------------------------
+                                  | create fibonacci(1) frame
+                                  | n = 1
+                                  | check if n <= 1: True
+                                  | return 1 (hit base)
+----------------------------------|-------------------------------------------------------------------
+                                  | destroy fibonacci(1) frame
+                                  | return to fibonacci(2) 
+                                  | create fibonacci(0) frame
+                                  | n = 0
+                                  | check if n <= 1: True
+                                  | return 0 (hit base)
+----------------------------------|-------------------------------------------------------------------
+                                  | destroy fibonacci(0) frame
+                                  | fibonacci(2) calculates 1 + 0
+                                  | fibonacci(2) returns 1
+                                  | destroy fibonacci(2) frame
+----------------------------------|-------------------------------------------------------------------
+                                  | return to fibonacci(3)
+                                  | create fibonacci(1) frame
+                                  | n = 1
+                                  | return 1
+                                  | destroy fibonacci(1) frame
+                                  | fibonacci(3) calculates 1 + 1
+                                  | fibonacci(3) returns 2
+                                  | destroy fibonacci(3) frame
+----------------------------------|-------------------------------------------------------------------
+                                  | return to fibonacci(4)
+                                  | create fibonacci(2) frame
+                                  | n = 2
+                                  | return fibonacci(1) + fibonacci(0)
+                                  | fibonacci(2) returns 1
+                                  | fibonacci(4) calculates 2 + 1
+                                  | fibonacci(4) returns 3
+                                  | destroy fibonacci(4) frame
+----------------------------------|-------------------------------------------------------------------
+                                  | return to fibonacci(5)
+                                  | create fibonacci(3) frame
+                                  | n = 3
+                                  | fibonacci(3) returns fibonacci(2) + fibonacci(1) => fibonacci(1) + fibonacci(0)
+                                  | fibonacci(5) calculates 3 + 2
+                                  | fibonacci(5) returns 5
+                                  | destroy fibonacci(5) frame
+----------------------------------|-------------------------------------------------------------------
+                                  | return to fibonacci(6)
+                                  | create fibonacci(4) frame
+                                  | n = 4
+                                  | fibonacci(4) returns fibonacci(3) + fibonacci(2) => … => fibonacci(1) + fibonacci(0)
+                                  | fibonacci(6) calculates 5 + 3
+                                  | fibonacci(6) returns 8
+                                  | destroy fibonacci(6) frame
+----------------------------------|-------------------------------------------------------------------
+                                  | return to fibonacci(7)
+                                  | create fibonacci(5) frame
+                                  | n = 5
+                                  | fibonacci(5) returns fibonacci(4) + fibonacci(3) => … => fibonacci(1) + fibonacci(0)
+                                  | fibonacci(7) calculates 8 + 5
+                                  | fibonacci(7) returns 13
+                                  | destroy fibonacci(7) frame
+----------------------------------|-------------------------------------------------------------------
+                                  | create print(13) frame
+                                  | print 13
+                                  | destroy print() frame
+----------------------------------|-------------------------------------------------------------------
+
+def find_max(numbers):
+  # base case
+  if len(numbers) == 1:
+    return numbers[0]
+  else:
+    # recursive case
+    max_of_rest = find_max(numbers[1:])
+    return numbers[0] if numbers[0] > max_of_rest else max_of_rest
+# find_max function object created 
+
+my_list = [3, 7, 2, 9, 1]
+print(find_max(my_list))
+
+Heap (objects)                                      | Stack (temporary frames)
+----------------------------------------------------|------------------------------------------------------------
+function object: find_max                           | find_max points to function object
+code: if … else …                                   |
+----------------------------------------------------|------------------------------------------------------------
+list object: [3, 7, 2, 9, 1]                        | my_list points to list object
+----------------------------------------------------|------------------------------------------------------------
+                                                    | create find_max([3, 7, 2, 9, 1]) frame
+                                                    | numbers = [3, 7, 2, 9, 1]
+                                                    | len(numbers) == 1: False
+                                                    | max_of_rest = find_max(numbers[1:])
+----------------------------------------------------|------------------------------------------------------------
+new slice list object: [7, 2, 9, 1]                 | create find_max([7, 2, 9, 1]) frame
+                                                    | numbers = [7, 2, 9, 1]
+                                                    | len(numbers) == 1: False
+                                                    | max_of_rest = find_max(numbers[1:])
+----------------------------------------------------|------------------------------------------------------------
+new slice list object: [2, 9, 1]                    | create find_max([2, 9, 1]) frame
+                                                    | numbers = [2, 9, 1]
+                                                    | len(numbers) == 1: False
+                                                    | max_of_rest = find_max(numbers[1:])
+----------------------------------------------------|------------------------------------------------------------
+new slice list object: [9, 1]                       | create find_max([9, 1]) frame
+                                                    | numbers = [9, 1]
+                                                    | len(numbers) == 1: False
+                                                    | max_of_rest = find_max(numbers[1:])
+----------------------------------------------------|------------------------------------------------------------
+new slice list object: [1]                          | create find_max([1]) frame
+                                                    | numbers = [1]
+                                                    | len(numbers) == 1: True
+                                                    | return numbers[0]
+                                                    | return 1
+----------------------------------------------------|------------------------------------------------------------
+                                                    | destroy find_max([1]) frame
+                                                    | return to find_max([9, 1])
+                                                    | max_of_rest = 1
+                                                    | compare numbers[0] > max_of_rest
+                                                    | compare 9 > 1: True
+                                                    | return numbers[0]
+                                                    | return 9
+----------------------------------------------------|------------------------------------------------------------
+                                                    | destroy find_max([9, 1]) frame
+                                                    | return to find_max([2, 9, 1])
+                                                    | max_of_rest = 9
+                                                    | compare numbers[0] > max_of_rest
+                                                    | compare 2 > 9: False
+                                                    | return max_of_rest
+                                                    | return 9
+----------------------------------------------------|------------------------------------------------------------
+                                                    | destroy find_max([2, 9, 1]) frame
+                                                    | return to find_max([7, 2, 9, 1])
+                                                    | max_of_rest = 9
+                                                    | compare numbers[0] > max_of_rest
+                                                    | compare 7 > 9: False
+                                                    | return max_of_rest
+                                                    | return 9
+----------------------------------------------------|------------------------------------------------------------
+                                                    | destroy find_max([7, 2, 9, 1]) frame
+                                                    | return to find_max([3, 7, 2, 9, 1])
+                                                    | max_of_rest = 9
+                                                    | compare numbers[0] > max_of_rest
+                                                    | compare 3 > 9: False
+                                                    | return max_of_rest
+                                                    | return 9
+----------------------------------------------------|------------------------------------------------------------
+                                                    | destroy find_max([3, 7, 2, 9, 1]) frame
+                                                    | create print(9) frame
+                                                    | print 9
+                                                    | destroy print() frame
+----------------------------------------------------|------------------------------------------------------------
+
+Python generator:
+
+A generator is a special iterator that is memory-efficient and produces one value at a time. It can pause after each yield/ expression and resume execution when the next value is requested. The number of times a generator can produce a value depends on how many times it reached a yield statement during the execution
+
+** yield in a generator pauses the execution and produces a value. return stops generator ** 
+
+
+Generator function                     | Generator expression
+---------------------------------------|------------------------------------------------------------
+		                       | # create a generator object that yields x * 2 for reach x in the list 
+def simple_gen():                      | gen = (x * 2 for x in [1, 2, 3]) 
+  yield "Apple"                        | print(type(gen)) # <class 'generator'>
+  yield "Banana"                       | print(next(gen)) # 2
+  yield "Cherry"                       | print(next(gen)) # 4
+                                       | print(next(gen)) # 6
+# create generator object	       |
+gen = simple_gen()                     |
+print(type(gen)) # <class 'generator'> |
+print(next(gen)) # Apple               |
+print(next(gen)) # Banana              |
+print(next(gen)) # Cherry              |
+---------------------------------------|------------------------------------------------------------
+
+
+Heap (objects)                         | Stack / Execution
+---------------------------------------|---------------------------------------------
+function object: simple_gen            | simple_gen points to function object
+code: yield Apple, Banana, Cherry      |
+---------------------------------------|---------------------------------------------
+generator object: gen                  | gen = simple_gen()
+state: not started                     | function body not executed yet
+saved stack frame                      |
+---------------------------------------|---------------------------------------------
+                                       | next(gen)
+                                       | start generator frame
+                                       | reach yield "Apple"
+                                       | return "Apple" to caller
+                                       | pause generator
+state: paused after yield "Apple"      |
+saved stack frame                      |
+---------------------------------------|---------------------------------------------
+                                       | next(gen)
+                                       | resume generator frame
+                                       | reach yield "Banana"
+                                       | return "Banana" to caller
+                                       | pause generator
+state: paused after yield "Banana"     |
+saved stack frame                      |
+---------------------------------------|---------------------------------------------
+                                       | next(gen)
+                                       | resume generator frame
+                                       | reach yield "Cherry"
+                                       | return "Cherry" to caller
+                                       | pause generator
+state: paused after yield "Cherry"     |
+saved stack frame                      |
+---------------------------------------|---------------------------------------------
+
+Generator methods:
+1. send() => send a value to the generator
+2. stop() => stops the generator[stop() stops the generator from inside the generator, return stops the generator from outside the generator]
+
+def echo_generator():
+  while True:
+    received = yield
+    print("Received:", received)
+# created function object
+
+gen = echo_generator()
+# created generator object 
+next(gen)
+# prime the generator
+# start execution and pause at the 1st yield
+gen.send("Hello")
+# send Hello to the generator
+# continue execution and pauses at yield
+gen.send("World")
+# send World to the generator
+# continue execution and pauses at yield
+
+Python module, package and Library
+- module => a python file that contains a collection of functions, classes, and global variables with .py extension 
+- package => a directory that contains a collections of modules, a __init__.py file and may also contains sub-packages.
+- Library => a general term for reusable Python code. It may refer to a module, a package or a collection of packages.
+
+Python Module:
+1. import module => module_name.function_name()
+2. import module as alias => alias.function_name()
+3. from module import function_name => function_name()
+4. from module import function_name as alias => alias()
+
+Python PIP & PyPI
+
+pip => Package manager for python packages/ module. It is the tool used to download, install, upgrade, remove packages from PyPI.
+e.g., pip install package_name, python -version -m pip install package_name
+
+PyPI => Python Package Index, which is the main online repository where python packages and libraries are published. It is the online store for Python packages/ libraries.
+
+JavaScript Object Notation (JSON) => plain text format that is used to send, receive and store data. [import json module]
+
+Convert JSON strings to python objects => json.loads()
+Convert python objects to JSON strings => json.dumps()
+
+JSON object  → Python dict
+JSON array   → Python list 
+JSON string  → Python str
+JSON number  → Python int/ float
+JSON true    → Python True
+JSON false   → Python False
+JSON null    → Python None
+
+Regular Expression (RegEx) => a sequence of characters that forms a search pattern. [import re module]
+
+findall => returns a list containing all matches
+search = returns a match object if there is a match anywhere in the string
+split => returns a list where the string has been split by each match
+sub => replace one or more matches with a string 
+
+Python Try & Except 
+
+try => test a block of code that many contain errors
+except => handle the error if an error occurs in the try block 
+else => execute only when there is no error in the try block
+finally => execute the code regardless whether an error occurs or not.
+
+try:
+    number = int(input("Enter a number: "))
+except:
+    print("Invalid number")
+else:
+    print("Valid number")
+finally:
+    print("Done!")
+
+** Multiple except blocks can be used to handle different types of errors and execute different code for each exception type. Python provides many built-in exception types, https://www.w3schools.com/python/python_ref_exceptions.asp**
+
+raise => is used to manually trigger an exception when an condition occurs 
+
+Python String Format
+
+1. f-string => using {argument} placeholders to insert variables, operations, functions and modifiers into a value
+2. format() method => Uses {} placeholders and the .format(argument/ index/ keyword_argument) method to insert values into a string.
+
+Python None
+
+None is a special constant in Python that to represent the absence of a value. Its data  type is NoneType. None if the only instance of a NoneType object.
+** Use "is" or "is not" to compare with None.
+** functions that do not return statement return None by default.
+
+Python User Input => get user input from keyboard
+** input() always return a string object 
+age = input("Enter your age: ") #33
+print(age) #33
+print(type(age)) #<class 'str'>
+
+Python Virtual Environment => isolated environment to run and test python project with dependencies without interfering with other projects or the original python installation
+
+python -m venv [environment_name] => create a virtual environment 
+environment_name\Scripts\activate => activate the virtual environment 
+deactivate => deactivate the virtual environment
+rmdir /s /q => delete the environment folder 
+
+Python Object Oriented Programming (OOP) => writing code using classes and objects 
+
+Class => blueprint, or template for creating objects. It contains methods and attributes. 
+
+Method => function defined inside a class. It describes behaviour/ action an object can perform. All methods must have self as the first parameter. Methods can access and modifies the attribute value.
+
+** methods in a Python class can be instance methods, class methods, static methods and special methods. An instance method uses self as the first parameter, it can access and modify object attribute values. A class method uses cls as the first parameter and is marked with @classmethod, it can access and modify class attributes. A static method is marked with @staticmethod, it is used as a helper function related to the class. A special method has double underscore (dunder) before and after its name such as __ini__. 
+
+Need to use object attributes => instance methods with self keyword
+Need to use class attributes => class methods with cls keyword 
+Do not need to use object attributes and class attributes => use static methods with normal parameters
+
+Example of class method:
+
+class Student:
+    school = "MindChamps" # Class attribute, applies to all objects 
+
+    def __init__(self, name): # Object attribute, each object has its own value 
+        self.name = name
+
+    def morning_greet(self): # Object method, accesses object attribute  
+        return f"Hi {self.name}, how are you today?"
+
+    @classmethod
+    def greet(cls): # Class method, accesses class object
+        return f"Welcome to {cls.school}"
+    
+s1 = Student("Hui")
+s2 = Student("gary")
+
+print(Student.school) #MindChamps
+print(s1.greet()) # Welcome to MindChamps
+print(s1.morning_greet()) # Hi Hui, how are you today?
+print(s2.greet()) # Welcome to MindChamps
+print(s2.morning_greet()) # Hi gary, how are you today?
+
+s1.school = "Sparkletots"
+print(Student.school) # MindChamps
+print(s1.greet()) # Welcome to MindChamps
+print(s2.greet()) # Welcome to MindChamps
+print(s1.school) # Sparkletots
+print(s2.school) # MindChamps
+
+Student.school = "My First Skool"
+print(Student.school) # My First Skool
+print(s1.greet()) # Welcome to My First Skool
+print(s2.greet()) # Welcome to My First Skool
+
+** if an instance method and a class method have the same name in the same class, the method defined later overrides the method defined earlier. Python only keeps the latest definition. ** 
+
+class Student:
+    school = "MindChamps"  # class attribute
+
+    def __init__(self, name):
+        self.name = name   # object attribute
+        self.school = "My First Skool"
+
+    def show_school(self):  # instance method
+        return self.school
+
+s1 = Student("Hui")
+print(s1.show_school()) # My First Skool
+
+
+** Instance method can access both object attributes and class attributes using self. Python checks the object attribute first. If it does not exist, Python then checks the class attribute. **
+
+** Class method can access object attributes only if an object is passed into it. **
+
+** Static method uses local parameter, it does not use class attribute and object attribute. **
+
+class Student:
+    school = "MindChamps"  # class attribute
+
+    def __init__(self, name):
+        self.name = name   # object attribute
+
+    @classmethod
+    def greet_student(cls, student): # class method using class attribute and object attribute from the input object
+        return f"Hi {student.name}, welcome to {cls.school}"
+    
+    @staticmethod
+    def join_event(event_name): # static method using a local input parameter only, does not use class attribue and object attribute
+        return f"Thank you for joining us at {event_name}!"
+
+
+s1 = Student("Hui")   # internally calls Student.__init__(s1, "Hui")
+s2 = Student("Gary")  # internally calls Student.__init__(s2, "Gary")
+
+print(Student.greet_student(s1)) 
+# cls = Student, student = s1 => Student.greet_student(Student, s1)
+# student.name = s1.name = "Hui"
+# cls.school = Student.school = "MindChamps"
+
+print(Student.greet_student(s2)) 
+# cls = Student, student = s2 => Student.greet_student(Student, s2)
+# student.name = s2.name = "Gary"
+# cls.school = Student.school = "MindChamps"
+
+print(s1.join_event("Eat with your family day"))
+print(s2.join_event("Earth day"))
+
+Attribute/ property => Variable belongs to an class (class attribute) or object (object attribute). It stores data/ information about the object. If same attribute exist, the object attribute overrides the class attribute.
+
+** object attribute can be created inside __init__, inside any method, or added later by the object itself. Attributes inside __init__ are created when the object is created. Attributes inside other method are created only when that method is called. Attributes added directly to an object only belong to that particular object. ** 
+
+cls => the class itself
+self => the object itself
+
+class Person:
+    species = "human"  # class attribute/ property, shared by all objects
+    def __init__(self, name):
+        self.name = name # object attribute/ property, each object has its own value
+
+p1 = Person("hui")
+p2 = Person("gary")
+
+print(p1.species) 
+print(p1.name)
+
+print(p2.species)
+print(p2.name) 
+
+Object => an instance created from a class 
+
+__init__() => built-in method that automatically runs to initialize object attributes when an object is created.
+
+** without __init__(), attributes need to set up manually for each object ** 
+
+with __init__()                          | without __init__()
+-----------------------------------------|-----------------------------------
+class Person:                            | class Person:
+    def __init__(self, name, age):       |     pass
+        self.name = name                 |  
+        self.age = age                   |  person1 = Person()
+                                         |  person1.name = "Hui"
+person1 = Person("Hui", 33)              |  person1.age = 33
+person2 = Person("Gary", 32)             |  person2 = Person()
+# Person.__init__(person1, "Hui", 33)	 | person2.name = "Gary"
+# Person.__init__(person1, "Gary", 32)	 |  person2.age = 32
+-----------------------------------------|-----------------------------------
+
+** self parameter is a reference to the current object, it is used to access object attributes and methods within the class. Without self, python would not know which object's attributes and methods to access. ** 
+
+1. self must be the first parameter of object methods in a class 
+2. self is not a keyword, it can use a different variable name. But it is recommended to use self as it is the standard convention and makes the code more easier for other developers to read. 
+
+__str__() => controls what is returned when the object is printed 
+__repr__() => controls what is returned when object the is inspected 
+
+Python Object Oriented Principles
+
+1. Inheritance => allows to define a class (child class/ derived class) that inherits all the attributes and methods from another class (parent class/ base class)
+2. Polymorphism => allows same method/ function to be executed on different objects or classes, with each object/ class providing its own behaviour
+3. Encapsulation => Protects object attributes and method in a class, and controls how they are accessed from outside the class.
+4. Abstraction => hides internal implementation details from user and shows only the necessary attributes and methods.
+5. Inner Class => class defined inside another class, the inner class can access the properties and methods of the outer class when outer class object is passed to it.
+
+Inheritance:
+
+1. Parent class/ base class => the class being inherited from. Any class can be a parent class, the syntax is the same as creating a normal class.
+2. Child class/ derived class => the class that inherits the attributes and methods from another class. To create a child class, pass the parent class name as the parameter when defining the child class.
+
+** Use the pass keyword when the child class has no attributes or methods of its own, the child class inherents the parent class attributes and methods **
+
+** When __init__() is added to the child class, it is automatically called every time when the child class is used to create a new object. The child class __init__() overrides the parent class __init__() **
+
+** To keep the inheritance of the parent class's attributes, add parent's __init__() function call in the child class's __init__(). 
+
+** The child class inherits all parent class's methods unless the child class defines a method with the same name. If the child class defines a method with the same name, it overrides the parent method.
+
+** To keep the inheritance of the parent class's attributes, add the super().__init__() function in the child class. The super().__init__() calls the parent __init__() in MRO (Method Resolution Order) so that child object can get the parent attributes. In multiple inheritance, super().__init__(*args) or super().__init__(**kwargs) can pass remaining arguments to the next class in the MRO for processing. **
+
+# parent class
+class Person:
+    def __init__(self, fname, lname): # attributes
+       self.firstname = fname
+       self.lastname = lname
+
+    def print_name(self): # method
+       print(f"Student Name: {self.firstname} {self.lastname}")
+
+class Student(Person): # child class of Person, parent class of Graduate
+    def __init__(self, fname, lname, ic): # attributes
+       super().__init__(fname, lname) # attributes inherited from parent class 
+       self.ic = ic
+    
+    def print_info(self): # method
+       print(f"Student Number: {self.ic}")
+
+class Graduate(Student):
+    def __init__(self, fname, lname, ic, year): # attributes
+       super().__init__(fname, lname, ic) # attributes inherited from parent classes
+       self.year = year
+    
+    def print_year(self):
+       print(f"Graduation year: {self.year}")
+
+a = Graduate("Winne", "Jiang", "2021473A", "2026")
+a.print_name() # method inherited from Person class
+a.print_info() # method inherited from Student class
+a.print_year() # method in Graduate class
+
+# parent class
+class Math:
+    def __init__(self, math_marks, *arg): # attributes
+       self.math_marks = math_marks
+       super().__init__(*arg) # pass extra arguments to next class, Science.__init__(self, "93")
+    def print_math(self): # method
+       print(f"Math Mark: {self.math_marks}")
+
+class Science:
+    def __init__(self, science_marks): # attributes
+       self.science_marks = science_marks
+    
+    def print_science(self): # method
+       print(f"Science Mark: {self.science_marks}")
+
+class Student(Math, Science): # child class of Person, parent class of Graduate
+    def __init__(self, name, ic, math_marks, science_marks): # attributes
+       super().__init__(math_marks, science_marks) # super().__init__(math_marks, science_marks) calls Math.__init__(self, math_marks, science_marks)
+       self.name = name
+       self.ic = ic
+
+    def print_info(self): # method
+       print(f"Student Number: {self.ic}")
+       print(f"Student Name: {self.name}")
+
+a = Student("Winne Jiang", "2026114E", "95", "93")
+print(Student.mro()) # [<class '__main__.Student'>, <class '__main__.Math'>, <class '__main__.Science'>, <class 'object'>]
+a.print_info() # method in Student class 
+a.print_science() # method inherited from Science class
+a.print_math() # method inherited from Math class
+
+Polymorphism:
+
+Same method name exists in different classes, and each class performs its own behaviour. 
+
+class Dog:
+    def __init__(self, name):
+        self.name = name
+
+    def sound(self):
+        print(f"{self.name} says Woof")
+
+class Cat:
+    def __init__(self, name):
+        self.name = name
+
+    def sound(self):
+        print(f"{self.name} says Meow")
+
+class Duck:
+    def __init__(self, name):
+        self.name = name
+
+    def sound(self):
+        print(f"{self.name} says Quack")
+
+dog = Dog("Lucky")
+cat = Cat("Kitty")
+duck = Duck("Donald")
+
+dog.sound()
+cat.sound()
+duck.sound()
+
+# inheritance and polymorphism 
+
+# parent class 
+class Vehicle: 
+    def __init__(self, brand, model): # attributes 
+        self.brand = brand
+        self.model = model
+    
+    def move(self): # method
+        print(f"Hello {self.brand}, {self.model}")
+        print("Move")
+
+# child class 
+class Car(Vehicle):
+    pass
+
+# child class
+class Boat(Vehicle):
+    def move(self):
+        print(f"Hello {self.brand}, {self.model}")
+        print("Sail")
+
+# child class
+class Plane(Vehicle):
+    def move(self):
+        print(f"Hello {self.brand}, {self.model}")
+        print("Fly")
+
+vehicles = [Car("Ford", "Mustang"), Boat("Ibiza", "Touring 20"), Plane("Boeing", "747")]
+
+for v in vehicles:
+    v.move()
+
+for v in vehicles:
+    print(v.brand, v.model)
+
+Python Encapsulation:
+
+Protecting an object's attributes and methods by controlling access from outside the class. It helps prevent accidental changes to attributes and hide internal details of how class works. 
+
+1. Private attributes => they are created using a double underscore prefix (e.g., self.__age). Private attributes cannot be accessed directly from outside the class using object.attribute/ object.__attribute, usually getter, setter methods or property are used to read and update the value. However, they can still accessed indirectly using Python name mangling convention: object._Classname__attributes which is not recommended. 
+
+2. Protected attributes => they are created using a single underscore prefix (e.g., self._salary). Protected attributes is for internal use within the class. They can still be accessed from outside the class, but by convention, accessing or modifying them directly outside the class should be avoided. 
+
+Type of attributes:
+
+Public => self.name => can be accessed directly using object.name
+Protected => self._name => should avoid direct access using object._name from outside the class
+Private => self.__name => cannot be accessed directly from outside the class using object.__name, it is accessed or modified through getter/setter methods or @property.
+
+** Encapsulation does not mean the data can never be changed. It is mainly more for hiding internal data and controlling how it is accessed or modified. **
+
+# Encapsultion 
+class Person:
+    def __init__(self, name, age): # attributes
+        self.name = name
+        self.__age = age # private attributes 
+
+    def get_age(self): # getter method that get attribute value
+        return self.__age
+    
+    def set_age(self, age): # setter method that set attribute value
+        if age >= 0:
+            self.__age = age
+        else:
+            raise ValueError("Age is invalid!")
+        
+p1 = Person("Hui", 33)
+print(p1.get_age())
+print(p1._Person__age) # mangle format for accessing private attribute
+print(p1.name) # for accessing public attributes
+
+p1.set_age(34)
+print(p1.get_age())
+print(p1._Person__age)
+
+property() creates a property object that can contain a getter, setter, and deleter function. It allows controlled access to a private attribute using normal attribute syntax.
+
+# Encapsultion 
+class Person:
+    def __init__(self, name, age): # attributes
+        self.name = name # public attribute
+        self.__age = 0   # private attribute
+        self.age = age   # calls setter setter method 
+    
+    # age = property(original age getter function)
+    # property() takes in the original getter function and returns a property object that can be accessed as an attribute
+    @property
+    def age(self): # getter method that allows to get attribute value
+        return self.__age
+    
+    # age = age.setter(original age setter function)
+    # age.setter() takes in the orignal setter function and returns a new property object  
+    @age.setter
+    def age(self, age): # setter method that set attribute value
+        if age >= 0:
+            self.__age = age
+        else:
+            raise ValueError("Age is invalid!")
+        
+p1 = Person("Hui", 33)
+print(p1.age) # access getter method to read value
+print(p1._Person__age) # mangle format for accessing private attribute
+print(p1.name) # for accessing public attributes
+
+p1.age = 34 # access setter method to update value
+print(p1.age)
+print(p1._Person__age)
+
+1. Private methods => they are created using double underscores, and cannot be called/ accessed directly from outside the class using object.methodname()/ object.__methodname(). However, they can still be accessed indirectly using Python name mangling convention: object._Classname__methodname, but it is not recommended. 
+
+2. Protected methods => they are created using single underscore for internal use within the class. Protected methods can still be accessed from outside the class using object._methodname(), but by convention, accessing or modifying them directly outside the class should be avoided.
+
+** Guideline for using protect and private attributes/ methods **
+
+- Use protected when the attribute/ method is meant for internal use, but child class maybe need to use and override it.
+- Use private when the attribute/ method is meant be used only inside that class, to prevent accidental access or accidental overriding. 
+
+# Encapsulation
+class Calculator:
+    def __init__(self): # attribute
+        self.result = 0
+
+    def __validate(self, number): # private method that cannot access from ouside the class
+        if not isinstance(number, (int, float)): # checks if an object belongs to a certain class/type, isinstance(object, class/type)
+            return False
+        return True
+
+    def add(self, number): # publib method 
+        if self.__validate(number): # access private method
+            self.result += number
+        else:
+            raise ValueError("Invalid number!")
+    
+    def sub(self, number): # public method 
+        if self.__validate(number): # access private method
+            self.result -= number
+        else:
+            raise ValueError("Invalid number!")
+
+cal = Calculator()
+cal.add(19)
+print(cal.result)
+cal.sub(4)
+print(cal.result)
+print(cal._Calculator__validate(20))
+
+Python Abstraction 
+
+Showing only what attributes/ methods the user needs to use, while hiding how it works internally inside the class.
+
+1. Using normal public, protected or private attributes and methods
+2. Using built-in ABC class and @abstractmethod => A formal abstract class is usually created by inheriting from the built-in ABC class. It can contain:
+- Normal method => methods can be inherited and used directly by child classes
+- @abstractmethod => required methods that must be implemented or overridden by child classes before objects of those child classes can be created. Objects cannot be created directly from the parent abstract class, it can only be created from child classes after all required abstract methods are implemented.
+
+# Abstraction by normal attributes & methods
+class CoffeeMachine:
+    def __init__(self):
+        self._brand = "Philips"
+        self._model = "EP2220"
+        self._drinks = ["Coffee", "Cappuccino", "Latte"]
+    
+    def show_machine_info(self):
+        print(f"Brand: {self._brand}")
+        print(f"Model: {self._model}")
+        print(f"Available drinks: {self._drinks}")
+
+    def _boil_water(self):
+        print("Boiling water...")
+
+    def _grind_beans(self):
+        print("Grinding beans...")
+
+    def _froth_milk(self):
+        print("Frothing milk...")
+
+    def _brew(self):
+        print("Brewing...")
+    
+    def _make_coffee(self):
+        print("Prepating Coffee...")
+        self._boil_water()
+        self._grind_beans()
+        self._brew()
+    
+    def _make_latte(self):
+        print("Prepating latte...")
+        self._boil_water()
+        self._grind_beans()
+        self._brew()
+        self._froth_milk()
+    
+    def make_drinks(self, drinks):
+        if drinks.lower() == "coffee":
+            self._make_coffee()
+        elif drinks.lower() == "latte":
+            self._make_latte()
+        else:
+            raise Exception("Invalid drink!")
+
+m1 = CoffeeMachine()
+m1.show_machine_info()
+print("---------------------")
+m1.make_drinks("latte")
+print("---------------------")
+m1.make_drinks("coffee")
+
+from abc import ABC
+
+class CoffeeMachine(ABC): # Inherits from ABC, but it is not truly an abstract class
+    def __init__(self, brand, model, drinks):
+        self._brand = brand
+        self._model = model
+        self._drinks = drinks
+    
+    def show_machine_info(self):
+        print(f"Brand: {self._brand}")
+        print(f"Model: {self._model}")
+        print(f"Available drinks: {self._drinks}")
+    
+    def _boil_water(self):
+        print("Boiling water...")
+
+    def _grind_beans(self):
+        print("Grinding beans...")
+
+    def _froth_milk(self):
+        print("Frothing milk...")
+
+    def _brew(self):
+        print("Brewing...")
+    
+    def _make_coffee(self):
+        print("Prepating Coffee...")
+        self._boil_water()
+        self._grind_beans()
+        self._brew()
+    
+    def _make_latte(self):
+        print("Prepating latte...")
+        self._boil_water()
+        self._grind_beans()
+        self._brew()
+        self._froth_milk()
+    
+    def make_drinks(self, drinks):
+        if drinks.lower() == "coffee":
+            self._make_coffee()
+        elif drinks.lower() == "latte":
+            self._make_latte()
+        else:
+            raise Exception("Invalid drink!")
+
+class PhilipsCoffeeMachine(CoffeeMachine):
+    def __init__(self):
+        super().__init__("Philips", "EP2220B", "['Coffee', 'Cappuccino', 'Latte']")
+
+
+m1 = CoffeeMachine("Philips", "EP2220A", "['Coffee', 'Cappuccino', 'Latte']")
+m2 = PhilipsCoffeeMachine()
+
+m1.show_machine_info()
+print("---------------------")
+m1.make_drinks("latte")
+print("---------------------")
+m1.make_drinks("coffee")
+
+m2.show_machine_info()
+print("*********************")
+m2.make_drinks("latte")
+print("*********************")
+m2.make_drinks("coffee")
+
+from abc import ABC, abstractmethod
+
+class CoffeeMachine(ABC): # Abstract class that Inherits from ABC
+    def __init__(self, brand, model, drinks):
+        self._brand = brand
+        self._model = model
+        self._drinks = drinks
+    
+    def show_machine_info(self):
+        print(f"Brand: {self._brand}")
+        print(f"Model: {self._model}")
+        print(f"Available drinks: {self._drinks}")
+    
+    @abstractmethod
+    def make_drinks(self, drink):
+        pass
+
+from abc import ABC, abstractmethod
+
+class CoffeeMachine(ABC): # Abstract class that Inherits from ABC
+    def __init__(self, brand, model, drinks):
+        self._brand = brand
+        self._model = model
+        self._drinks = drinks
+    
+    def show_machine_info(self):
+        print(f"Brand: {self._brand}")
+        print(f"Model: {self._model}")
+        print(f"Available drinks: {self._drinks}")
+    
+    def _boil_water(self):
+        print("Boiling water...")
+
+    def _grind_beans(self):
+        print("Grinding beans...")
+
+    def _froth_milk(self):
+        print("Frothing milk...")
+
+    def _brew(self):
+        print("Brewing...")
+    
+    def _make_coffee(self):
+        print("Prepating Coffee...")
+        self._boil_water()
+        self._grind_beans()
+        self._brew()
+    
+    def _make_latte(self):
+        print("Prepating latte...")
+        self._boil_water()
+        self._grind_beans()
+        self._brew()
+        self._froth_milk()
+    
+    @abstractmethod # decorator that indicates make_drinks() must be implemented by every child class that inherits from this class
+    def make_drinks(self, drink):
+        pass
+
+class PhilipsCoffeeMachine(CoffeeMachine):
+    def __init__(self):
+        super().__init__("Philips", "EP2220", "['Coffee', 'Cappuccino', 'Latte']")
+    
+    def make_drinks(self, drinks):
+        if drinks.lower() == "coffee":
+            self._make_coffee()
+        elif drinks.lower() == "latte":
+            self._make_latte()
+        else:
+            raise Exception("Invalid drink!")
+
+m1 = PhilipsCoffeeMachine()
+m1.show_machine_info()
+print("---------------------")
+m1.make_drinks("latte")
+print("---------------------")
+m1.make_drinks("coffee")
+
+Python Inner Classes 
+The inner class does not automatically access the attributes and methods of the outer class, but it can access them when the outer class object is passed to it. 
+
+** Inner class and outer class are two separated classes. The inner class is just nested inside the outer class for organization. It does not automatically access the outer class's attribute s or methods. 
+
+# Accessing Outer class, and accessing the Inner class from the Outer class
+class Outer: # outer class 
+    def __init__(self):
+        self.name = "Outer Class"
+    
+    def diplay_outer(self):
+        print(f"This is the {self.name}")
+
+    class Inner: # inner class
+        def __init__(self):
+            self.name = "Inner Class"
+
+        def display_inner(self):
+            print(f"This is the {self.name}")
+
+outer = Outer() # outer class object 
+print(outer.name)
+outer.diplay_outer()
+print("+"*24)
+inner = Outer.Inner() # inner class object 
+print(inner.name)
+inner.display_inner()
+
+# Accessing Outer Class from Inner Class
+class Outer: # outer class 
+    def __init__(self):
+        self.name = "Outer Class"
+        self.type = "Public"
+    
+    def display_outer(self):
+        print(f"This is the {self.name}")
+
+    class Inner: # inner class
+        def __init__(self, outer): # taking in outer class as parameter 
+            self.name = "Inner Class"
+            self.outer = outer # store outer object 
+
+        def display_inner(self):
+            print(f"This is the {self.name} inside the {self.outer.name}") # access outer class attribute
+
+outer = Outer() # outer class object 
+print(outer.name)
+outer.display_outer()
+print("+"*24)
+inner = Outer.Inner(outer) # inner class object, passing outer object parameter
+print(inner.name) # inner class attribute
+inner.display_inner() # inner class method
+print(inner.outer.type) # inner class accessing outer class attributes  
+inner.outer.display_outer() # inner class accessing outer class object
+
+There are three common ways to use an inner class when it needs to access the outer class’s attributes or methods:
+1. Create the inner class object directly using the outer class name, the inner class taking in the outer class object as the parameter and store the outer class object
+2. Create the inner class object inside the outer's class __init__() as an attribute (this is more cleaner)
+3. Create the inner class object inside the outer's class method 
+
+# Method 1
+class Car: # outer class
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+    
+    def car_info(self):
+        print(f"{self.brand}, {self.model}")
+    
+    class Engine: # inner class 
+        def __init__(self, car): # passing outer class as parameter
+            self.status = "off"
+            self.car = car # store outer class object
+
+        def start(self):
+            self.status = "running"
+            print("Engine started")
+
+        def stop(self):
+            self.status = "off"
+            print("Engine stopped")
+
+        def drive(self):
+            if self.status == "running":
+                print(f"Driving the {self.car.brand}, {self.car.model}") # accessing outer class attributes
+            else:
+                print(f"start engine first")
+
+car = Car("Toyota", "Corolla")  # outer class object
+car.car_info()
+
+engine = Car.Engine(car) # inner class object, taking in outer class object as the parameter 
+engine.start()
+engine.drive()
+
+# Method 2
+class Car: # outer class
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+        self.engine = self.Engine() # create inner object inside outer object 
+    
+    def car_info(self):
+        print(f"{self.brand}, {self.model}")
+    
+    class Engine: # inner class
+        def __init__(self): 
+            self.status = "off"
+
+        def start(self): 
+            self.status = "running"
+            print("Engine started")
+
+        def stop(self):
+            self.status = "off"
+            print("Engine stopped")
+
+    def drive(self): # outer class method
+        if self.engine.status == "running":
+            print(f"Driving the {self.brand}, {self.model}") # accessing outer class attributes
+        else:
+            print(f"start engine first")
+
+car = Car("Toyota", "Corolla")  # car is the outer class object, car.engine is the inner class object
+car.car_info()
+print(car.engine.status) # access inner class attributes 
+car.engine.start() # access inner class methods
+car.drive() # access outer class methods
+
+# Method 3
+class Car: # outer class
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+    
+    def car_info(self):
+        print(f"{self.brand}, {self.model}")
+    
+    def create_engine(self): # outer class method, can be called using .create_engine
+        return self.Engine(self) #self here refer to the Car object => Car.Engine(car)
+    
+    class Engine: # inner class
+        def __init__(self, car): # taking in outer class object as paramter, self here refer to the Engine object, car here refer to the Car object passed in
+            self.status = "off"
+            self.car = car # store outer class object
+
+        def start(self): 
+            self.status = "running"
+            print("Engine started")
+
+        def stop(self):
+            self.status = "off"
+            print("Engine stopped")
+
+        def drive(self): # inner class method, taken in the inner object
+            if self.status == "running":
+                print(f"Driving the {self.car.brand}, {self.car.model}") # accessing outer class attributes
+            else:
+                print(f"start engine first")
+
+car = Car("Toyota", "Corolla")  # car is the outer class object
+engine = car.create_engine() # engine is the inner class object => return Car.Engine(car)
+car.car_info()
+print(engine.status) # access inner class attributes 
+engine.start() # access inner class methods
+engine.drive() # access inner class methods
+
+Python File Handling - CRUD [Create, Read, Update and Delete]
+open(filename, mode) => Key function for working with files in python. It returns a file object
+
+4 modes:
+r => read, default mode. Opens a file for reading. Error if file does not exist
+a => append. Opens a file for appending, and creates the file if it does not exist. New contented is added at the end of the file
+w => write. Opens a file for writing, creates the file if it does not exist. Overwrites the file if it already exist. 
+x => create. Creates a specific file, returns an error if the file exist
+
+Additional 3 modes
+t => text mode, default. For handle text files
+b => binary mode, binary. For handle binary files such as images, PDFs, audio
++ => read and write mode. [r+ => read and write, a+ => read and append, w+ => read and write]
+
+Reading methods:
+1. read(size=-1) => reads the whole file by default, or number of characters if size if provided
+2. readline() => Reads one line from the file. 
+3. readlines() => Reads all lines and returns them as a list.
+
+Writing methods:
+1. write(string) => writes a string to the file
+2. writelines(iterable) => writes multiple string from an iterable 
+
+Delete method:
+1. os.remove(filename) => delete a file
+2. os.rmdir(foldername) => delete a directory (directory must be empty)
+
+f = open(filename)
+print(f.read())
+f.close() 
+
+with => context manager automatically handles setup and cleanup operations for:
+
+1. File/ Multiple file handling
+2. Database connection
+3. Thread lock
+4. Temporary file/ directory 
+5. Network connection 
+6. Custom setup/ cleanup logic
+
+with open(filename) as f:
+    print(f.read())
+
+DSA with Python 
+
+Data Structures => a way to organize and store data so that it can be used efficiently
+
+- Array/ List => items store in order
+- Stack => LIFO (can be implemented using list)
+- Queue => FIFO
+- Linked List => Nodes connected one by one
+- Tree => Hierarchical structure (Binary, Binary Search and AVL)
+- Graph => Nodes connected by edges
+- Hash Table/ Dictionary => Key-pairs
+
+
+Algorithms => step by step instructions/ method that solve a problem
+
+- Linear Search
+- Binary Search
+- Bubble Search
+- Selection Search
+- Insertion Search
+- Quick Sort
+- Counting Sort
+- Radix Sort
+- Merge Sort
+
+Time and Space Complexity => evaluate the efficiency of an algorithm
+Time complexity => how the running time of an algorithm grows as the input size grows 
+
+
+ Notation    | Type              | Description                                     
++------------+-------------------+-----------------------------------------------------------------------+
+  O(1)       | Constant time     | Best; time stays the same regardless of data size   
+  O(log n)   | Logarithmic time  | Efficient; time grows slowly, input size reduces by a fraction each step 
+  O(n)       | Linear time       | Manageable; time grows proportionally to input size
+  O(n log n) | Linearithmic time | Good; common in efficient sorting  
+  O(n^2)     | Quadratic time    | Slow; Time grows proportionally to the square of the input size
+  O(2^n)     | Exponential time  | Very slow; avoid for large input size if possible               
+  O(n!)      | Factorial time    | Extremely slow; very poor for large input 
++------------+-------------------+-----------------------------------------------------------------------+
+
+Space complexity => how the memory usage grows as the input size grows 
+
+| Notation   | Type              | Meaning                                        
++------------+-------------------+-----------------------------------------------------------------------+
+| O(1)       | Constant space    | Fixed memory 
+| O(log n)   | Logarithmic space | Memory grows slowly, e.g. recursive binary search
+| O(n)       | Linear space      | Memory grows proportionally to input size
+| O(n^2)     | Quadratic space   | Memory grows fast
++------------------+-------------+-----------------------------------------------------------------------+
+
+Using list as stack:
+
+stack = []
+stack.append("A") # push
+stack.append("B")
+stack.append("C")
+stack.append("D")
+
+isEmpty = not bool(stack) # check if stack is empty
+
+if not isEmpty:
+    topElement = stack[-1] # top most element
+    print(f"isEmpty: {isEmpty}")
+    print(f"original stack :{stack}, top element: {topElement}")
+    
+    poppedElement = stack.pop() # pop top element
+    print(f"new stack:{stack}, popped element: {poppedElement}")
+
+Using class as stack
+
+class Stack:
+    # initialize stack attribute 
+    def __init__(self):
+        self.stack = []
+    
+    # push method
+    def push(self, element):
+        self.stack.append(element)
+
+    # pop method
+    def pop(self):
+        if self.isEmpty():
+            print("Stack is empty") # return none if stack is empty
+            return None
+        return self.stack.pop()
+    
+    # peek method
+    def peek(self):
+        if self.isEmpty():
+            return "stack is empty" # return none if stack is empty
+        return self.stack[-1]
+
+    # isEmpty method, bool([]) returns true, bool(["A"]) returns false
+    def isEmpty(self):
+        if not bool(self.stack): # self.stack = [], bool(self.stack) = False. not False, return true 
+            return True # self.stack is empty
+        return False # if self.stack is not empty
+
+mystack = Stack()
+mystack.push("A")
+mystack.push("B")
+mystack.push("C")
+mystack.push("D")
+print(f"original stack :{mystack.stack}, top element: {mystack.peek()}")
+poppedElement = mystack.pop()
+print(f"new stack:{mystack.stack}, popped element: {poppedElement}")
+
+** Implementing a stack using list requires less coding, and list elements do not need to store the address of the next element, unlike the nodes in the linked list. But Python list may use more memory than needed because it may reserve extra unused memory to make the append operations faster. ** 
+
+Linked List Node
+----------------------------------------------------------
+# Linked List Nodes
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None 
+
+"""
+node_a = Node("A") 
+head = node_a # head=>A, A.next=>None
+
+node_b = Node("B")
+node_b.next = head  # node_b.next = head = node_a
+head = node_b # head=>B, B.next=>A, A.next=>None
+
+node_c = Node("C")
+node_c.next = head # node_c.next = head = node_b
+head = node_c # head=>C, C.next=>B, B.next=>A, A.next=>None
+
+node_d = Node("D") 
+node_d.next = head # node_d.next = head = node c
+head = node_d # head=>D, D.next=>C, C.next=>B, B.next=>A, A.next=>None
+
+## head node address: <__main__.Node object at 0x0000028C55D3AA80>, node value: D, next node: <__main__.Node object at 0x0000028C55D3AA20>, next node value: C
+print(f"head node address: {head}, node value: {head.value}, next node: {head.next}, next node value: {head.next.value}")
+## node C address: <__main__.Node object at 0x0000028C55D3AA20>, node value: C, next node: <__main__.Node object at 0x0000028C55D3A9C0>, next node value: B
+print(f"node C address: {node_c}, node value: {node_c.value}, next node: {node_c.next}, next node value: {node_c.next.value}")
+## node B address: <__main__.Node object at 0x0000028C55D3A9C0>, node value: B, next node: <__main__.Node object at 0x0000028C55D3A990>, next node value: A
+print(f"node B address: {node_b}, node value: {node_b.value}, next node: {node_b.next}, next node value: {node_b.next.value}")
+## node A address: <__main__.Node object at 0x0000028C55D3A990>, node value: A, next node: None 
+print(f"node A address: {node_a}, node value: {node_a.value}, next node: {node_a.next}")
+
+"""
+
+# Stack class
+class Stack:
+    def __init__(self):
+        self.head = None # head node =>None
+        self.size = 0 # stack size
+    
+    def push(self, value): # push method
+        new_node = Node(value) # create a new node, new_node=>A, A.next=>None
+        if self.head: # if stack is not empty, self.head=>X, X.next=>None 
+            new_node.next = self.head # new_node.next=head, new_node=>A, A.next=>X, X.next=>None 
+        self.head = new_node # If stack is empty, self.head=>A, A.next=>None. If stack is not empty, self.head=>A, A.next=> X, X.next=>None 
+        self.size += 1 # increase stack size by 1
+    
+    def pop(self): # pop method
+        if self.isEmpty(): # if stack is empty 
+            return "Stack is empty"
+        popped_node = self.head
+        self.head = self.head.next # self.head=>A, A.next=> X, X.next=>None, self.head = self.head.next, self.head=> X, X.next=>None
+        self.size -= 1 # reduce stack size by 1
+        return popped_node.value
+
+    def peek(self): # peek method
+        if self.isEmpty():
+            return "Stack is empty"
+        return self.head.value
+
+    def isEmpty(self): # is empty method
+        return self.size == 0
+    
+    def printAllNodes(self):
+        currentNode = self.head
+        while currentNode:
+            print(f"{currentNode.value} =>", end=" ")
+            currentNode = currentNode.next
+        print("None")
+
+stack = Stack()
+print(f"isEmpty: {stack.isEmpty()}") # isEmpty: True
+stack.push("A")
+stack.push("B")
+stack.push("C")
+stack.push("D")
+print(f"isEmpty: {stack.isEmpty()}") # isEmpty: False
+print(f"stack size: {stack.size}") # stack size: 4
+stack.printAllNodes() # D => C => B => A => None 
+print(f"top element: {stack.peek()}") # top element: D
+print(f"popped element: {stack.pop()}") # popped element: D
+print(f"popped element: {stack.pop()}") # popped element: C
+stack.printAllNodes() # B => A => None
+
+Use list as queue:
+
+queue = []
+isEmpty = not bool(queue) # bool(queue) = False if queue is empty, not False = True
+print(f"isEmpty:{isEmpty}") # isEmpty:True 
+
+#Enqueue
+queue.append("A")
+queue.append("B")
+queue.append("C")
+queue.append("D")
+print(f"Original Queue: {queue}") #  ['A', 'B', 'C', 'D']
+
+# Peek
+frontElement = queue[0]
+print(f"Peek: {frontElement}") # Peek: A
+
+#Dequeue
+poppedElement = queue.pop(0) # pop the first element
+print(f"popped element: {poppedElement}") # popped element: A
+print(f"New queue after popped: {queue}") # New queue after popped: ['B', 'C', 'D']
+print(f"isEmpty:{isEmpty}") # isEmpty:True
+print(f"Queue Size: {len(queue)}") # Queue Size: 3
+
+Use class as queue:
+
+class Queue:
+    def __init__(self):
+        self.queue = []
+        self.size = 0
+
+    def enqueue(self, value): # enqueue method
+        self.size += 1 
+        return self.queue.append(value)
+    
+    def dequeue(self): # dequeue method 
+        if self.isEmpty():
+            return "Queue is empty"
+        return self.queue.pop(0)
+        self.size -= 1
+
+    def peek(self): # peek method 
+        if self.isEmpty():
+            return "Queue is empty"
+        return self.queue[0]
+
+    def isEmpty(self):
+        return self.size == 0
+
+queue = Queue()
+print(f"isEmpty:{queue.isEmpty()}") # isEmpty:True 
+
+#Enqueue
+queue.enqueue("A")
+queue.enqueue("B")
+queue.enqueue("C")
+queue.enqueue("D")
+print(f"isEmpty:{queue.isEmpty()}") # isEmpty:False 
+print(f"Original Queue: {queue.queue}") #  ['A', 'B', 'C', 'D']
+print(f"Queue Size: {queue.size}") # Queue Size: 4
+
+# Peek
+print(f"Peek: {queue.peek()}") # Peek: A
+
+#Dequeue
+print(f"popped element: {queue.dequeue()}") # popped element: A
+print(f"New queue after popped: {queue.queue}") # New queue after popped: ['B', 'C', 'D']
+print(f"isEmpty:{queue.isEmpty()}") # isEmpty:False
+print(f"Queue Size: {queue.size}") # Queue Size: 4
+
+Linked List Node
+----------------------------------------------------------
+# Linked List Nodes
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None 
+
+class Queue:
+    def __init__(self):
+        self.head_node = None
+        self.rear_node = None
+        self.size = 0
+
+    def enqueue(self, value): # enqueue method
+        new_node = Node(value) # create a new node 
+        if self.rear_node: # if queue is not empty
+            # head_node|rear_node=>A.value, A.next=>None. So self.rear_node.next = new_node => A.next = new_node
+            self.rear_node.next = new_node # head_node|rear_node=>A.value, A.next=>new_node.value, new_node.next=> None
+            self.rear_node = new_node # head_node=>A.value, A.next=>(rear_node=>)new_node.value, new_node.next=> None
+        else:
+            self.head_node = self.rear_node = new_node # if queue is empty head_node|rear_node=>new_node.value, new_node.next=>None
+        self.size +=1 # increase queue size by 1
+        return self.head_node
+    
+    def dequeue(self): # dequeue method 
+        if self.isEmpty():
+            return "Queue is empty"
+        temp_node = self.head_node
+        self.head_node = self.head_node.next # move head pointer to next element in the queue
+        self.size -= 1 # decrease queue size by 1 
+
+        if self.head_node is None: # reset rear_node if queue is empty, 
+            self.rear_node = None
+
+        temp_node.next = None # disconnect temp_node from rest of the queue 
+        return temp_node.value  
+
+    def peek(self): # peek method 
+        if self.isEmpty():
+            return "Queue is empty"
+        return self.head_node.value
+
+    def isEmpty(self):
+        return self.size == 0
+    
+    def printQueue(self):
+        if self.isEmpty():
+            return "Queue is empty"
+        temp_node = self.head_node
+        while temp_node:
+            print(f"{temp_node.value} =>", end=" ")
+            temp_node = temp_node.next
+        print("None")
+
+queue = Queue()
+print(f"isEmpty:{queue.isEmpty()}") # isEmpty:True 
+
+#Enqueue
+queue.enqueue("A")
+queue.enqueue("B")
+queue.enqueue("C")
+queue.enqueue("D")
+print(f"isEmpty:{queue.isEmpty()}") # isEmpty:False 
+queue.printQueue() #  A => B => C => D => None
+print(f"Queue Size: {queue.size}") # Queue Size: 4
+
+# Peek
+print(f"Peek: {queue.peek()}") # Peek: A
+
+#Dequeue
+print(f"popped element: {queue.dequeue()}") # popped element: A
+print(f"popped element: {queue.dequeue()}") # popped element: B
+queue.printQueue() # New queue after popped: ['C', 'D']
+print(f"isEmpty:{queue.isEmpty()}") # isEmpty:False
+print(f"Queue Size: {queue.size}") # Queue Size: 2
+
+Linked List => consists of nodes where each node contains data and the reference to the next node
+1. Single linked list => each node contains data and the reference to the next node 
+2. double linked list => each node contains data, the reference to the previous node, and the reference to the next node. It takes up more memory 
+3. circular linked list => a single or double linked list with the head node and tail node connected. tail.next=>head.value, head.next=>... 
+
+Hash table => data structure that uses keys to insert, find, and delete values quickly. The hash function converts a key into an index which tells a hash table which bucket should be used.. A hash table contains buckets, which are storage locations that store values. 
+
+Hash table collision => when hash function return same index for different keys
+
+1. Chaining => each bucket can store multiple values by using list or linked list
+2. Open addressing => if the target bucket is occupied, find another bucket. Linear probing => check the next bucket one by one which can create clustering. Quadratic probing => check the next bucket using square numbers. Double hashing => use a second hash function to decide the next bucket 
+
+Using list as hash table
+
+table = [[], [], [], [], []]
+
+def hash_function(key):
+    idx = 0
+    for char in key:
+        idx += ord(char)
+    return idx % 5
+
+def add(value):
+    index = hash_function(value)
+    table[index].append(value)
+
+def find(value):
+    index = hash_function(value)
+    return value in table[index]
+
+def delete(value):
+    index = hash_function(value)
+    if value in table[index]:
+        table[index].remove(value)
+    
+add("Bob")
+add("Peter")
+add("Peter")
+add("Joe")
+add("Lily")
+print(table) # [['Bob', 'Lily'], ['Joe'], ['Peter', 'Peter'], [], []]
+print(f"find value 'Hui': {find('Hui')}") # find value 'Hui': False
+print(f"find value 'Joe': {find('Joe')}") # find value 'Joe': True
+delete("Peter")
+print(table) # [['Bob', 'Lily'], ['Joe'], ['Peter'], [], []]
+
+Using class as hash table
+
+class HashTable:
+    def __init__(self):
+        self._bucket = 5
+        self.table = [[] for _ in range (self._bucket)]
+
+    def hash_function(self, key):
+        idx = 0
+        for char in key:
+            idx += ord(char)
+        return idx % self._bucket
+
+    def add(self, value):
+        index = self.hash_function(value)
+        self.table[index].append(value)
+
+    def find(self, value):
+        index = self.hash_function(value)
+        return value in self.table[index]
+
+    def delete(self, value):
+        index = self.hash_function(value)
+        if value in self.table[index]:
+            self.table[index].remove(value)
+
+
+hashtable = HashTable()
+print(f"Original Hash table: {hashtable.table}") # Original Hash table: [[], [], [], [], []]
+hashtable.add("Bob")
+hashtable.add("Peter")
+hashtable.add("Peter")
+hashtable.add("Joe")
+hashtable.add("Lily")
+print(f"New Hash table: {hashtable.table}") # New Hash table: [['Bob', 'Lily'], ['Joe'], ['Peter', 'Peter'], [], []]
+print(f"find value 'Hui': {hashtable.find('Hui')}") # find value 'Hui': False
+print(f"find value 'Joe': {hashtable.find('Joe')}") # find value 'Joe': True
+hashtable.delete("Peter")
+print(f"Hash table after deletion: {hashtable.table}") # Hash table after deletion: [['Bob', 'Lily'], ['Joe'], ['Peter'], [], []]
+
+Tree => data structure that is similar to Linked List such that each node contains data and the reference to other node. In a tree, a single node can have multiple next node. 
+1. Binary Tree => each node has maximum 2 child nodes, left child node and right child node
+2. Binary Search Tree (BST) => for every node, all values in the left subtree are smaller than the node's value, and all values in the right subtree are greater than the node's value. 
+3. AVL Tree => BST that is self-balancing so that for every node, the height difference between the left and right subtrees is at most one. 
+
+List VS linked list VS Tree
+
+- List are fast for accessing an element at a specific index, but inserting and deleting elements may require other elements to shift in memory 
+- Linked List are fast for inserting and deleting elements when head node is known, but accessing an element needs traversing the nodes one by one.
+- Tree are fast for accessing, inserting and deleting the nodes.
+
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left_node = None
+        self.right_node = None
+
+root = TreeNode("R")
+nodeA = TreeNode("A")
+nodeB = TreeNode("B")
+nodeC = TreeNode("C")
+nodeD = TreeNode("D")
+nodeE = TreeNode("E")
+nodeF = TreeNode("F")
+nodeG = TreeNode("G")
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+nodeF.left_node = nodeG
+
+print("root.right.right.left.value:", root.right_node.right_node.left_node.value) # G
+
+Binary tree traversal => Go through a tree by visiting a node at a time for all nodes
+
+1. Breadth First Search (BFS) => nodes at the same level are visited before next level in the tree
+2. Depth First Search (DFS) => visit nodes from all the way down the tree, branch by branch
+   - pre-order, root => left subtree => right subtree 
+   - in-order, left subtree => root => right subtree 
+   - post-order, left subtree => right subtree => root 
+
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left_node = None
+        self.right_node = None
+
+# root => left subtree => right subtree 
+def preOrderTraversal(node):
+    if node is None:
+        print("0")
+        return
+    print(f"node: {node.value}")
+    preOrderTraversal(node.left_node)
+    preOrderTraversal(node.right_node)
+
+def inOrderTraversal(node): # left subtree => root => right subtree
+    if node is None:
+        print("0")
+        return
+    inOrderTraversal(node.left_node)
+    print(f"node: {node.value}")
+    inOrderTraversal(node.right_node)    
+    
+def postOrderTraversal(node): # left subtree => right subtree => root
+    if node is None:
+        print("0")
+        return
+    postOrderTraversal(node.left_node)
+    postOrderTraversal(node.right_node)
+    print(f"node: {node.value}")
+
+root = TreeNode("R")
+nodeA = TreeNode("A")
+nodeB = TreeNode("B")
+nodeC = TreeNode("C")
+nodeD = TreeNode("D")
+nodeE = TreeNode("E")
+nodeF = TreeNode("F")
+nodeG = TreeNode("G")
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+nodeF.left_node = nodeG
+
+"""
+          R
+     A         B
+  C     D   E     F
+                G
+"""
+"""
+    # Start at R(node=R), print R
+    # Go to R.left_node[preOrderTraversal(node=A)], print A
+    # Go to A.left_node[preOrderTraversal(node=C)], print C 
+    # Go to C.left_node, return None, go to C.right_node, return None. Return to node=A
+    # Go to A.right[preOrderTraversal(node=D)], print D
+    # Go to D.left_node, return None, go to D.right_node, return None. Return to node=A. Return to node=R
+    # Go to R.right_node[preOrderTraversal(node=B)], print B
+    # Go to B.left_node[preOrderTraversal(node=E)], print E
+    # Go to E.left_node, return None, go to E.right_node, returned None. return to node=B
+    # Go to B.right_node[preOrderTraversal(node=F)], print F
+    # Go to F.left_node[preOrderTraversal(node=G)], print G
+    # Go to G.left_node, return None, go to G.right, return None, return to F
+    # Go to F.right_node, return None
+"""
+preOrderTraversal(root) # R => A => C => D => B => E => F => G
+"""
+    # Start at R(node=R), inOrderTraversal(node=R.left_node)
+    # Go to R.left_node[inOrderTraversal(node=A)], inOrderTraversal(node=A.left_node)
+    # Go to A.left_node[inOrderTraversal(node=C)], inOrderTraversal(node=C.left_node)
+    # Go to C.left_node, return None, print C, inOrderTraversal(node=C.right)
+    # Go to C.right_node, return None. Return to node=A, print A, inOrderTraversal(A.right_node)
+    # Go to A.right_node[inOrderTraversal(node=D)], inOrderTraversal(node=D.left_node)
+    # Go to D.left_node, return None, print D, go to D.right_node, return None. Return to node=A. Return to node=R.
+    # Print R, inOrderTraversal(node=R.right_node)
+    # Go to R.right_node[inOrderTraversal(node=B)], inOrderTraversal(node=B.left_node)
+    # Go to B.left_node[inOrderTraversal(node=E)], inOrderTraversal(node=E.left_node)
+    # Go to E.left_node, return None, print E, go to E.right_node, return None. Return to node=B
+    # Print B, inOrderTraversal(B.right_node), inOrderTraversal(node=F)
+    # Go to F.left_node[inOrderTraversal(node=G)], inOrderTraversal(G.left_node)
+    # Go to G.left_node, return None, print G, go to G.right_node, return None. Return to node=F
+    # Print F, inOrderTraversal(F.right_node), return None.  
+"""
+inOrderTraversal(root) # C => A => D => R => E => B => G => F
+"""
+    # Start at R(node=R), postOrderTraversal(node=R.left_node)
+    # Go to R.left_node[postOrderTraversal(node=A)], inOrderTraversal(node=A.left_node)
+    # Go to A.left_node[postOrderTraversal(node=C)], inOrderTraversal(node=C.left_node)
+    # Go to C.left_node, return None, go to C.right_node, return None, print C. Return to node=A
+    # Go to A.right_node[postOrderTraversal(node=D)], inOrderTraversal(node=D.left_node)
+    # Go to D.left_node, return None, go to D.right_node, return None, print D. Return to node=A, print A, Return to node=R
+    # Go to R.right_node[postOrderTraversal(node=B)], inOrderTraversal(node=B.left_node)
+    # Go to B.left_node[postOrderTraversal(node=E)], inOrderTraversal(node=E.left_node)
+    # Go to E.left_node, return None, go to E.right_node, return None. Print E. Return to node=B
+    # Go to B.right_node[postOrderTraversal(node=F)], inOrderTraversal(node=F.left_node)
+    # Go to F.left_node[postOrderTraversal(node=G)], inOrderTraversal(node=G.left_node)
+    # Go to G.left_node, return None, go to G.right_node, return None. Print G. Return to node=F
+    # Go to Fl.right_node, return None, print F. Return to node=B, print B, return to node=R, print R
+"""
+postOrderTraversal(root) # C => D => A => E => G => F => B => R
+
+
+Breadth Search Traversal
+----------------------------------------------------------
+
+class TreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left_node = None
+        self.right_node = None
+
+def height(node):
+    if node is None:
+        return 0
+    # print(node.value)
+    return 1 + max(height(node.left_node), height(node.right_node))
+
+def nodesAtLevel(node, level):
+    if node is None:
+        return
+    
+    if level == 0:
+        print(f"{node.value}")
+        return
+    #print(f"{node.value} go to left_node")
+    nodesAtLevel(node.left_node, level-1)
+    #print(f"{node.value} go to right_node")
+    nodesAtLevel(node.right_node, level-1)
+
+def breadthFirstSearch(node):
+    tree_height = height(node)
+    for level in range(tree_height):
+        print (f"level: {level}")
+        nodesAtLevel(node, level)
+        
+"""
+          R
+     A         B
+  C     D   E     F
+                G
+"""
+
+root = TreeNode("R")
+nodeA = TreeNode("A")
+nodeB = TreeNode("B")
+nodeC = TreeNode("C")
+nodeD = TreeNode("D")
+nodeE = TreeNode("E")
+nodeF = TreeNode("F")
+nodeG = TreeNode("G")
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+nodeF.left_node = nodeG
+
+# Start at R(node=R), return 1 + max(height(node=R.left_node), height(node=R.right_node))， return 1 + max(height(node=A), height(node=B)), ~return 1 + max(2,3), return 4 
+# Go to max(height(node=A), height(node=B)), ~max(2,3)
+# # height(node=A), return 1 + max(height(node=A.left_node), height(node=A.right_node)), return 1 + max(height(node=C), height(node=D)), ~return 1 + max(1,1), ~return 2
+# # # max(height(node=C), height(node=D)), ~max(1,1)
+# # # height(node=C), return 1 + max(height(node=C.left_node), height(node=C.right_node)), return 1 + max(0,0), return 1
+# # # height(node=D), return 1 + max(height(node=D.left_node), height(node.D.right_node)), return 1 + max(0,0), return 1
+# # height(node=B), return 1 + max(height(node=B.left_node), height(node=B.right_node)), return 1 + max(height(node=E), height(node=F)), ~return 1 + max(1,2), ~return 3
+# # # max(height(node=E), height(node=F)), ~max(1,2)
+# # # height(node=E), reutrn 1 + max(height(node=E.left_node), height(node=E.right_node)), return 1 + max(0,0), return 1
+# # # height(node=F), return 1 + max(height(node=F.left_node), height(node=F.right_node)), return 1 + max(height(node=G), 0), ~return 1 + max(1,0), ~return 2
+# # # # max(height(node=G)), return 1 + max(height(node=G.left_node), height(node=G.right_node)), return 1 + max(0,0), return 1
+# print(height(root))
+
+## print root node
+# nodesAtLevel(root, 0)
+
+## print nodes at 2nd level, nodesAtLevel(root, 2)
+# Go to nodesAtLevel(root.left_node, level-1), nodesAtLevel(A, 1)
+# # nodesAtLevel(A, 1), go to nodesAtLevel(A.left_node, 1-1), nodesAtLevel(C, 0)
+# # # nodesAtLevel(C, 0), print C, return to node=A
+# # nodesAtLevel(A, 1), go to nodesAtLevel(A.right_node, 1-1), nodesAtLevel(D, 0)
+# # # nodesAtLevel(D, 0), print D, return to node=A, return to node=R, go to nodesAtLevel(root.right_node, level-1), nodesAtLevel(B, 1)
+# # nodesAtLevel(B, 1), go to nodesAtLevel(B.left_node, 1-1), nodesAtLevel(E, 0)
+# # # nodesAtLevel(E, 0), print E, return to node=B, go to go to nodesAtLevel(B.right_node, 1-1), nodesAtLevel(F, 0)
+# # # nodesAtLevel(F, 0)， print F, final return
+# nodesAtLevel(root, 2) 
+# nodesAtLevel(root, 3)
+
+breadthFirstSearch(root)
+
+Breadth Search Traversal using queue
+----------------------------------------------------------
+from collections import deque
+
+class TreeNode:
+    def __init__(self, value):
+        self.value = value 
+        self.left_node = None
+        self.right_node = None
+
+root = TreeNode("R")
+nodeA = TreeNode("A")
+nodeB = TreeNode("B")
+nodeC = TreeNode("C")
+nodeD = TreeNode("D")
+nodeE = TreeNode("E")
+nodeF = TreeNode("F")
+nodeG = TreeNode("G")
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+nodeF.left_node = nodeG
+
+def breadthFirstSearch(node):
+    if node is None:
+        return
+    
+    # queue = [root_node]
+    queue = deque([node])
+    while queue:
+        node = queue.popleft() # node = first node in the collection
+        print(node.value)
+
+        if node.left_node:
+            queue.append(node.left_node) # queue = [second_node]
+        if node.right_node:
+            queue.append(node.right_node) # queue = [second_node, third_node]
+
+breadthFirstSearch(root)
+
+Binary Search Tree => for every node, the node’s left child and all of its descendants have lower values than the node, while the node’s right child and all of its descendants have higher values than the node. 
+
+Best traversal method for binary search tree is in-order traversal, left => root => right
+
+# binary search tree node class 
+class TreeNode:
+    def __init__(self, value):
+        self.value = value 
+        self.left_node = None
+        self.right_node = None
+
+root = TreeNode(20)
+nodeA = TreeNode(12)
+nodeB = TreeNode(29)
+nodeC = TreeNode(7)
+nodeD = TreeNode(15)
+nodeE = TreeNode(21)
+nodeF = TreeNode(32)
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+
+"""
+            R(20)
+     A(12)         B(29)
+ C(7)   D(15)  E(21)   F(32)
+
+"""
+
+# left => root => right 
+def binarySearchTree(node):
+    if node is None:
+        return
+    binarySearchTree(node.left_node)
+    print(f"node value: {node.value}")
+    binarySearchTree(node.right_node)
+
+# binarySearchTree(root), go to binarySearchTree(root.left_node)
+# # binarySearchTree(node=A), go to binarySearchTree(A.left_node)
+# # # binarySearchTree(node=C), go to binarySearchTree(C.left_node), return None
+# # # Print C, go to binarySearchTree(C.right_node), return None， return to node=A
+# # Print A, go to binarySearchTree(A.right_node)
+# # # binarySearchTree(node=D), go to binarySearchTree(D.left_node), return None
+# # # Print D, go to binarySearchTree(D.right_node), return None， return to node=A, return to node=R
+# Print R, go to binarySearchTree(R.right_node)
+# # binarySearchTree(node=B), go to binarySearchTree(B.left_node)
+# # # binarySearchTree(node=E), go to binarySearchTree(E.left_node), return None
+# # # Print E, go to binarySearchTree(E.right_node), return None，return to node=B
+# # Print B, go to binarySearchTree(B.right_node)
+# # # binarySearchTree(F), go to binarySearchTree(F.left_node), return None, print F, go to binarySearchTree(F.right_node), return None
+
+binarySearchTree(root)
+
+Search a value in binary tree - O(h) 
+----------------------------------------------------------
+# binary search tree node class 
+class TreeNode:
+    def __init__(self, value):
+        self.value = value 
+        self.left_node = None
+        self.right_node = None
+
+root = TreeNode(20)
+nodeA = TreeNode(12)
+nodeB = TreeNode(29)
+nodeC = TreeNode(7)
+nodeD = TreeNode(15)
+nodeE = TreeNode(21)
+nodeF = TreeNode(32)
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+
+"""
+            R(20)
+     A(12)         B(29)
+ C(7)   D(15)  E(21)   F(32)
+
+"""
+
+def search(node, target):
+    if node is None: # if node no found
+        return
+    elif node.value == target: # if node is found 
+        return node
+    elif target < node.value: # if target is less than node value, search left subtree
+        return search(node.left_node, target)
+    else:
+        return search(node.right_node, target) # search right subtree
+
+result = search(root, 31)
+if result:
+    print(result.value)
+else:
+    print(result)
+
+insert a value in binary tree
+----------------------------------------------------------
+# binary search tree node class 
+class TreeNode:
+    def __init__(self, value):
+        self.value = value 
+        self.left_node = None
+        self.right_node = None
+
+root = TreeNode(20)
+nodeA = TreeNode(12)
+nodeB = TreeNode(29)
+nodeC = TreeNode(7)
+nodeD = TreeNode(15)
+nodeE = TreeNode(21)
+nodeF = TreeNode(32)
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+
+"""
+            R(20)
+     A(12)         B(29)
+ C(7)   D(15)  E(21)   F(32)
+
+"""
+def inOrderTraversal(node):
+    if node is None:
+        return
+    inOrderTraversal(node.left_node)
+    print(f"node value: {node.value}")
+    inOrderTraversal(node.right_node)
+
+def insert(node, value):
+    if node is None:
+        return TreeNode(value)
+    elif value < node.value: # if value less than node value, insert left subtree
+        node.left_node = insert(node.left_node, value)
+    elif value > node.value:
+        node.right_node = insert(node.right_node, value) # if value more than node value, insert right subtree
+    else:
+        print("Node already exist") # if node already exist
+        return 
+    
+    # print("return node...")
+    return node
+
+# original binary tree traversal
+inOrderTraversal(root)
+
+# insert(root, 10), 10 < root, go to node.left_node = insert(node.left_node, value), root.left_node = insert(root.left_node, 10)
+# # insert(node=A, 10), 10 < A, go to A.left_node = insert(A.left_node, 10), 
+# # # insert(node=C, 10), 10 > C, go to C.right_node = insert(C.right_node, 10)
+# # # # insert(node=C.right_node, 10), C.right_node is None, returns TreeNode(10), returns to node=C
+# # # C.right_node = TreeNode(10), print return node, return C, returns to node=A
+# # A.left_node = C, print return node, return A, returns to R
+# root.left_node = A, print return node, return R
+insert(root, 10)
+# new binary tree traversal
+inOrderTraversal(root)
+
+Find min & max value in binary tree
+----------------------------------------------------------
+# binary search tree node class 
+class TreeNode:
+    def __init__(self, value):
+        self.value = value 
+        self.left_node = None
+        self.right_node = None
+
+root = TreeNode(20)
+nodeA = TreeNode(12)
+nodeB = TreeNode(29)
+nodeC = TreeNode(7)
+nodeD = TreeNode(15)
+nodeE = TreeNode(21)
+nodeF = TreeNode(32)
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+
+"""
+            R(20)
+     A(12)         B(29)
+ C(7)   D(15)  E(21)   F(32)
+
+"""
+def minBST(node):
+    # if it is a empty tree
+    if node is None:
+        return None
+    
+    while node.left_node:
+        node = node.left_node
+    return node
+
+def maxBST(node):
+    # if it is a empty tree
+    if node is None:
+        return None
+    while node.right_node:
+        node = node.right_node
+    return node
+
+def insert(node, value):
+    if node is None:
+        return TreeNode(value)
+    elif value < node.value: # if value less than node value, insert left subtree
+        node.left_node = insert(node.left_node, value)
+    elif value > node.value:
+        node.right_node = insert(node.right_node, value) # if value more than node value, insert right subtree
+    else:
+        print("Node already exist") # if node already exist
+        return 
+    
+    # print("return node...")
+    return node
+
+# insert(root, 3), 3 < root, go to node.left_node = insert(node.left_node, value), root.left_node = insert(root.left_node, 3)
+# # insert(node=A, 3), 3 < A, go to A.left_node = insert(A.left_node, 3), 
+# # # insert(node=C, 3), 3 < C, go to C.left_node = insert(C.left_node, 3)
+# # # # insert(node=C.left_node, 3), C.left_node is None, returns TreeNode(3), returns to node=C
+# # # C.left_node = TreeNode(3), print return node, return C, returns to node=A
+# # A.left_node = C, print return node, return A, returns to R
+# root.left_node = A, print return node, return R
+insert(root, 3)
+
+min = minBST(root)
+max = maxBST(root)
+print(f"Min Node: {min.value}, Max Node: {max.value}")
