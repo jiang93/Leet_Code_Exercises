@@ -1,59 +1,38 @@
-# binary search tree node class 
-class TreeNode:
-    def __init__(self, value):
-        self.value = value 
-        self.left_node = None
-        self.right_node = None
+# Insertion sort - treat the first element as the initial sorted element, and rest are unsorted elements
+mylist = [11, 5, 64, 34, 25, 22, 12, 42, 5, 50, 90, 100]
 
-root = TreeNode(20)
-nodeA = TreeNode(12)
-nodeB = TreeNode(29)
-nodeC = TreeNode(7)
-nodeD = TreeNode(15)
-nodeE = TreeNode(21)
-nodeF = TreeNode(32)
+# i = 1 (current_value=5, index=1), j=0(index=0), mylist[1] = 11, mylist[0]=5
+# mylist = [5, 11, 64, 34, 25, 22, 12, 42, 5, 50, 90, 100]
+# # i = 2 (current_value=64, index=2), j=1, j=0
+# # mylist = [5, 11, 64, 34, 25, 22, 12, 42, 5, 50, 90, 100]
+# # # i = 3 (current_value=34, index=3), j=2(index=2), mylist[3] = 64, mylist[2] = 34
+# # # mylist = [5, 11, 34, 64, 25, 22, 12, 42, 5, 50, 90, 100]
+# # # # i = 4, (current)
 
-root.left_node = nodeA
-root.right_node = nodeB
-nodeA.left_node = nodeC
-nodeA.right_node = nodeD
-nodeB.left_node = nodeE
-nodeB.right_node = nodeF
+ 
+n = len(mylist)
+print(mylist)
 
-"""
-            R(20)
-     A(12)         B(29)
- C(7)   D(15)  E(21)   F(32)
+for i in range(1, n):
+    current_value = mylist[i] 
+    index = i
 
-"""
-def inOrderTraversal(node):
-    if node is None:
-        return
-    inOrderTraversal(node.left_node)
-    print(node.value)
-    inOrderTraversal(node.right_node)
+    for j in range(i - 1, -1, -1):
+        print(mylist[j], mylist[i])
 
-def delete(node, value):
-    # remove the node from parent node
-    # link the child nodes to parent node
+        if mylist[i] < mylist[j]: # if unsorted element is smaller than sorted element:
+            index = j
+            mylist[j+1] = mylist[j]
+    if index != i:
+        mylist[index] = current_value
 
-    if node is None:
-        return
-    
-    if value < node.value: # node in left subtree
-        node.left_node = delete(node.left_node, value)
-    elif value > node.value: # node in right subtree
-        node.right_node = delete(node.right_node, value)
-    else: # found node
-        # if node has no child, or one child
-        if node.left_node is None: # return right node if no left node
-            return node.right_node
-        elif node.right_node is None:
-            return node.left_node # return left node if no right node
-        else:
-            node.data = node.right_node.data
-            node.right_node = None
-    return node 
+        """
+        if mylist[i] < mylist[j]: # if unsorted element is smaller than sorted element
+            pop_value = mylist.pop(i) # remove it from unsorted portion => elements after index i shifted to left by 1 
+            mylist.insert(j, pop_value) # insert it into the sorted portion => elements after index j shifted to right by 1
+            break
+        """
 
-delete(root, 15)
-inOrderTraversal(root)
+    print(mylist)
+
+
