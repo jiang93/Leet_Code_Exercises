@@ -3208,3 +3208,678 @@ insert(root, 3)
 min = minBST(root)
 max = maxBST(root)
 print(f"Min Node: {min.value}, Max Node: {max.value}")
+
+Delete a node from BST 
+----------------------------------------------------------
+# binary search tree node class 
+class TreeNode:
+    def __init__(self, value):
+        self.value = value 
+        self.left_node = None
+        self.right_node = None
+
+root = TreeNode(20)
+nodeA = TreeNode(12)
+nodeB = TreeNode(29)
+nodeC = TreeNode(7)
+nodeD = TreeNode(17)
+nodeE = TreeNode(25)
+nodeF = TreeNode(32)
+nodeG = TreeNode(3)
+nodeH = TreeNode(10)
+nodeI = TreeNode(15)
+nodeJ = TreeNode(19)
+nodeK = TreeNode(21)
+nodeL = TreeNode(27)
+nodeM = TreeNode(31)
+nodeN = TreeNode(34)
+
+root.left_node = nodeA
+root.right_node = nodeB
+nodeA.left_node = nodeC
+nodeA.right_node = nodeD
+nodeB.left_node = nodeE
+nodeB.right_node = nodeF
+nodeC.left_node = nodeG
+nodeC.right_node = nodeH
+nodeD.left_node = nodeI
+nodeD.right_node = nodeJ
+nodeE.left_node = nodeK
+nodeE.right_node = nodeL
+nodeF.left_node = nodeM
+nodeF.right_node = nodeN
+
+"""
+                                  R(20)
+                A(12)                           B(29)
+        C(7)            D(17)           E(25)           F(32)
+    G(3)   H(10)    I(15)   J(19)   K(21)    L(27)   M(31)   N(34)
+
+"""
+def inOrderTraversal(node):
+    if node is None:
+        return
+    inOrderTraversal(node.left_node)
+    print(node.value, end=" ")
+    inOrderTraversal(node.right_node)
+
+def minBST(node):
+    if node is None:
+        return
+    while node.left_node:
+        node = node.left_node
+    return node
+
+def delete(node, value):
+    if node is None: # if node not found
+        return
+    elif value < node.value: # node in left subtree 
+        node.left_node = delete(node.left_node, value)
+    elif value > node.value: # node in right subtree
+        node.right_node = delete(node.right_node, value)
+    else: # found node
+        if node.left_node is None: # if no left child node, return node.next = node.right_node 
+            return node.right_node
+        elif node.right_node is None: # if no right child node, return node.next = node.left_node
+            return node.left_node
+        else: # if node have both left and right child
+            # Update the node value, and its child node
+            # The min value in right subtree is the node value that bigger than left subtree and less than right subtree 
+            """
+                                                R(20)
+                                A(12)                           *B(31) # update the node value, node.left_node=> no change, node.right_node=> 
+                        C(7)            D(17)           E(25)           F(32)
+                    G(3)   H(10)    I(15)   J(19)   K(21)   L(27)   M(del)   N(34)
+            """
+            # Update the node value
+            node.value = minBST(node.right_node).value
+            # Update the node child 
+            node.right_node = delete(node.right_node, node.value)
+    return node 
+print("original BST: ", end=" ")
+inOrderTraversal(root)
+print()
+# delete(root, 29), go to node.right_node = delete(node.right_node, value), root.right_node = delete(root.right_node, 29)
+# # delete(node=B, 29), go to else: eles: node.value = minBST(node.right_node).value, node.right_node = delete(node.right_node, node.value)
+# # # minBST(node.right_node).value, minBST(B.right_node) => return the smallest node of right subtree from B node, node.value = smallest node value = 31
+# # # delete(node.right_node, node.value), delete(B.right_node, 31)
+# # # # delete(node=F, 31), go to node.left_node = delete(node.left_node, value), F.left_node = delete(F.left_node, 31)
+# # # # # delete(node=M, 31), go to else: return node.right_node which is None, return None, returns to node=F
+# # # # F.left_node = None, return F, returns to node=B
+# # # delete(B.right_node, 31) = F, B.right_node = F
+# # node.value = 31, node.right_node = F, return B, returns to node=R
+# root.right_node = B, return R
+delete(root, 29)
+print("BST after deletion: ", end=" ")
+inOrderTraversal(root)
+print()
+# delete(root, 31), go to node.right_node = delete(node.right_node, value), root.right_node = delete(root.right_node, 31)
+# # delete(node=B, 31), go to else: else: node.value = minBST(node.right_node).value, node.right_node = delete(node.right_node, node.value)
+# # # minBST(node.right_node).value, minBST(B.right_node) => return the smallest node of right subtree from  B node, node.value = 32
+# # # delete(node.right_node, node.value), delete(B.right_node, 32)
+# # # # delete(B.right_node, 32), go to else: return node.right_node which is N, return N, returns to node=B
+# # # delete(B.right_node, 32) = N, B.right_node = N
+# # node.value = 32, node.right_node = N, return B, returns to node=root
+# root.right_node = B, return root
+delete(root, 31)
+print("BST after deletion: ", end=" ")
+inOrderTraversal(root)
+
+AVL Trees => self-balancing BST via rotation operations such that the tree height is kept minimum for fast searching, inserting and deleting nodes
+Node Height=> max number of edges between a node and its leaf node 
+Balance Factor for a node => difference in height between its left subtrees and right subtrees
+BF(X) = height(right_subtree(X) - left_subtree(X))
+
+AVL Tree:
+All nodes must be balanced: -1 <= BF(X) <= 1 
+Balance factor values:
+0 => node is balance 
+>0 => node is right heavy
+<0 => node is left heavy 
+
+4 out-of-balance cases
+1. Left-left => the unbalanced node and its left child are left-heavy (right rotation)
+2. Right-right => the unbalanced node and its right child are right-heavy (left rotation)
+3. Left-right => the unbalanced node is left heavy, and its left child is right heavy (right, left rotations)
+4. Right-left => the unbalanced node is right heavy, and its right child node is left heavy (left, right rotations)
+
+Insert/ delete a node from AVL tree 
+----------------------------------------------------------
+# AVL tree node class
+class TreeNode():
+    def __init__(self, value):
+        self.value = value
+        self.left_node = None
+        self.right_node = None
+
+def getHeight(node):
+    if node is None:
+        return -1 # height of an AVL tree with single node is 0 
+    return 1 + max(getHeight(node.left_node), getHeight(node.right_node))
+
+# BF = height(right_subtree) - height(left_subtree)
+# AVL -1 <= BF <= 1 
+# > 1, right heavy, perform left rotation
+# < -1, left heavy, perform right rotation
+def getBalanceFactor(node):
+    if node is None:
+        return 0
+    return getHeight(node.right_node) - getHeight(node.left_node)
+
+def inOrderTraversal(node):
+    if node is None:
+        return
+    inOrderTraversal(node.left_node)
+    print(f"{node.value}")
+    inOrderTraversal(node.right_node)
+
+def rotateLeft(node):
+    # rotate current node to left
+    # right child moves up and become the new root
+    # original left subtree of the new root becomes the right subtree of the current node
+    print("Rotate left on node", node.value)
+    new_root = node.right_node 
+    orig_left_subtree = new_root.left_node
+    new_root.left_node = node
+    node.right_node = orig_left_subtree
+
+    return new_root
+
+def rotateRight(node):
+    # rotate current node to the right
+    # left child moves up and become the new root 
+    # original right subtree of the new root becomes and left subtree of the current node
+    print("Rotate right on node", node.value)
+    new_root = node.left_node
+    orig_right_subtree = new_root.right_node
+    new_root.right_node = node
+    node.left_node = orig_right_subtree
+
+    return new_root
+
+def insertNode(node, value):
+    if node is None:
+        return TreeNode(value)
+    elif value < node.value:
+        node.left_node = insertNode(node.left_node, value)
+    elif value > node.value:
+        node.right_node = insertNode(node.right_node, value)
+    else:
+        print("Node duplicayed ...")
+        return node
+
+    balanceFactor = getBalanceFactor(node)
+    print(f"node: {node.value}, BF: {balanceFactor}")
+
+    # right-right case
+    if balanceFactor > 1 and getBalanceFactor(node.right_node) >= 0:
+        print("right right case")
+        return rotateLeft(node)
+    # right-left case
+    elif balanceFactor > 1 and getBalanceFactor(node.right_node) < 0:
+        print("right left case")
+        node.right_node = rotateRight(node.right_node)
+        return rotateLeft(node)
+    # left-left case 
+    elif balanceFactor < -1 and getBalanceFactor(node.left_node) <= 0:
+        print("left left case")
+        return rotateRight(node)
+    # left-right case 
+    elif balanceFactor < -1 and getBalanceFactor(node.left_node) > 0:
+        print("left right case")
+        node.left_node = rotateLeft(node.left_node)
+        return rotateRight(node)
+    else:
+        return node
+
+def minBST(node):
+    if node is None:
+        return
+    while node.left_node:
+        node = node.left_node
+    return node
+
+def deleteNode(node, value):
+    if node is None:
+        return
+    if value < node.value: # search in left subtree
+        node.left_node = deleteNode(node.left_node, value)
+    elif value > node.value: # search in right subtree
+        node.right_node = deleteNode(node.right_node, value)
+    else: # found the node
+
+        if node.left_node is None: # if no left child, return node.right_node
+            return node.right_node 
+        elif node.right_node is None: # if no right child, return node.left_node
+            return node.left_node
+        else: # if node has both left and right child 
+            # update the node value, and its child node value
+            # the min node value in right subtree is greater than left subtree and smaller right subtree
+
+            # update node value
+            node.value = minBST(node.right_node).value
+            # update child node 
+            node.right_node = deleteNode(node.right_node, node.value)
+    print(f"current node: {node.value}")
+    return node
+
+root = nodeR = TreeNode(80)
+nodeA = TreeNode(70)
+nodeB = TreeNode(60)
+nodeC = TreeNode(77)
+nodeD = TreeNode(50)
+nodeE = TreeNode(63)
+nodeF = TreeNode(40)
+nodeG = TreeNode(59)
+nodeH = TreeNode(30)
+
+nodeR.left_node = nodeA
+nodeA.left_node = nodeB
+nodeA.right_node = nodeC
+nodeB.left_node = nodeD
+nodeB.right_node = nodeE
+nodeD.left_node = nodeF
+nodeD.right_node = nodeG
+nodeF.left_node = nodeH
+
+# original AVL tree and balance factor
+print("original AVL tree: ") 
+inOrderTraversal(root)
+balanceFactor = getBalanceFactor(root)
+print(balanceFactor)
+root = rotateRight(root)
+print("AVL tree after right rotate:")
+inOrderTraversal(root)
+
+balanceFactor = getBalanceFactor(root)
+print(balanceFactor)
+root = rotateRight(root)
+print("AVL tree after right rotate:")
+inOrderTraversal(root)
+
+"""
+                              R(80)  [h(80) = 5, bf(80) = 0-5 = -5]
+                     A(70)
+              B(60)        C(77)  
+         D(50)     E(63) 
+    F(40)    G(59)
+H(30)    
+                      A(70)  [h(70) = 4, bf(70) = 2-4 = -2]
+              B(60)          R(80)  
+         D(50)    E(63)   C(77)  
+    F(40)    G(59)
+H(30)
+                  B(60)  [h(60) = 3, bf(70) = 3-3 = 0]                 
+         D(50)           A(70)                    
+    F(40)    G(59)   E(63)    R(80)
+H(30)                     C(77)
+
+"""
+"""
+        r(30)  [h(30) = 5, bf(30) = 5-0 = 5]
+            a(50)
+    b(40)          c(60)  
+            d(59)        e(70) 
+                   f(63)      g(77)
+                                  h(80)
+
+            a(50) [h(50) = 4, bf(50) = 4-2 = 2]
+    r(30)           c(60)  
+        b(40)  d(59)     e(70) 
+                   f(63)      g(77)
+                                  h(80)
+                                  
+                     c(60) [h(60) = 3, bf(60) = 3-3 = 0] 
+            a(50)             e(70) 
+       r(30)     d(59)    f(63)    g(77)
+             b(40)                      h(80)
+"""
+
+root = node_r = TreeNode(30)
+node_a = TreeNode(50)
+node_b = TreeNode(40)
+node_c = TreeNode(60)
+node_d = TreeNode(59)
+node_e = TreeNode(70)
+node_f = TreeNode(63)
+node_g = TreeNode(77)
+node_h = TreeNode(80)
+
+node_r.right_node = node_a
+node_a.left_node = node_b
+node_a.right_node = node_c
+node_c.left_node = node_d
+node_c.right_node = node_e
+node_e.left_node = node_f
+node_e.right_node = node_g
+node_g.right_node = node_h
+
+print("original AVL tree: ") 
+inOrderTraversal(root)
+balanceFactor = getBalanceFactor(root)
+print(balanceFactor)
+root = rotateLeft(root)
+print("AVL tree after left rotate:")
+inOrderTraversal(root)
+
+balanceFactor = getBalanceFactor(root)
+print(balanceFactor)
+root = rotateLeft(root)
+print("AVL tree after left rotate:")
+inOrderTraversal(root)
+
+"""
+                     c(60)
+            a(50)             e(70) 
+       r(30)     d(59)    f(63)    h(80)
+          b(40)            g(77)      i(100)
+
+                     c(60)
+            a(50)              h(80) 
+       r(30)     d(59)   e(70)       i(100)
+          b(40)    f(63)  g(77) k(99)  j(110)     
+
+                     f(63)
+            a(50)              h(80) 
+       r(30)     d(59)   e(70)       i(100)
+          b(40)             g(77) k(99)  j(110)     
+
+                    f(63)
+            a(50)              k(99) 
+       r(30)     d(59)   e(70)       i(100)
+          b(40)             g(77)        j(110)     
+                                    
+"""
+print("Inserting 100...")
+root = insertNode(root, 100)
+print("Inserting 110...")
+root = insertNode(root, 110)
+print("Inserting 99...")
+root = insertNode(root, 99)
+print("AVL tree after insert:")
+inOrderTraversal(root)
+print("Deleting 60...")
+root = deleteNode(root, 60)
+print("AVL tree after delete:")
+inOrderTraversal(root)
+print(f"Current root: {root.value}, its left child: {root.left_node.value}, its right child: {root.right_node.value}")
+
+# deleteNode(root, 80), go to root.right_node = deleteNode(root.right_node, 80)
+# # deleteNode(node=80, 80), go to else: else: node.value = minBST(node.right_node).value = 99
+# # node.right_node = deleteNode(node.right_node, node.value), go to deleteNode(99.right_node, 99)
+# # # # deleteNode(node=100, 99), go to 100.left_node = deleteNode(100.left_node, 99)
+# # # # # deleteNode(node=99, 99), go to else: else: return node.right_node which is None
+# # # # 100.left_node is None, return node 100, and returns to node=99
+# # # node.value = 99, 99.right_node = node 100, return node 99, and returns node=root
+
+print("Deleting 80...")
+root = deleteNode(root, 80)
+print("AVL tree after delete:")
+inOrderTraversal(root)
+print(f"Current root: {root.value}, its left child: {root.left_node.value}, its right child: {root.right_node.value}")
+
+
+Linear search/ sequential search => check the item one by one.
+Binary search => splitting the search range in half for every comparison
+
+Binary search 
+----------------------------------------------------------
+import time
+
+def binarySearch(inputList, targetVal):
+
+    # set start and end indexes
+    # [0, 1, 2, 3, 4, 5, 6, 7], target value -1, endIndex = 7, midIndex = 3, mid value = 3
+    # # endIndex = 2, midIndex = 1, mid value = 1
+    # # # endIndex = 0, midIndex = 0, mid value = 0
+    # # # # endIndex = -1
+
+    # [0, 1, 2, 3, 4, 5, 6, 7], target value 13, endIndex = 7, midIndex = 3, mid value = 3
+    # # startIndex = 4, midIndex = 5, mid value = 5
+    # # # startIndex = 6, midIndex = 6, mid value = 6
+    # # # # startIndex = 7, midIndex = 7, mid value = 7
+    # # # # # startIndex = 8
+
+    # [0, 2, 4, 6, 8, 10, 12, 14, 16], target value 20, endIndex = 8, midIndex = 4, mid value = 8
+    # # startIndex = 5, midIndex = 6, mid value = 12
+    # # # startIndex = 7, midIndex = 7, mid value = 14
+    # # # # startIndex = 8, midIndex = 8, mid value = 16
+    # # # # # startIndex = 9
+
+    # [0, 2, 4, 6, 8, 10, 12, 14, 16], target value 13, endIndex = 8, midIndex = 4, mid value = 8
+    # # startIndex = 5, midIndex = 6, mid value = 12
+    # # # startIndex = 7, midIndex = 7, mid value = 14
+    # # # # endIndex = 6
+
+    startIndex = 0
+    endIndex = len(inputList) - 1
+
+    # if start is before end index
+    while startIndex <= endIndex:
+        # mid index using floor division
+        midIndex = (startIndex + endIndex) // 2
+
+        #print(startIndex, endIndex, inputList[midIndex])
+        #time.sleep(3)
+
+        if targetVal == inputList[midIndex]: # target value == mid value
+            return midIndex
+        elif targetVal < inputList[midIndex]: # if target value < mid value
+            endIndex = midIndex - 1
+        else: # if target value > mid value
+            startIndex = midIndex + 1
+
+    return -1
+
+mylist = [0, 2, 4, 6, 8, 10, 12, 14, 16]
+result = binarySearch(mylist, 10)
+
+if result == -1:
+    print("value not found")
+else:
+    print(f"value found at index {result}")
+
+Bubble sort => sorting algorithm that repeatedly compares and swaps 2 adjacent elements so that the larger numbers move from left to right like bubbles rising to the top. After each loop, the last element in the list is sorted and does not need to be checked again.
+
+Selection sort => repeatedly finds the smallest element in the unsorted portion and swaps it with the first element of that portion.
+
+Insertion sort => repeatedly takes the next unsorted element and inserts it into the correction position in the sorted portion. 
+
+Quick sort => repeatedly chooses an element as the pivot and partitions the array so that smaller elements are on the left and larger elements are on the right. Elements are swapped whenever they are found on the wrong side of the pivot.
+
+Counting sort => counting the occurrence of each value and use the count to rebuild the list in order
+
+Radix sort => repeatedly sorts the number by each digit, starting from Least Significant Digit to Most Significant Digit
+
+# Bubble Sort
+mylist = [11, 64, 34, 25, 22, 12, 42, 5, 50, 90, 100]
+n = len(mylist)
+print(mylist)
+
+for i in range(n-1):
+    swapped = False
+
+    for j in range (n-i-1): # shortens the checking range after each inner loop completes. largest element has moved to the end.
+        #print(mylist[j], mylist[j+1])
+
+        if (mylist[j] > mylist[j+1]): # swap adjacent numbers if it in wrong order
+            temp = mylist[j]
+            mylist[j] = mylist[j+1]
+            mylist[j+1] = temp
+            swapped = True
+    #print(mylist)
+
+    # enhanced logic
+    # if no elements were swapped during this inner loop, it means the list is sorted so stop the outer loop
+    if not swapped:
+        break
+
+print(mylist) 
+
+# Selection sort
+mylist = [11, 64, 34, 25, 22, 12, 42, 5, 50, 90, 100]
+n = len(mylist)
+print(mylist)
+
+for i in range(n-1):
+    min_index = i
+    for j in range(i+1, n):
+        print(mylist[min_index], mylist[j])
+        if mylist[j] < mylist[min_index]:
+            min_index = j
+    """
+    temp = mylist[i]
+    mylist[i] = mylist[min_index]
+    mylist[min_index] = temp
+    """
+    # Python evaluates all values on the right side before assigning them to the variables on the left side.
+    mylist[i], mylist[min_index] = mylist[min_index], mylist[i]
+    print(mylist)
+
+# Insertion sort - treat the first element as the initial sorted element, and rest are unsorted elements
+mylist = [11, 5, 64, 34, 25, 22, 42, 50, 90, 100]
+
+# i = 1 (current_value=11, index=1), j=0(index=0), mylist[1] = 11, mylist[0] = 5
+# mylist = [5, 11, 64, 34, 25, 22, 42, 50, 90, 100]
+# # i = 2 (current_value=64, index=2), j=1, break
+# # mylist = [5, 11, 64, 34, 25, 22, 42, 50, 90, 100]
+# # # i = 3 (current_value=34, index=3), j=2(index=2), mylist[3] = 64, j=1, break, mylist[2] = 34
+# # # mylist = [5, 11, 34, 64, 25, 22, 42, 50, 90, 100]
+# # # # i = 4, (current_value=25, index=4), j=3(index=3), mylist[4] = 64, j=2(index=2), mylist[3] = 34, j=1, break, mylist[2] = 25
+# # # # mylist = [5, 11, 25, 34, 64, 22, 42, 50, 90, 100]
+# # # # # i = 5, (current_value=22, index=5), j=4(index=4), mylist[5] = 64, j=3(index=3), mylist[4] = 34, j=2(index=2), mylist[3] = 25, j=1, break, mylist[2] = 22
+# # # # # mylist = [5, 11, 22, 25, 34, 64, 42, 50, 90, 100]
+# # # # # # i = 6, (current_value=42, index=6), j=5(index=5), mylist[6] = 64, j=4, break, mylist[5] = 42
+# # # # # # mylist = [5, 11, 22, 25, 34, 42, 64, 50, 90, 100]
+# # # # # # # i = 7, (current_value=50, index=7), j=6(index=6), mylist[7] = 64, j=5, break, mylist[6] = 50
+# # # # # # # mylist = [5, 11, 22, 25, 34, 42, 50, 64, 90, 100]
+# # # # # # # # i = 8, (current_value=90, index=8), j=7, break
+# # # # # # # # # i = 9, (current_value=100, index=9), j=8, break
+# # # # # # # # # mylist = [5, 11, 22, 25, 34, 42, 50, 64, 90, 100]
+
+n = len(mylist)
+print(mylist)
+
+for i in range(1, n):
+    current_value = mylist[i] 
+    index = i
+
+    for j in range(i - 1, -1, -1): # range(start, stop, step)
+        print(mylist[j], current_value)
+
+        if current_value < mylist[j]: # if current element is smaller than sorted element:
+            index = j # update index 
+            mylist[j+1] = mylist[j] # Update right element value
+        else:
+            break
+
+    # update the current value using the index 
+    if index != i:
+        mylist[index] = current_value
+        """
+	# pop shifts element to the left, insert shifts element to the right
+        if mylist[i] < mylist[j]: # if unsorted element is smaller than sorted element
+            pop_value = mylist.pop(i) # remove it from unsorted portion => elements after index i shifted to left by 1 
+            mylist.insert(j, pop_value) # insert it into the sorted portion => elements after index j shifted to right by 1
+            break
+        """
+    print(mylist)
+
+# Quick sort
+mylist = [11, 64, 34, 25, 22, 12, 42, 5, 30]
+
+def partition(inputlist, start, stop):
+    #print("partition input: ", inputlist, start, stop)
+    pivot = inputlist[stop-1] # use last element as the pivot
+    i = start - 1 # pivot swap index 
+    print(pivot, i)
+
+    for j in range(start, stop-1):
+        #print(inputlist[j], pivot)
+        if inputlist[j] < pivot: # if current element is less than pivot
+            i += 1 # increment swap index
+            inputlist[i], inputlist[j] = inputlist[j], inputlist[i] # swap current element with element larger than pivot
+    
+    pivot_index = i + 1 # pivot index
+    inputlist[pivot_index], inputlist[stop-1] = pivot, inputlist[pivot_index] # swap pivot with element larger than pivot
+
+    # print("partition output: ", pivot_index, mylist)
+    # print()
+    return pivot_index
+
+def quickSort(inputlist, start=0, stop=None):
+
+    # initialize stop variable
+    if stop is None:
+        stop = len(inputlist)
+
+    #print("quickSort input: ", inputlist, start, stop)
+    # base case
+    if start >= stop:
+        return
+    
+    # pass the full list to partition function 
+    pivot_index = partition(inputlist, start, stop)
+    # print("pivot index: ", pivot_index)
+    quickSort(inputlist, start, pivot_index)
+    quickSort(inputlist, pivot_index + 1, stop)
+
+# start = 0, stop = 9, pivot = inputlist[8] = 30, i = -1, j = 0 to 7, pivot_index = 5, mylist = [11, 25, 22, 12, 5, 30, 42, 34, 64]
+# quickSort(inputlist, start, pivot_index) => partition(inputlist, 0, 5)
+# quickSort(inputlist, pivot_index + 1, stop) => pending execution
+# # start = 0, stop = 5, pivot = inputlist[4] = 5, i = -1, j = 0 to 3, pivot_index = 0, mylist = [5, 25, 22, 12, 11, 30, 42, 34, 64]
+# # # quickSort(inputlist, start, pivot_index) => partition(inputlist, 0, 0) => returns []
+# # # quickSort(inputlist, pivot_index + 1, stop) => partition(inputlist, 1, 5)
+# # # # start = 1, stop = 5, pivot = inputlist[4] = 11, i = 0, j = 1 to 3, pivot_index = 1, mylist = [5, 11, 22, 12, 25, 30, 42, 34, 64]
+# # # # # quickSort(inputlist, start, pivot_index) => partition(inputlist, 1, 1) => returns []
+# # # # # quickSort(inputlist, pivot_index + 1, stop) => partition(inputlist, 2, 5)
+# # # # # # start = 2, stop = 5, pivot = inputlist[4] = 25, i = 1, j = 2 to 3, pivot_index = 4, mylist = [5, 11, 22, 12, 25, 30, 42, 34, 64]
+# # # # # # # quickSort(inputlist, start, pivot_index) => partition(inputlist, 2, 4) 
+# # # # # # # quickSort(inputlist, pivot_index + 1, stop) => pending execution 
+# # # # # # # # start = 2, stop = 4, pivot = inputlist[3] = 12, i = 1, j = 2, pivot_index = 2, mylist = [5, 11, 12, 22, 25, 30, 42, 34, 64]
+# # # # # # # # # quickSort(inputlist, start, pivot_index) => partition(inputlist, 2, 2) => returns [] 
+# # # # # # # # # quickSort(inputlist, pivot_index + 1, stop) => partition(inputlist, 3, 4)
+# # # # # # # # # # start = 3, stop = 4, pivot = inputlist[3] = 22, i = 2, j = 3, pivot_index = 3, mylist = [5, 11, 12, 22, 25, 30, 42, 34, 64]
+# # # # # # # # # # # quickSort(inputlist, start, pivot_index) => partition(inputlist, 3, 3) => returns [] 
+# # # # # # # # # # # quickSort(inputlist, pivot_index + 1, stop) => partition(inputlist, 4, 4) => returns []
+# # # # # # # # start = 5, stop = 5 => returns []
+# start = 6, stop = 9, pivot = inputlist[8] = 64, i = 5, j = 6 to 7, pivot_index = 8, mylist = [5, 11, 12, 22, 25, 30, 42, 34, 64]
+# # quickSort(inputlist, start, pivot_index) => partition(inputlist, 6, 8)
+# # quickSort(inputlist, pivot_index + 1, stop) => pending execution
+# # # start = 6, stop = 8, pivot = inputlist[7] = 34, i = 5, j = 6, pivot_index = 6, mylist = [5, 11, 12, 22, 25, 30, 34, 42, 64]
+# # # # quickSort(inputlist, start, pivot_index) => partition(inputlist, 6, 6) => returns []
+# # # # quickSort(inputlist, pivot_index + 1, stop) => partition(inputlist, 7, 8)
+# # # # # start = 7, stop = 8, pivot = inputlist[7] = 42, i = 6, pivot_index = 7, mylist = [5, 11, 12, 22, 25, 30, 34, 42, 64]
+# # # # # # quickSort(inputlist, start, pivot_index) => partition(inputlist, 7, 7) => returns []
+# # # # # # quickSort(inputlist, pivot_index + 1, stop) => partition(inputlist, 8, 8) => returns []
+# # start = 9, stop = 9 => returns []
+
+quickSort(mylist)
+print(mylist)
+
+#  counting sort 
+mylist = [11, 64, 34, 25, 22, 12, 42, 5, 30, 5]
+
+def countingSort(inputlist):
+    max_value = max(inputlist)
+    count_array = [0] * (max_value + 1) # count array filled with zeros
+    # print(count_array)
+
+    # Count the occurrences of each value
+    for val in inputlist:
+        count_array[val] += 1
+    # print(count_array)
+
+    # re-initialize inputlist
+    inputlist = []
+    for idx in range(len(count_array)):
+        while count_array[idx] > 0:
+            inputlist.append(idx) # append index as number to inputlist until occurrence is 0
+            count_array[idx] -= 1
+            # print(inputlist)
+    return inputlist
+
+newlist = countingSort(mylist)
+print(newlist)
+
+
