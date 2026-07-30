@@ -3691,6 +3691,8 @@ Counting sort => counting the occurrence of each value and use the count to rebu
 
 Radix sort => repeatedly sorts the number by each digit, starting from Least Significant Digit to Most Significant Digit
 
+Merge sort => divide-and-conquer approach that repeatedly divides the list into 2 halves until each portion has 0 or 1 element, then merge the portions back together in sorted order.
+
 # Bubble Sort
 mylist = [11, 64, 34, 25, 22, 12, 42, 5, 50, 90, 100]
 n = len(mylist)
@@ -3857,7 +3859,7 @@ def quickSort(inputlist, start=0, stop=None):
 quickSort(mylist)
 print(mylist)
 
-#  counting sort 
+#  Counting sort 
 mylist = [11, 64, 34, 25, 22, 12, 42, 5, 30, 5]
 
 def countingSort(inputlist):
@@ -3882,4 +3884,131 @@ def countingSort(inputlist):
 newlist = countingSort(mylist)
 print(newlist)
 
+# Radix sort
+mylist = [11, 64, 34, 25, 22, 12, 42, 5, 30, 5]
 
+def radixSort(inputlist):
+    # length of inputlist
+    n = len(inputlist)
+    if n <= 1:
+        return inputlist
+    
+    # max element of inputlist 
+    max_value = max(inputlist) 
+    exp = 1 
+
+    # empty radix array
+    radixArray = []
+
+    while max_value//exp > 0:
+        for _ in range(n):
+            radixArray.append([])
+
+        for val in inputlist:
+            index = (val // exp) % 10 # extract every digit
+            radixArray[index].append(val) # append value to radixArray using digit as the index 
+        exp *= 10
+        print(radixArray)
+
+        # empty the original list 
+        inputlist.clear()
+        for val in radixArray:
+            if val: # add radixArray back to inputlist 
+                inputlist.extend(val)
+        print(inputlist)
+
+        # empty the radixArray 
+        radixArray.clear()
+    
+radixSort(mylist)
+print(mylist)
+
+# Merge sort
+mylist = [11, 64, 34, 25, 22, 2, 42, 5, 30, 5]
+
+def mergeSort(inputlist):
+    # print("merge sort input: ", inputlist)
+    n = len(inputlist)
+    if n <= 1:
+        return inputlist
+    
+    middle = n // 2
+    leftHalf = inputlist[:middle]
+    rightHalf = inputlist[middle:]
+    # print(middle, leftHalf, rightHalf)
+    
+    leftHalf = mergeSort(leftHalf)
+    rightHalf = mergeSort(rightHalf)
+    # print(leftHalf, rightHalf)
+    return merge(leftHalf, rightHalf) # return this when rightHalf is left with single element 
+
+def merge(left, right):
+    mergelist = []
+    i = j = 0
+
+    while i<len(left) and j<len(right):
+        if left[i] < right[j]:
+            mergelist.append(left[i])
+            i += 1
+        else:
+            mergelist.append(right[j])
+            j += 1
+
+    mergelist.extend(left[i:])
+    mergelist.extend(right[j:])
+    # print("merge output: ", mergelist)
+    
+    return mergelist
+
+# middle = 5, leftHalf = [11, 64, 34, 25, 22], rightHalf = [2, 42, 5, 30, 5]
+# leftHalf = mergeSort([11, 64, 34, 25, 22])
+# rightHalf = mergeSort([2, 42, 5, 30, 5]) 
+# merge(leftHalf, rightHalf)
+
+# # mergeSort([11, 64, 34, 25, 22]), middle = 2, leftHalf = [11, 64], rightHalf =  [34, 25, 22]
+# # leftHalf = mergeSort([11, 64])
+# # rightHalf = mergeSort([34, 25, 22])
+# # merge(leftHalf, rightHalf), mergeSort([11, 64, 34, 25, 22]) return [11, 22, 25, 34, 64]
+
+# # # mergeSort([11, 64]), middle = 1, leftHalf = [11], rightHalf = [64]
+# # # leftHalf = mergeSort([11]) => returns [11]
+# # # rightHalf = mergeSort([64]) => returns [64]
+# # # merge(leftHalf, rightHalf) => mergeSort([11, 64]), returns [11, 64]
+
+# # #  mergeSort([34, 25, 22]), middle = 1, leftHalf = [34], rightHalf = [25, 22]
+# # # leftHalf = mergeSort([34]) => returns leftHalf = [34]
+# # # rightHalf = mergeSort([25, 22]) 
+# # # merge(leftHalf, rightHalf), mergeSort([34, 25, 22]) returns [22, 25, 34]
+
+# # # # mergeSort([25, 22]), middle = 1, leftHalf = [25], rightHalf = [22]
+# # # # leftHalf = mergeSort([25]) => returns [25]
+# # # # rightHalf = mergeSort([22]) => returns [22]
+# # # # merge(leftHalf, rightHalf) => mergeSort([25, 22]) returns [22, 25] 
+# # # merge(leftHalf, rightHalf) => returns [22, 25, 34]
+# # merge(leftHalf, rightHalf) => returns [11, 22, 25, 34, 64]
+
+# # mergeSort([2, 42, 5, 30, 5]), middle = 2, leftHalf = [2, 42], rightHalf = [5, 30, 5] 
+# # leftHalf = mergeSort([2, 42])
+# # rightHalf = mergeSort([5, 30, 5])
+# # merge(leftHalf, rightHalf), mergeSort([2, 42, 5, 30, 5]) returns [2, 5, 5, 30, 42]
+
+# # # mergeSort([2, 42]), middle = 1,  leftHalf = [2], rightHalf = [42]
+# # # leftHalf = mergeSort([2]), returns leftHalf = [2]
+# # # rightHalf = mergeSort([42]) => returns rightHalf = [42]
+# # # merge(leftHalf, rightHalf) => mergeSort([2, 42]) returns [2, 42]
+
+# # # mergeSort([5, 30, 5]), middle = 1, leftHalf = [5], rightHalf = [30, 5]
+# # # leftHalf = mergeSort([5]), returns leftHalf = [5]
+# # # rightHalf = mergeSort([30, 5])
+# # # merge(leftHalf, rightHalf), mergeSort([5, 30, 5]) = [5, 5, 30]
+
+# # # # mergeSort([30, 5]), middle =1, leftHalf = [30], rightHalf = [5]
+# # # # leftHalf = mergeSort([30]), returns leftHalf = [30]
+# # # # rightHalf = mergeSort([5]) => returns rightHalf = [5]
+# # # # merge(leftHalf, rightHalf) => mergeSort([30, 5]) returns [5, 30]
+# # # merge(leftHalf, rightHalf) => [5, 5, 30]
+# # merge(leftHalf, rightHalf) => returns [2, 5, 5, 30, 42]
+# merge(leftHalf, rightHalf) => returns [5, 5, 11, 12, 22, 25, 30, 34, 42, 64]
+
+sortlist = mergeSort(mylist)
+print (sortlist)
