@@ -1348,6 +1348,34 @@ gen.send("World")
 # send World to the generator
 # continue execution and pauses at yield
 
+Python enumerate:
+enumerate() takes in an iterable, such as a list, tuple, or string, adds a counter to each item, and returns an enumerate object, which is an iterator that produces index-value pairs
+
+x = ('apple', 'banana', 'cherry')
+y = enumerate(x)
+
+# <class 'tuple'>
+print(type(x))
+# ('apple', 'banana', 'cherry')
+print(x)
+# <class 'enumerate'>
+print(type(y))
+# <enumerate object at 0x7f31425b87c0>
+print(y)
+# [(0, 'apple'), (1, 'banana'), (2, 'cherry')]
+print(list(y))
+
+# <class 'tuple'>
+print(type(x))
+# ('apple', 'banana', 'cherry')
+print(x)
+# <class 'enumerate'>
+print(type(y))
+# <enumerate object at 0x7f31425b87c0>
+print(y)
+# [], enumerate object y has been consumed so it becomes empty
+print(list(y))
+
 Python module, package and Library
 - module => a python file that contains a collection of functions, classes, and global variables with .py extension 
 - package => a directory that contains a collections of modules, a __init__.py file and may also contains sub-packages.
@@ -1436,7 +1464,7 @@ Class => blueprint, or template for creating objects. It contains methods and at
 
 Method => function defined inside a class. It describes behaviour/ action an object can perform. All methods must have self as the first parameter. Methods can access and modifies the attribute value.
 
-** methods in a Python class can be instance methods, class methods, static methods and special methods. An instance method uses self as the first parameter, it can access and modify object attribute values. A class method uses cls as the first parameter and is marked with @classmethod, it can access and modify class attributes. A static method is marked with @staticmethod, it is used as a helper function related to the class. A special method has double underscore (dunder) before and after its name such as __ini__. 
+** methods in a Python class can be instance methods(object methods), class methods, static methods and special methods. An instance method uses self as the first parameter, it can access and modify object attribute values. A class method uses cls as the first parameter and is marked with @classmethod, it can access and modify class attributes. A static method is marked with @staticmethod, it is used as a helper function related to the class. A special method has double underscore (dunder) before and after its name such as __ini__. 
 
 Need to use object attributes => instance methods with self keyword
 Need to use class attributes => class methods with cls keyword 
@@ -3923,7 +3951,7 @@ def radixSort(inputlist):
 radixSort(mylist)
 print(mylist)
 
-# Merge sort
+# Merge sort - using recursion
 mylist = [11, 64, 34, 25, 22, 2, 42, 5, 30, 5]
 
 def mergeSort(inputlist):
@@ -4009,6 +4037,59 @@ def merge(left, right):
 # # # merge(leftHalf, rightHalf) => [5, 5, 30]
 # # merge(leftHalf, rightHalf) => returns [2, 5, 5, 30, 42]
 # merge(leftHalf, rightHalf) => returns [5, 5, 11, 12, 22, 25, 30, 34, 42, 64]
+
+sortlist = mergeSort(mylist)
+print (sortlist)
+
+# Merge sort 
+mylist = [11, 64, 34, 25, 22, 2, 42, 5, 30, 5]
+
+def mergeSort(inputlist):
+    n = len(inputlist)
+    idx = 1 # index check 
+    while idx < n:
+        new_list = []
+        # i = 0, 2, 4, 6, 8, 10, 12, ... => step = 2, idx = 1
+        # left = [0:1], right = [1:2], left = [2:3], right = [3:4], ... 
+        # left = [i:i+idx], right = [i+idx:i+2*idx]
+        # # i = 0, 4, 8, 12, ... => step = 4, idx = 2
+        # # left = [0:2], right = [2:4], left = [4:6], right = [6,8], ...
+        # # left = [i:i+idx], right = [i+idx:i+2*idx]
+        # # # i = 0, 8, ... => step = 8, idx = 4
+        # # # left = [0:4], right = [4,8]
+        # # # left = [i:i+idx], right = [i+idx:i+idx*2]
+        for i in range(0, n, idx*2): # check left and right
+            left = inputlist[i:i+idx] 
+            right = inputlist[i+idx:i+2*idx]
+            merge_list = merge(left, right)
+            #print(i, idx, left, right, merge_list)
+            # save the merge list - time efficient
+            new_list.extend(merge_list)
+            
+            """
+            # update the merge portion to original input list - memory efficient 
+            for j, val in enumerate(merge_list):
+                inputlist[i+j] = val
+            """
+        inputlist = new_list
+        idx *= 2
+
+def merge(left, right):
+    mergelist = []
+    i = j = 0
+
+    while i<len(left) and j<len(right):
+        if left[i] < right[j]:
+            mergelist.append(left[i])
+            i += 1
+        else:
+            mergelist.append(right[j])
+            j += 1
+    mergelist.extend(left[i:])
+    mergelist.extend(right[j:])
+    #print("merge output: ", mergelist)
+    
+    return mergelist
 
 sortlist = mergeSort(mylist)
 print (sortlist)
