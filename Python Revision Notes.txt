@@ -130,7 +130,8 @@ Python Operations
 - Membership => check if an element is in an object [in, not in]
 - Bitwise => compare binary numbers [ AND => &, OR => |, XOR => ^, NOT => ~, left shift => >>, right shift => <<]
 - Operator Precedence => define the order of operations [() highest precedence => exponential => unary operation (+x, -x, ~x) => arithmetic => bitwise => comparison => identity => membership => logical]
- 
+- walrus Operator => assigns a value and returns that value immediately so that it can be used in an expression
+
 Python Assignment Example - list vs integer:
  
 x = y = [1, 2, 3]
@@ -265,6 +266,19 @@ One-line multiple if, else => value_if_condition1 if condition1 else value_if_co
 
 ** A if statement cannot be empty. If it has no content, put in a pass statement to avoid error. The pass statement is a null operation, nothing happens when it executes. It serves as a placeholder. **
 
+Python Walrus Operator (:=)
+
+"""
+length = len("Python")
+if length > 3:
+    print(f"The word has {length} letters.")
+"""
+# calculates len("Python") 
+# := assigns the value to length
+
+if (length := len("Python")) > 3: 
+    print(f"The word has {length} letters.")
+
 Python Match Statement => selects one of many code blocks to be executed. It is used for matching specific values/ patterns/ structure, or when there is too many elif
 
 Python primitive loops:
@@ -296,16 +310,31 @@ When passing in arguments:
 ** to specify a function can have only keyword arguments, add * before the argument in function definition 
 ** to specify a function can have only mixed of positional and keyword arguments, add / after the positional argument and * before the keyword argument (positional argument must come before keyword arguments)
 
+def function_name (name, /) => positional argument only
+def function_name (*, name) => keyward argument only
+def function_name (name, /, *, age) => mix of positional and keyward arguments
+
+def add_numbers(num1, num2):
+    print(num1 + num2)
+
+add_numbers(1, 3) => positional Arguments
+add_numbers(num1 = 1, num2 = 3) => keyword Arguments
+
 *args and **kwargs => allow functions to accept unknow number of arguments 
 
 *args (Arbitrary Arguments) => allow a function to accept unknow number of positional arguments. These arguments are stored as tuple. 
-
 **kwargs (Arbitrary Keyword Arguments) => allow a function to accept unknow number of keyword arguments. These arguments are stored as dictionary. 
 
-Combining parameters, *args,**kwangs => the order must be:
+Combining parameters, *args,**kwargs => the order must be:
 1. regular parameters
 2. *args
 3. *kwargs
+
+def function_name(*args)
+def function_name(**kwargs)
+def function_name(*args, **kwargs)
+
+args and kwargs are not key words, they can be replaced with other parameter names.
 
 Unpacking arguments using * and ** operators
 1. * operator => unpack a list, tuple, set into individual positional arguments(number of elements must match the function parameters)
@@ -4093,3 +4122,187 @@ def merge(left, right):
 
 sortlist = mergeSort(mylist)
 print (sortlist)
+
+Matplotlib => graph plotting library in python that servers as visualization utility. Most of the Matplotlib utilities lies under the pyplot submodule
+Python Build-in modules and functions => https://www.w3schools.com/python/python_reference.asp
+
+Unit test in Python
+
+Automated testing of a unit (function/ class/ method/ loop/ variable) in isolation.
+A test specifies the inputs, execute the unit code, and validates the actual results with the expected results.
+Python provides the built-in unittest framework for unit testings. Developers can also use 3rd-party testing frameworks such as pytest. 
+
+Pyhon Errors:
+1. Syntax error 
+2. Runtime error (exceptions) 
+
+instruments = ["Violin", "Conga", "Clavinet"]
+--------------------------------------------------------------------
+try:
+    print(instruments[3])
+except Exception: # Catches all exceptions
+    print("Error occurred")
+--------------------------------------------------------------------
+try:
+    print(instruments[3])
+except Exception as e: # Stores the exception object in e
+    print(e)
+--------------------------------------------------------------------
+try:
+    print(instruments[3])
+except NameError: # Catches NameError
+    print("Name error")
+except IndexError: # Catches IndexError 
+    print("Index error")
+--------------------------------------------------------------------
+try:
+    print(instruments[3])
+except NameError as e:
+    print(e)
+except IndexError as e:
+    print(e)
+--------------------------------------------------------------------
+try:
+    print(instruments[3])
+except (NameError, IndexError) as e: # Catches NameError and IndexError
+    print(e)
+except Exception as e: # catches other exceptions 
+    print(e)
+
+--------------------------------------------------------------------
+try:
+    print(instruments[3])
+except Exception as e: # Stores the exception object in e
+    print(e)
+finally:
+    print("try exception code block executed")
+
+--------------------------------------------------------------------
+try:
+    print(instruments[3])
+except Exception as e: # Stores the exception object in e
+    print(e)
+else:
+    print("No exception occurred") # else executes when no exception occurrs
+finally:
+    print("try exception else code block executed") # always executes, whether an exception occurs or not.
+
+raise => keyword used to trigger an specific exception for invalid or unexpected conditions
+
+age = -5
+if age < 0:
+    # exception is raised but not handled, so the program terminates
+    raise ValueError("Age cannot be negative") 
+    print("Raise exception") # skipped
+
+print("Python program continues") # skipped
+--------------------------------------------------------------------
+try: 
+    age = -5
+    if age < 0:
+        # exception is raised
+        raise ValueError("Age cannot be negative") 
+        print("Raise exception") # skipped
+except ValueError:
+    # exception is handled here
+    pass 
+
+print("Python program continues") # this executes because exception was handled
+--------------------------------------------------------------------
+class CustomError(Exception):
+    pass
+
+if age < 0:
+    raise CustomError
+--------------------------------------------------------------------
+class CustomError(Exception):
+    def __init___(self, age):
+        self.age = age
+
+    def __str__(self):
+        return f"Your age is {self.age}. Age cannot be negative!"
+
+if age < 0:
+    raise CustomError(-2)
+
+
+assert keyword => used mainly for debugging in code. It checks whether a condition True. If the condition is False, Python raises an AssertionError
+assert <condition>, "Message if condition is not met"
+
+Each test function can contain one or more assert statement. If any assert statement fails, the test function stops immediately and remaining statements in that test function are not executed. 
+Python testing frameworks like unittest and pytest help manage test case execution and report all test results together.
+
+The unittest module provides tools for creating and running test cases and reporting the test results to user. It also provides features for test grouping, setup, teardown and test skipping.
+The test case class inherits the unittest.TestCase and serves as the main storage of all unit testing functions. Each test function starts with test_function_name.
+It provides built-in assert methods such as assertEqual(), assertTrue(), assertRaises() and also setup and teardown methods to prepare and cleanup before and after the test.
+unittest.main() set up the test process by loading and grouping the test cases in the current module, passing them to a test runner for execution, and collecting the reporting the test results
+
+unittest.main()
+    │
+    ├── TestLoader       → finds the tests
+    │
+    ├── TestSuite        → groups the tests
+    │
+    ├── TextTestRunner   → runs the tests
+    │
+    └── TestResult       → records the results
+
+import unittest
+
+def get_nearest_exit(row_number):
+  if row_number < 15:
+    location = 'front'
+  elif row_number < 30:
+    location = 'middle'
+  else:
+    location = 'middle'
+  return location
+
+class TestTimesTen(unittest.TestCase):
+        # self.assertEqual(actual_test_result, expected_test_result, assert exception message)
+    def test_row_1(self):
+        self.assertEqual(get_nearest_exit(1), "front", "The nearest exit to row 1 is in the front!")
+
+    def test_row_20(self):
+        self.assertEqual(get_nearest_exit(20), "middle", "The nearest exit to row 20 is in the middle!")
+
+    def test_row_40(self):
+        self.assertEqual(get_nearest_exit(40), "back", "The nearest exit to row 40 is in the back!")
+
+# Run the tests
+unittest.main() 
+
+Assert methods in unittest:
+1. Equality and membership methods 
+    - assertEqual() => is a == b? [assertEqual(function(a), b, "Message if condition is not met")]
+    - assertIn() => is a in b? [assertIn(function(a), b, "Message if a is not in b")]
+    - assertTrue() => is a or condition True? [assertTrue(function(a) > b, "Message if condition is False")]
+2. Quantitative methods
+    - assertLess => a < b? [assertLess(function(a), b, "Message if a is not < b")]
+    - assertAlmostEqual => a almost equal to b? [assertAlmostEqual(funciton(a), b, places, "Message if a is not almost equal to b")]
+3. Exceptions and warning methods
+    - assertRaises => checks whether calling a function with the given argument(s) raises the expected exception 
+                      [assertRaises(ExceptionType, function_name, argument) | with self.assertRaises(ExceptionType, ExceptionMessage): function_name(argument)]
+    - assertWarns => checks whether calling a function raises with given arguments raises expected warning 
+                      [assertWarns(WarningExceptionType, function_name, argument) | with self.assertWarns(WarningExceptionType, WarningMessage): function_name(argument)]
+Exceptions indicates an error that disrupts the program execution, while warnings indicates potential issues but usually do not stop the program execution
+
+Multiple assert statements can be placed in one test function, but if one assert statement raises exception, the remaining assert statements in the function will not be executed.
+Separate test functions with individual assert statement creates independent test cases, but it also leads to repetition. 
+unittest provides test parameterization (subTest) which allows a test function to be used with different inputs and expected test results. This reduces repetitive code while improving test coverage at the same time.
+with self.subTest(msg=None, **params) => msg and parameters are mainly used to describe and identify each subtest in the test report
+
+
+A test fixture (setUp, tearDown) is used to prepare a consistent test environment before a test runs and clean it up afterward, preventing one test affecting the results of another.
+setUp() and tearDown() are special lifecycle methods recognized by unittest.TestCase. They are executed automatically before and after each test function, respectively.
+setUpClass() and tearDownClass() are special class-level lifecycle methods in unittest.TestCase. They are executed automatically once before and after all test methods in the test class.
+
+A test can be skipped when it should not run under certain conditions.
+unittest framework provides 2 ways to skip tests:
+1. @unittest skip decorators (skipUnless(condition, message), skipIf(condition, message))
+2. skipTest() method (self.skipTest(message))
+
+If a test case is expected to fail on purpose, and should not be reported as a normal fail case, it can be marked with the @unittest.expectedFailure decorator.
+
+Pytest is a free and open-source testing framework that uses standard python assert statements to write small and readable test cases. 
+https://testautomationu.applitools.com/pytest-tutorial/
