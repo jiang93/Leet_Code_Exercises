@@ -1416,6 +1416,44 @@ Python Module:
 3. from module import function_name => function_name()
 4. from module import function_name as alias => alias()
 
+# python module => a .py file containing python code
+"""
+    import module_name
+    module_name.function_name()
+"""
+"""
+    from module_name import function_name
+    function_name()
+"""
+
+# package => a directory that groups related modules 
+# my_package/
+# ├── __init__.py (from . import module_name, from .module_one import function_name, empty)
+# ├── module_one.py
+# └── module_two.py
+"""
+    # only if the module_name is imported inside the dunder init.py file
+    import my_package
+    my_package.module_name.function_name()
+"""
+""" 
+    # only if the function_name is imported inside the dunder init.py file
+    import my_package
+    my_package.function_name()
+"""
+"""
+    import my_package.module_name
+    my_package.module_name.function_name()
+"""
+"""
+    from my_package import module_name
+    module_name.function_name()
+"""
+"""
+    from my_package.module_name import function_name
+    function_name()
+"""
+
 Python PIP & PyPI
 
 pip => Package manager for python packages/ module. It is the tool used to download, install, upgrade, remove packages from PyPI.
@@ -1836,24 +1874,23 @@ class Person:
     def __init__(self, name, age): # attributes
         self.name = name # public attribute
         self.__age = 0   # private attribute
-        self.age = age   # calls setter setter method 
+        self.age = age   # calls setter method because the age property exists
     
-    # age = property(original age getter function)
-    # property() takes in the original getter function and returns a property object that can be accessed as an attribute
+    # age = property(age getter function)
     @property
     def age(self): # getter method that allows to get attribute value
         return self.__age
     
-    # age = age.setter(original age setter function)
-    # age.setter() takes in the orignal setter function and returns a new property object  
+    # age = age.setter(age setter function)
     @age.setter
-    def age(self, age): # setter method that set attribute value
+    def age(self, age): # setter method that sets the attribute value
         if age >= 0:
             self.__age = age
         else:
             raise ValueError("Age is invalid!")
         
 p1 = Person("Hui", 33)
+
 print(p1.age) # access getter method to read value
 print(p1._Person__age) # mangle format for accessing private attribute
 print(p1.name) # for accessing public attributes
@@ -1861,6 +1898,69 @@ print(p1.name) # for accessing public attributes
 p1.age = 34 # access setter method to update value
 print(p1.age)
 print(p1._Person__age)
+
+
+3 ways for defining getter and setter methods:
+
+class Accumulator:
+
+    def __init__(self):
+        # private attribute
+        self.__count = 0
+
+    # -------------------------------- first method -------------------------------- #
+
+    # access private attribute using property and setter function manually
+
+    def get_count(self) -> int:
+        return self.__count
+    count = property(get_count)
+
+    def set_count(self, value: int) -> None:
+        self.__count = value
+    count = count.setter(set_count)
+
+accumulator = Accumulator()
+accumulator.count = 15
+print(accumulator.count)
+
+    # -------------------------------- second method -------------------------------- #
+
+    # access private attribute using @property and @count.setter decorators
+    # count = property(count)
+    @property
+    def count(self) -> int:
+        return self.__count
+    
+    # setter method
+    # count = count.setter(count)
+    @count.setter
+    def count(self, value: int) -> int:
+        self.__count = value
+
+    # add method
+    def add(self, more: int = 1) -> int:
+        self.__count += more
+
+accumulator = Accumulator()
+accumulator.count = 15
+print(accumulator.count)
+
+    # -------------------------------- third method -------------------------------- #
+
+    # access private attribute using property(getter, setter)
+
+    def get_count(self) -> int:
+        return self.__count
+
+    def set_count(self, value: int) -> int:
+         self.__count = value
+
+    count = property(get_count, set_count)
+
+accumulator = Accumulator()
+accumulator.count = 15
+print(accumulator.count)
 
 1. Private methods => they are created using double underscores, and cannot be called/ accessed directly from outside the class using object.methodname()/ object.__methodname(). However, they can still be accessed indirectly using Python name mangling convention: object._Classname__methodname, but it is not recommended. 
 
@@ -4304,5 +4404,27 @@ unittest framework provides 2 ways to skip tests:
 
 If a test case is expected to fail on purpose, and should not be reported as a normal fail case, it can be marked with the @unittest.expectedFailure decorator.
 
-Pytest is a free and open-source testing framework that uses standard python assert statements to write small and readable test cases. 
-https://testautomationu.applitools.com/pytest-tutorial/
+Pytest is a free and open-source testing framework for python.
+It allows test cases to be written as small and readable functions using python's built-in assert statement.
+
+The naming convention in pytest:
+- test module files should start with test_ or end with _test.py
+- test case function should start with test_
+The naming convention can be changed in the pytest configuration file
+
+-Test case for exceptions => pytest.raises 
+
+# Test case for an expected division by zero exception 
+def test_divide_by_zero():
+    with pytest.raises(ZeroDivisionError) as e:
+        num = 1 / 0
+    # print(e.value)
+    assert "division by zero" in str(e.value)
+
+- Parameterization => @pytest.mark.parametrize("test function parameter names", test value)
+
+# Test the same logic/ function with different inputs and expected outputs
+test_values = [(2, 3, 6), (1, 99, 99), (0, 10, 0), (-3, 5, -15), (-1, -9, 9)]
+@pytest.mark.parametrize("a, b, result", test_values)
+def test_multiplication(a, b, result):
+    assert a * b == result
