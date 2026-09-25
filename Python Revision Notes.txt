@@ -4392,7 +4392,6 @@ Separate test functions with individual assert statement creates independent tes
 unittest provides test parameterization (subTest) which allows a test function to be used with different inputs and expected test results. This reduces repetitive code while improving test coverage at the same time.
 with self.subTest(msg=None, **params) => msg and parameters are mainly used to describe and identify each subtest in the test report
 
-
 A test fixture (setUp, tearDown) is used to prepare a consistent test environment before a test runs and clean it up afterward, preventing one test affecting the results of another.
 setUp() and tearDown() are special lifecycle methods recognized by unittest.TestCase. They are executed automatically before and after each test function, respectively.
 setUpClass() and tearDownClass() are special class-level lifecycle methods in unittest.TestCase. They are executed automatically once before and after all test methods in the test class.
@@ -4412,7 +4411,18 @@ The naming convention in pytest:
 - test case function should start with test_
 The naming convention can be changed in the pytest configuration file
 
--Test case for exceptions => pytest.raises 
+-Test case for exceptions => pytest.raises.
+
+    1. with pytest.raises(ExceptionType):
+        test_function()
+    
+    2. with pytest.raises(ExceptionType) as e:
+        test_function()
+
+    3. with pytest.raises(ExceptionType, match = "optional search for exception message"):
+        test_function()
+
+    4. pytest.raise(ExceptionType, test_function, args)
 
 # Test case for an expected division by zero exception 
 def test_divide_by_zero():
@@ -4421,10 +4431,43 @@ def test_divide_by_zero():
     # print(e.value)
     assert "division by zero" in str(e.value)
 
-- Parameterization => @pytest.mark.parametrize("test function parameter names", test value)
+- Parameterization (test same logic with different set of inputs and outputs) => @pytest.mark.parametrize("test function parameter names", test value)
+- Fixture (reuable setup, and optional cleanup for each test with yield) => @pytest.fixture => test function requests the fixture by using it as the input parameter
 
 # Test the same logic/ function with different inputs and expected outputs
 test_values = [(2, 3, 6), (1, 99, 99), (0, 10, 0), (-3, 5, -15), (-1, -9, 9)]
+
 @pytest.mark.parametrize("a, b, result", test_values)
 def test_multiplication(a, b, result):
     assert a * b == result
+
+import pytest
+from counter.accumulator import Accumulator
+
+# unit test structure 
+# - Arrange => prepare inputs, object, and any required steps
+# - Act => call the function to perfrom the test case 
+# - Assert => check that the actual result matches the expected result
+# unit test design
+# independent => each unit test should be run alone without depending on another test, and each test should focus one one behaviour or test outcome
+
+@pytest.fixture()
+def accum():
+    return Accumulator() 
+
+# intial count check
+def test_accumulator_init(accum):
+    assert accum.count == 0 
+
+Selecting test cases => @pytest.mark.label => assigns a custom label to a test function and run selective test functions using python -m pytest -m label
+** custom markers must be registered in the pytest.ini ** 
+
+Pytest plugins => optional pacakge that add capabiligtu into the framework
+    - pytest-html => generates test report in HTML format
+    - pytest-cov => measure code coverage during tests
+    - pytest-xdist => run tests in multiple threads 
+    - pytest-bdd => support behaviour-driven tests using Given/When/Then
+
+Other type of funtional testing:
+    - API testing => with requests
+    - UI testing => with playwright
