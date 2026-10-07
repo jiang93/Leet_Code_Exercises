@@ -1,4 +1,4 @@
-Python => Python is an interpreted, high-level programming language where code can executed immediately without prior complication. Python is popular for: 
+Python => Python is an interpreted, high-level programming language where code can be executed immediately without manual compilation. Python is popular for: 
 
 1. Web Application 
 2. Data Analysis 
