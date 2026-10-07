@@ -17,6 +17,19 @@ Examples        | Python, JavaScript     | C, C++
 
 Python installation => https://www.python.org/downloads/
 
+Python Interpreter => a program that reads and translates the python code into machine code line by line 
+
+    -> python3 main.py 
+    -> OS start python application 
+    ------ Python interpreter ------
+        ------ Python Parser, reads sources code and checks syntax ------
+        -> reads main.py 
+        ------ Python Complier, converts source code into bytecode ------
+        -> convert source code into bytecode 
+            ------ Python runtime, part of python interpreter that supports program execution ------
+        -> python virtual machine executes bytecode, and CPU perform the operation
+        -> python runtime manages memory and requests OS services 
+
 Python Syntax =>
 	- indentation (Best practice is 4 spaces. Accepts other indentations as long as it is consistent throughout the program)
 	- assign variable (variable_names = value) 
@@ -55,7 +68,6 @@ print (f"{x} {y}") #f-strings
 print("{} {}".format(x, y)) #str.format()
 
 Text in Python must be inside quotes, either single quote or double quotes. By default, the print() function ends with a new line like this, print("Hello World!", end="\n")
-
 
 Global variable => Global variables are created outside functions and can be used anywhere, both inside and outside functions. Variables created inside a function are local variables and can only be used within that function. However, a global variable can be modified inside a function using the global keyword.
 
@@ -111,7 +123,6 @@ Memory Usage      | High                | Low                 | Medium          
 ------------------|---------------------|---------------------|----------------------|---------------------
 When to Use       | Dynamic data        | Fixed/Read-only data| Unique items         | Immutable unique items
 ------------------|---------------------|---------------------|----------------------|---------------------
-
 
 * Tuple is only hashable if all elements inside it are hashable
 * Set/ Frozenset are considered unordered (even if insertion order may appear preserved in Python 3.7+)
