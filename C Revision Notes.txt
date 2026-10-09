@@ -1,0 +1,129 @@
+C Programming Language => high-level programming language with low-level capabilities, including pointers, explicit memory access and bitwise operations.
+                          It also allows reading from and writing to registers, allowing developers to work closely with computer memory and hardware.
+
+C is often used to develop software that needs to run efficiently and interact with the hardware.
+
+- Operating systems: Unix, Linux and Windows
+- Device drivers: allowing OS to communicate with hardware
+- Embedded systems: programs that run in devices such as TVs, Cars and household applicances 
+- Database systems: DBMS and RDBMS engines
+
+C program structure
+
+1. header files => contains C built-in function declarations, macros and constants that can be used in multiple sources code files
+   #include <stdio.h> 
+
+2. optional macro and constants => macro defines a replacement text used to represent a value, text and expression before compilation. 
+                                   constant is used to define a read-only variable.
+   #define PI 3.142 // define a macro
+   #undef PI // remove a macro
+   # define PI 3.14 // redefine macro again
+
+   const double PI = 3.142; // defines a read-only variable 
+   PI = 3.14; // invalid: pi is const
+
+3. global variables => variables declared outside all functions, can be accessed by functions in the same source code file.
+                       can also accessed across source files
+    int counter = 0; # creates and initializes a variable
+    static int count; = 0 # creates and restricts variable to its own source code file
+    extern int count; # declare variable exists elsewhere 
+
+4. function declarations (user-defined functions) => introduce function name, return type and paraters parameter to the complier before the function is called. 
+int add(int a, int b);
+
+5. main function => entry point of the C program where program execution begins.
+int main(void) {
+    return 0;
+}
+6. function definitions => contain the code that executes when a function is called.
+int add(int a, int b){
+    return a + b;
+}
+
+Preprocessor directives begin with #, it tells the preprocessor to include file contents, expands macros and select code for compilation. 
+
+#undef => remove a macro
+#ifdef => include code if macro is define 
+#ifndef => include code if macro is not define
+#if => include code if processing condition is true
+#elif => check another processing condition  
+#else => include alternative conditional code
+#endif => end the conditional section
+#error => report compilation error
+------------------------------------------------------------------------------
+#include <stdio.h>
+#define MAX_LEVEL 1
+
+#ifndef MAX_LEVEL
+#define MAX_LEVEL 100
+#endif
+
+int main(){
+    #if MAX_LEVEL == 1
+        printf("Low level");
+    #elif MAX_LEVEL == 100
+        printf("high level");
+    #else
+        printf("invalid level");
+    #endif
+    return 0;
+}
+------------------------------------------------------------------------------
+A C program is a collection of one or more functions. Two types of functions in C:
+
+1. Library functions 
+2. User-defined functions
+
+Every function must have a return type, and its return value must match with that type.
+1. void
+2. int
+3. float
+4. double
+5. char
+6. bool 
+7. const char *return_string => C has no built-in string type, we can use pointer store the address of the returned string
+
+Compiling and running C program
+1. code editor => write the .c source code file
+2. complier => convert C source code into machine code for CPU to execute the instructions
+    - GCC => popular open source C complier on Windows, macOS, and Linux
+    - clang
+    - Microsoft Visual C++ => IDE which provides code editor, debugging tool, complier and terminal
+3. terminal => input command to compile and run the program
+
+Compilation process in C => compile source code to machine code for CPU to execute and perform operations
+
+    
+source file => preprocessor (include header file content, replace macro by their values, remove comments and handle directives)
+main.c      => main.i
+                            => complier (translate source code into assembly code)
+                            => main.s
+                                        => assembler (translate assembly code into object file containing machine code)
+                                        => main.o    
+                                                    => linker (link all object files with required libraries and startup code)
+                                                    => main.exe
+Comments in C:
+1. single line => //
+2. multiline => /**/
+
+Identifiers in C => name used to identify a variable, function or user-defined item.
+1. must start with alphabet or underscore
+2. Can contain letters, underscores and digits
+3. Case-sensitive 
+4. C keywords cannot be used as identifier 
+
+Format specifiers in C:
+- Character => %c [8 bits by default, can be signed and unsigned]
+- String => %s [depend on array size, terminate with '\0']
+- Signed integer (int) => %d/ %i(printf), %d(scanf) [32 bits, -2^31 to 2^31-1]
+- Unsigned integer (unsigned int) => %u [32 bits, 0 to 2^32-1]
+- Float => %f [32 bits, -3.403 × 10^38 to 3.403 × 10^38]
+- Double => %f(printf)/ %lf(scanf) [64 bits, −1.798 × 10^308 to 1.798 × 10^308] 
+- Long => %ld/ %li [32 bits, -2^31 to 2^31-1]
+- Unsigned long => %lu [32 bits, 0 to 2^32-1]
+- Long double => %Lf [64 bits in MSVC]
+- Long long => %lld/ %lli [64 bits, -2^63 to 2^63-1]
+- Unsigned long long => %llu [64 bits, 0 to 2^64-1]
+
+
+Pointer and multithreading ... 
