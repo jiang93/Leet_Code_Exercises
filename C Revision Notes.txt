@@ -13,14 +13,23 @@ C program structure
 1. header files => contains C built-in function declarations, macros and constants that can be used in multiple sources code files
    #include <stdio.h> 
 
-2. optional macro and constants => macro defines a replacement text used to represent a value, text and expression before compilation. 
-                                   constant is used to define a read-only variable.
+2. Constants => a fixed value that can be defined using const and #define
+   Macro and constants => macro defines a replacement text used to represent a value, text and expression before compilation. 
+                          const is used to define a read-only variable.
    #define PI 3.142 // define a macro
    #undef PI // remove a macro
    # define PI 3.14 // redefine macro again
 
    const double PI = 3.142; // defines a read-only variable 
-   PI = 3.14; // invalid: pi is const
+   PI = 3.14; // invalid: pi is const that cannot be modified after initialization
+
+   const qualifiers in different contexts:
+
+   1. constant variable => fixed value cannot be changed after initialization [const int a = 10]
+   2. pointer to constant => pointer points to a constant variable [const int *p = &x]
+   3. constant pointer to variable => constant pointer points to a variable [int *const p = &x]
+   4. constant pointer to constant => constant pointer points to constant variable [const int *const p = &x]
+
 
 3. global variables => variables declared outside all functions, can be accessed by functions in the same source code file.
                        can also accessed across source files
@@ -40,7 +49,7 @@ int add(int a, int b){
     return a + b;
 }
 
-Preprocessor directives begin with #, it tells the preprocessor to include file contents, expands macros and select code for compilation. 
+Preprocessor directives begin with #. They tell preprocessor to include file contents (#include), expands macros(#define) and select code for compilation(#ifdef, #if). 
 
 #undef => remove a macro
 #ifdef => include code if macro is define 
@@ -106,24 +115,52 @@ Comments in C:
 1. single line => //
 2. multiline => /**/
 
-Identifiers in C => name used to identify a variable, function or user-defined item.
+Identifiers in C => name used to identify a variable, function, label, Enum or user-defined element.
 1. must start with alphabet or underscore
 2. Can contain letters, underscores and digits
 3. Case-sensitive 
 4. C keywords cannot be used as identifier 
 
-Format specifiers in C:
-- Character => %c [8 bits by default, can be signed and unsigned]
-- String => %s [depend on array size, terminate with '\0']
-- Signed integer (int) => %d/ %i(printf), %d(scanf) [32 bits, -2^31 to 2^31-1]
-- Unsigned integer (unsigned int) => %u [32 bits, 0 to 2^32-1]
-- Float => %f [32 bits, -3.403 × 10^38 to 3.403 × 10^38]
-- Double => %f(printf)/ %lf(scanf) [64 bits, −1.798 × 10^308 to 1.798 × 10^308] 
-- Long => %ld/ %li [32 bits, -2^31 to 2^31-1]
-- Unsigned long => %lu [32 bits, 0 to 2^32-1]
-- Long double => %Lf [64 bits in MSVC]
-- Long long => %lld/ %lli [64 bits, -2^63 to 2^63-1]
-- Unsigned long long => %llu [64 bits, 0 to 2^64-1]
+Scope of identifiers in C:
+1. Global identifier(external identifier) => outside and before any function declarations 
+2. Local identifier (internal identifier) => inside a function 
 
+Data Types and Format Specifiers in C [ranges are affected depending on the compliers and CPU architecture]:
+
+- Character => %c [8 bits by default, can be signed and unsigned] (char a = 'A')
+- String => %s [depend on array size, terminate with '\0'] (char word[] = "hello", char word[6] = "hello")
+- Signed integer (int) => %d/ %i(printf), %d(scanf) [32 bits, -2^31 to 2^31-1] (int a = 11)
+- Unsigned integer (unsigned int) => %u [32 bits, 0 to 2^32-1] (unsigned int a = 11U)
+- Float => %f [32 bits, -3.403 × 10^38 to 3.403 × 10^38] (float a = -1, float a = 1.0, float a = 2.0f)
+- Double => %f(printf)/ %lf(scanf) [64 bits, −1.798 × 10^308 to 1.798 × 10^308] (double a = 20, double a = -20.0)
+- Long => %ld/ %li [32 bits, -2^31 to 2^31-1] (long a = 2000, long a = 2000L)
+- Unsigned long => %lu [32 bits, 0 to 2^32-1] (unsigned long a = 1000, unsigned long a = 1000UL)
+- Long double => %Lf [64 bits in MSVC] (long double a = 120000, long double a = -120000.0L)
+- Long long => %lld/ %lli [64 bits, -2^63 to 2^63-1] (long long a = -1400000, long long a = -14000000LL)
+- Unsigned long long => %llu [64 bits, 0 to 2^64-1] (unsigned long long a = 1400000, unsigned long long a = 14000000ULL)
+- Pointer (void*) => %p [pointer stores an address]
+
+The data type of a variable determines what value it can stored and how it is stored, a literal is value written diectly into the code, it also has a data type.
+Both determine how arithmetic is performed.
+
+Keywords in C:
+- Data types [char, int, float, double, void, bool, _Bool]
+- Data type modifiers [short, long, signed, unsigned]
+- Custom types [struct, union, enum, typedef]
+- Boolean constants [true, false]
+- Decimal floating-point types [_Decimal32, _Decimal64, _Decimal128]
+- Conditions [if, else, switch, case, default]
+- Loops [for, while, do, break, continue, goto, return]
+- Storage and linkage [auto, register, static, extern]
+- Type qualifiers [const, volatile, restrict, _Atomic]
+- Size and type queries [sizeof, typeof, typeof_unqual]
+- Function specifiers [inline, _Noreturn]
+- Alignment [alignas, alignof, _Alignas, _Alignof]
+- Compile-time assertions [static_assert, _Static_assert]
+- Thread-local storage [thread_local, _Thread_local]
+- Complex and imaginary types [_Complex, _Imaginary]
+- Others [_Generic, nullptr, constexpr, _BitInt]
+
+stdio.h => printf, scanf, fprintf, fscanf 
 
 Pointer and multithreading ... 
