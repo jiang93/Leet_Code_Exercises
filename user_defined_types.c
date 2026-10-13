@@ -36,5 +36,5 @@ int main(void) {
     // presence, velocit and temperature share same memory, only 31 is retained
     printf("Sensor data: %d, %d, %d\n", data.presence, data.velocity, data.temperature);
 
-
+    return 0;
 }
