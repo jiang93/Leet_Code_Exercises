@@ -24,12 +24,12 @@ C program structure
    PI = 3.14; // invalid: pi is const that cannot be modified after initialization
 
    const qualifiers in different contexts:
+   const qualifiers helps to prevent unintentional changes to variables
 
    1. constant variable => fixed value cannot be changed after initialization [const int a = 10]
    2. pointer to constant => pointer points to a constant variable [const int *p = &x]
    3. constant pointer to variable => constant pointer points to a variable [int *const p = &x]
    4. constant pointer to constant => constant pointer points to constant variable [const int *const p = &x]
-
 
 3. global variables => variables declared outside all functions, can be accessed by functions in the same source code file.
                        can also accessed across source files
@@ -160,6 +160,15 @@ Keywords in C:
 - Thread-local storage [thread_local, _Thread_local]
 - Complex and imaginary types [_Complex, _Imaginary]
 - Others [_Generic, nullptr, constexpr, _BitInt]
+
+Linkage in C:
+- linkage defines how variables/ functions are linked by the linker 
+- linkage controls whether a variable/ function is limited to one file or share across multiple files
+
+1. Internal linkage => variables/ functions are accessed within the same file where they declared 
+                       [static (used outside functions) seperates variables/ functions in different files]
+                       [Retains a local variable value between calls (used inside functions)]
+2. External linkage => variables/ functions are accessed from another source file [extern declares a variable/ function defined in another file] 
 
 stdio.h => printf, scanf, fprintf, fscanf 
 
