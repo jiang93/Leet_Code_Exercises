@@ -141,7 +141,7 @@ Python Operations
 - Identity => check whether two objects have the same identity/ memory address [is, is not]
 - Membership => check if an element is in an object [in, not in]
 - Bitwise => compare binary numbers [ AND => &, OR => |, XOR => ^, NOT => ~, left shift => >>, right shift => <<]
-- Operator Precedence => define the order of operations [() highest precedence => exponential => unary operation (+x, -x, ~x) => arithmetic => bitwise => comparison => identity => membership => logical]
+- Operator Precedence => define the order of operations [() highest precedence => exponential => unary operations (+x, -x, ~x) => arithmetic => bitwise => comparison => identity => membership => logical]
 - walrus Operator => assigns a value and returns that value immediately so that it can be used in an expression
 
 Python Assignment Example - list vs integer:
@@ -833,7 +833,7 @@ print(mydoubler(11))
 # executed lambda function and return a * n where a = 11 and n = 2
 -------------------------------------------------------------------
 
-Lambda with built-in functions 
+Lambda with built-in functions => Lambada function can be passed as arg to another function 
 1. map (iterator) => applies a function to every item in an iterable 
 2. filter (iterator) => create a list of filtered items for which a function returns True
 3. sort => custom sorting using function as the key 
