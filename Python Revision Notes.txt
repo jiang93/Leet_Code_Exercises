@@ -135,6 +135,7 @@ String Methods: https://www.w3schools.com/python/python_strings_methods.asp
 Python Operations 
 - Arithmetic [addition => +, subtraction => -, multiplication => *, division => /, floor division => //, modulus => % , exponential => **]
 - Assignment [assign => =, add => += , subtract => -=, multiply => *=, divide => /=, floor divide => //=, modulus => %=, exponential => **=, AND => &=, OR => |=, XOR => ^=, left shift => >>=, right shift => <<=, walrus operator => := ]
+- Ternary(shortland if statement) [if_value_true if condition else if_value_false, if_value_true if condition else if_value_true if condition else if_value_false]
 - Comparison [equal => ==, not equal => !=, greater than => >, smaller than => <, greater than or equal to => >=, smaller than or equal to => <=]
 - Logical => for combining conditional statements [and, or, not]
 - Identity => check whether two objects have the same identity/ memory address [is, is not]
