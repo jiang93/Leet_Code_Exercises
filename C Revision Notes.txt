@@ -125,7 +125,7 @@ Scope of identifiers in C:
 1. Global identifier(external identifier) => outside and before any function declarations 
 2. Local identifier (internal identifier) => inside a function 
 
-Data Types and Format Specifiers in C [ranges are affected depending on the compliers and CPU architecture]:
+Basic Data Types and Format Specifiers in C [ranges are affected depending on the compliers and CPU architecture]:
 
 - Character => %c [8 bits by default, can be signed and unsigned] (char a = 'A')
 - String => %s [depend on array size, terminate with '\0'] (char word[] = "hello", char word[6] = "hello")
@@ -138,10 +138,7 @@ Data Types and Format Specifiers in C [ranges are affected depending on the comp
 - Long double => %Lf [64 bits in MSVC] (long double a = 120000, long double a = -120000.0L)
 - Long long => %lld/ %lli [64 bits, -2^63 to 2^63-1] (long long a = -1400000, long long a = -14000000LL)
 - Unsigned long long => %llu [64 bits, 0 to 2^64-1] (unsigned long long a = 1400000, unsigned long long a = 14000000ULL)
-- Pointer (void*) => %p [pointer stores an address]
-
-The data type of a variable determines what value it can stored and how it is stored, a literal is value written diectly into the code, it also has a data type.
-Both determine how arithmetic is performed.
+- (void*) => %p [pointer value/ memory address]
 
 Keywords in C:
 - Data types [char, int, float, double, void, bool, _Bool]
@@ -172,4 +169,96 @@ Linkage in C:
 
 stdio.h => printf, scanf, fprintf, fscanf 
 
-Pointer and multithreading ... 
+Data types in C:
+
+1. Basic data types [char, int, float, double, bool]
+2. Enumerated types [enum]
+3. Void type [void]
+4. Derived types [pointer, array, struct, union, function]
+
+enum => defines a custom type and assigns names to fixed integer values. 
+
+    enum Status {ON, OFF, ERROR};
+    enum Status {ON = 1, OFF = 2, ERROR = 3};
+
+---------------------------------------------
+#include <stdio.h>
+
+int main(void) {
+
+    // typedef defines an alias BOOL for {false, true} enum data type
+    typedef enum {false, true} BOOL; 
+
+    BOOL x = false;
+    BOOL y = true;
+
+    x = 10 > 5;
+
+    // if(x) => if x != 0, if (!x) => if x == 0
+    if(x) {
+        printf("true");
+    }
+    else { // 
+        printf("false");
+    }
+}
+
+struct => defines a custom type that groups related variables (members) together. Members can have different data types.
+union => a special case of struct whose members share the same memory. It stores one member value at a time.
+
+void => represents no value
+1. void function_name() => function returns no value
+2. int main(void) => function takes no arguments 
+3. void* ptr => pointer that points/ stores the memory address without specifying the data type.
+
+The data type of a variable determines what value it can stored and how it is stored, a literal is the value written diectly into the code, it also has a data type.
+Both determine how arithmetic is performed.
+
+Literals in C:
+1. integer literals => 200, 200U, 200L, 200UL, 200LL, 200ULL, 0310, 0xC8, 0b11001000
+2. float literals => 200.0f, 200.0F, 2e+2f, 2E+2f, 2e+2F, 2E+2F
+3. double/ long double literals => 200.0, 2e+2，2E+2, 200.0L, 2e+2L, 2E+200L
+4. character literals => 'I', '\u09A9'
+5. string literals => "hello"
+   - an escape sequence can appear inside a character and string literal.
+   - '\n' => character literal
+   - "hello\n" string literal
+
+Integer Promotion for Arithmetic Operations in C
+C programming complier applies integer promotion to covert smaller integer types, such as char, short to int/ unigned int before carrying out arithmetic operations.
+
+Type Coversion and Casting in C:
+
+- Conversion => convert a variable to a data type automatically
+1. double a = 20;
+
+- Casting => explicitly converting a variable from one type to another type 
+1. data_type var2 = (data_type) var1
+   int a = 20;
+   double b = double(a)；
+
+2. stdlib.h => data_type var2 = atoi(var1)/ itoa(var1) [ASCII <=> Integer]
+   int a = atoi("20");
+
+Operators in C:
+
+1. Arithmetic [addition => +, subtraction => -, multiplication => *, division => /, modulus => %]
+2. Relational [equal => ==, not equal => !=, greater than => >, smaller than => <, greater or equal to => >=, smaller or equal to => <=]
+3. Logical [and => &&, or => ||, not => !]
+4. Bitwise [AND => &, OR => |, XOR => ^, complement => ~, left shifter => <<, right shifter => >>] 
+5. Assignment [=, +=, -=, *=, /=, %=, <<=, >>=, &=, |=, ^=]
+6. Unary [increment => a++, ++a, decrement => a--, --a, unary operations => [+a, -a, !a, ~a, &a, *a], sizeof]
+   int a = 5;
+   int b = a++; //postfix increment, a = 6, b = 5
+
+   int c = 5;
+   int d = ++c; //prefix increment, c = 6, d = 6 
+
+7. Ternary (shorthand if-else/ if-else if-else, nested if-else) 
+- if-esle [condition ? if_value_true : if_value_false]
+- if-else if-else [condition1 ? if_value_true
+                   : condition2 ? if_value_true
+                   : if_value_false]
+- nested if-else [condition1 ? condition2 ? if_value_true : if_value_false
+                  : condition3 ? if_value_true : if_value_false]
+Pointer and multithreading, realtime RTOS, RTOS
