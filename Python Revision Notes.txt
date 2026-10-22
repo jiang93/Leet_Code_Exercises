@@ -352,6 +352,23 @@ Unpacking arguments using * and ** operators
 1. * operator => unpack a list, tuple, set into individual positional arguments(number of elements must match the function parameters)
 2. ** operator => unpack a dictionary into individual keyword arguments(dictionary key must match to paramater names)
 
+def show_args(*args):
+  for arg in args:
+    print(f"Positional args: {arg}")
+
+def show_kwargs(**kwargs):
+  for key, value in kwargs.items():
+    print(f"Keyword argument: {key}={value}")
+
+show_args("apple", "banana", "cherry")
+show_kwargs(name="hui", age=18, grade="A")
+
+def show_input(*args, **kwargs):
+  print("Positional arguments:", args)
+  print("Keyword arguments:", kwargs)
+
+show_input("apple", "banana", "cherry", name="hui", age=18, grade="A")
+
 Python Scope => defines the visibility and lifetime of variables within different parts of a program
 if, for and while statements do not create new scope. so variables created inside these statements belong to the global scope for outside functions, or local scope inside functions 
 
