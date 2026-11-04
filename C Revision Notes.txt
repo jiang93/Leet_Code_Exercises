@@ -10,7 +10,7 @@ C is often used to develop software that needs to run efficiently and interact w
 
 C program structure
 
-1. header files => contains C built-in function declarations, macros and constants that can be used in multiple sources code files
+1. header files => C standard libraries containing function declarations, macros and constants that can be used in multiple sources code files
    #include <stdio.h> 
 
 2. Constants => a fixed value that can be defined using const and #define
@@ -37,7 +37,7 @@ C program structure
     static int count; = 0 # creates and restricts variable to its own source code file
     extern int count; # declare variable exists elsewhere 
 
-4. function declarations (user-defined functions) => introduce function name, return type and paraters parameter to the complier before the function is called. 
+4. function declaration(prototype) (user-defined functions) => introduce function name, return type and paraters parameter to the complier before the function is called. 
 int add(int a, int b);
 
 5. main function => entry point of the C program where program execution begins.
@@ -206,6 +206,10 @@ int main(void) {
 struct => defines a custom type that groups related variables (members) together. Members can have different data types.
 union => a special case of struct whose members share the same memory. It stores one member value at a time.
 
+Member access:
+1. direct access => variable_name.member
+2. with a pointer => poniter_name -> member
+
 void => represents no value
 1. void function_name() => function returns no value
 2. int main(void) => function takes no arguments 
@@ -247,7 +251,7 @@ Operators in C:
 3. Logical [and => &&, or => ||, not => !]
 4. Bitwise [AND => &, OR => |, XOR => ^, complement => ~, left shifter => <<, right shifter => >>] 
 5. Assignment [=, +=, -=, *=, /=, %=, <<=, >>=, &=, |=, ^=]
-6. Unary [increment => a++, ++a, decrement => a--, --a, unary operations => [+a, -a, !a, ~a, &a, *a], sizeof]
+6. Unary [increment => a++, ++a, decrement => a--, --a, unary operations => [+a, -a, !a, ~a, &a, *a], sizeof => %zu format specifier]
    int a = 5;
    int b = a++; //postfix increment, a = 6, b = 5
 
@@ -261,4 +265,96 @@ Operators in C:
                    : if_value_false]
 - nested if-else [condition1 ? condition2 ? if_value_true : if_value_false
                   : condition3 ? if_value_true : if_value_false]
+
+malloc and calloc => returns the starting adddress of the allocated memory block
+
+- malloc => reserves a block of memory for C program without initializing it. 
+            syntax: type *ptr = (type *)malloc(sizeof(type)*num)
+- calloc => reserves a block of memory and set all allocated bytes to 0.
+            syntax: type *ptr = (type *)calloc(num, sizeof(type))
+
+** pointer is NULL if memory allocation fails. **
+
+Decision Making and Control Statements in C 
+1. if & nested if statements include, if, if-else, if-else if-else,
+2. switch & nested switch statements
+3. goto => jump to a labeled statement within the same function
+
+Loops and Control statements in C
+
+1. for 
+2. while 
+3. do-while 
+4. nested for, while, do-while 
+
+- break => terminate the entire loop 
+- continue => skip the program body for the current iteration 
+- goto => jump to a labeled statement
+
+Functions in C
+A block of code that can be called to perform a specific task. 
+
+Defining a function in C 
+1. Function declaration => tells complier about function name, parameter, and return type.
+   return_type function_name(para1_type para1_name, para2_type para2_name, ...)
+2. Funcion definition => body/code/statement of the function 
+
+Calling a function in C 
+1. Call by value => pass a copy of argument's value into the parameter 
+2. Call by reference => pass a copy of argument's address into the parameter
+
+void update_number(int num){
+    num = 100; // num is a copy of a's value, num changes and a remains 
+}
+int main(void) {
+    int a = 50;
+    update_number(a); // passing a copy of a's value to update_number function
+
+    return 0;
+}
+--------------------------------------------------------------------------------
+void update_number(int *num)
+{
+    *num = 100; // num is a copy of a's address, deference num to change a 
+}
+
+int main(void){
+    int a = 50;
+    update_number(&a); // pass a copy of a's address to update_number function 
+
+    return 0;
+}
+
+Function declaration/ prototype in C
+
+Function declaration introduct function to the complier. function prototype is a kind of declaration that specifies its parameter type.
+Ways for define function declaration/ prototype
+
+1. int function_name(); // declaration
+2. int function_name(int, int); // declaration & prototype
+3. int function_name (int a, int b); // declaration & prototype (commonly used)
+4. int function_name(int a, int b) { // definition
+    return a+b; 
+}
+
+** A seperate function declaration is needed if the function definition is not visible before the function is called. 
+   If the function definition appears before calling it, it also acts a function declaration so a seperate declaration is unnecessary **
+   
+main function in C standard program
+A C program must have exactly one main() function which servers as the entry point for program execution
+
+- int main()/ int main(void)
+- int main(int argc, char *argv[]) => argc and argv are parameter name for argument count and argument vectors, they can be renamed
+
+main function exit 
+1. use exit() function => terminates the entire program
+   exit(0)/ exit(EXIT_SUCCESS) => reports success exit  
+   exit(1)/ exit(EXIT_FAILURE) => reports error exit 
+
+2. use return statement => ends current function and returns Control to the caller   
+   return 0 => report success 
+   return 1/ non-zero => report error/ failure
+   ** in a C function, return statement will return the result and control to the caller ** 
+
+
 Pointer and multithreading, realtime RTOS, RTOS
