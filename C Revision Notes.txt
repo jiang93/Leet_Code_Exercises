@@ -302,6 +302,49 @@ Defining a function in C
 Calling a function in C 
 1. Call by value => pass a copy of argument's value into the parameter 
 2. Call by reference => pass a copy of argument's address into the parameter
+   - pointer/ deference operator (* | asterisk)
+   - address operator (& | ampersand)
+
+     - int a = 50, int *ptr = &a => ptr is a pointer that points to int variable a 
+     - int a = 50, int *ptr, ptr = &a 
+     - int *ptr = NULL, int a = 50, ptr = &a
+     - int a = 50, int *ptr = &a, int **pptr = &ptr => pptr is a pointer that points to pointer variable ptr 
+
+        #include <stdio.h>
+        int main(void) {
+            
+            int a = 50;
+            int *ptr = NULL;
+            printf("address of a is: %p\n", ptr); //ptr is null, printf *ptr will crash the entire program 
+
+            ptr = &a; // ptr point to int variable a 
+            printf("address of a is: %p\n", ptr);
+            printf("value of a is: %d\n", *ptr);
+            
+            int **pptr = &ptr; // pptr point to pointer variable ptr 
+            printf("address of ptr is: %p\n", pptr);
+            printf("value of ptr is: %d\n", **pptr);
+            
+            *ptr = 100; // update variable a value
+            printf("address of a is: %p\n", ptr);
+            printf("value of a is: %d\n", a);
+            
+            printf("address of ptr is: %p\n", pptr);
+            printf("value of ptr is: %d\n", **pptr);
+            
+            int b = 150;
+            ptr = &b; // ptr point to int variable b
+            printf("address of b is: %p\n", ptr);
+            printf("value of b is: %d\n", *ptr);
+            
+            printf("address of ptr is: %p\n", pptr);
+            printf("value of ptr is: %d\n", **pptr);
+            
+            return 0;
+        }
+
+--------------------------------------------------------------------------------
+#include <stdio.h>
 
 void update_number(int num){
     num = 100; // num is a copy of a's value, num changes and a remains 
@@ -310,9 +353,12 @@ int main(void) {
     int a = 50;
     update_number(a); // passing a copy of a's value to update_number function
 
+    printf("a is %d", a);
     return 0;
 }
 --------------------------------------------------------------------------------
+#include <stdio.h>
+
 void update_number(int *num)
 {
     *num = 100; // num is a copy of a's address, deference num to change a 
@@ -320,8 +366,9 @@ void update_number(int *num)
 
 int main(void){
     int a = 50;
-    update_number(&a); // pass a copy of a's address to update_number function 
+    update_number(&a); // pass a copy of a's address to update_number function
 
+    printf("a is %d", a);
     return 0;
 }
 
@@ -355,6 +402,57 @@ main function exit
    return 0 => report success 
    return 1/ non-zero => report error/ failure
    ** in a C function, return statement will return the result and control to the caller ** 
+
+variadic function in C => accepts a variable number of arguments 
+callback function in C => a function is passed as an argument to another function. In C, callback is implemented using a function pointer.
+
+** A function pointer is a variable that stores the address of a function. **
+-  return_type (*function_ptr_name)(parameter_types) = function_name
+-  int (*func_ptr)(int, int) = add OR int (*func_ptr)(int a, int b) = add where paramter names are optional 
+--------------------------------------------------------------------------------
+#include <stdio.h>
+
+void hello(void) {
+    printf("Hello!\n");
+}
+
+void greet(char *message) {
+    printf("%s\n", message);
+}
+
+void callback_func(char *message) {
+    printf("Running callback function: ");
+    printf("%s\n", message);
+}
+
+void multi_print(char *callback_message, void (*callback_func_ptr)(char *)) {
+    for (int i = 5; i > 0; i--) {
+        callback_func_ptr(callback_message);
+    }
+}
+
+int main() {
+    
+    // func_ptr is the function pointer that stores the address of hello function
+    //  void (*func_ptr)(char *) = hello is equivalent to void (*func_ptr)(char *) = &hello
+    void (*func_ptr1)(void) = hello;
+    void (*func_ptr2)(char *) = greet;
+    
+    func_ptr1();
+    func_ptr2("How are you?");
+    
+    // callback function is a function passed as an argument to another function
+    multi_print("I am fine", callback_func);
+    
+    return 0;
+}
+--------------------------------------------------------------------------------
+
+
+1. synchronous callback => caller function waits for callbacl function to finish before continuing with the rest of its code. 
+2. asynchronous callback => caller function continuing with other code, and the callback function runs after a specific task or an event occurs. 
+
+
 
 
 Pointer and multithreading, realtime RTOS, RTOS
