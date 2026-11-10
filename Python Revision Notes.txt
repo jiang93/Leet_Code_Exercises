@@ -954,7 +954,7 @@ Python map function
 
 Nested function calls vs Nested function definitions
 
-1. Nested function calls => calling one function inside another function call. e.g., doubled = list(map(lambda x: x * 2, numbers))
+1. Nested function calls => a function is called and its result is passed as argument to another function. e.g., doubled = list(map(lambda x: x * 2, numbers))
 The inside call runs first:
    - create the lambda function object
    - call map(lambda, numbers)
@@ -964,6 +964,20 @@ The inside call runs first:
 2. Nested function definitions => defining a function inside another functions
 The outer function object is created first, and inner function objects are not created immediately. They are created only when outer function is called 
 
+def outer_func1(prefix):
+    def auto_inner(msg):
+        print(f"{prefix}: {msg}")
+    auto_inner("I am default inner msg...") # outer_func1 object created
+
+outer_func1("LOG") # auto_inner is executed
+    
+def outer_func2(prefix):
+    def inner(msg):
+        print(f"{prefix}: {msg}")
+    return inner # outer_func2 object created, inner is not executed
+    
+p = outer_func2("LOG") # p is pointing to inner
+p("Here is the input inner message...")
 ----------------------------------------------------|---------------------------------------------------------------------------------------------
 numbers = [1, 2, 3]                                 | numbers = [1, 2, 3]
 double = map(lambda x: x * 2, numbers)              | double = map(lambda x: x * 2, numbers)
@@ -996,6 +1010,18 @@ print(type(n))  # <class 'int'>                     | print(type(n))  # <class '
                                                     |     print(n)  # 2, 4, 6
                                                     | print(n)  # 6
                                                     | print(type(n))  # <class 'int'>
+
+Python callback function => a function is passed as an argument to another function 
+
+def greet(message):
+    print(message)
+
+def print_greet(callback_function, message):
+    callback_function(message)
+    
+print_greet(greet, "Hello World!")
+
+Callback functions are used when caller needs to support different behaviours, or register for a later event
 
 Python recursive function
 
